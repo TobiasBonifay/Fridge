@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_fridge">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_fridge"
         android:name="edu.polytech.fridge.ui.fridge.FridgeFragment"
         android:label="@string/title_fridge"
         tools:layout="@layout/fragment_fridge" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_recipe"
         android:name="edu.polytech.fridge.ui.dashboard.RecipeFragment"
         android:label="@string/title_recipe"
         tools:layout="@layout/fragment_recipe" />
