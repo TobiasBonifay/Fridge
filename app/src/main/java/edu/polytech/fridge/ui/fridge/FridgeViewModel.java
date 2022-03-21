@@ -1,16 +1,16 @@
-package edu.polytech.fridge.ui.dashboard;
+package edu.polytech.fridge.ui.fridge;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class FridgeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public FridgeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("Fridge content including listview");
     }
 
     public LiveData<String> getText() {

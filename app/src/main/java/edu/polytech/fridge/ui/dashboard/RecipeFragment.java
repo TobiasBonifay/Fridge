@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.polytech.fridge.databinding.FragmentDashboardBinding;
+import edu.polytech.fridge.databinding.FragmentRecipeBinding;
 
-public class DashboardFragment extends Fragment {
+public class RecipeFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentRecipeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        RecipeViewModel recipeViewModel =
+                new ViewModelProvider(this).get(RecipeViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentRecipeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

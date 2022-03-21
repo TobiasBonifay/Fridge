@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.home;
+package edu.polytech.fridge.ui.fridge;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.polytech.fridge.databinding.FragmentHomeBinding;
+import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 
-public class HomeFragment extends Fragment {
+public class FridgeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentFridgeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        FridgeViewModel fridgeViewModel =
+                new ViewModelProvider(this).get(FridgeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        fridgeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
