@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_recipe"
-        android:name="edu.polytech.fridge.ui.dashboard.RecipeFragment"
+        android:name="edu.polytech.fridge.ui.recipe.RecipeFragment"
         android:label="@string/title_recipe"
         tools:layout="@layout/fragment_recipe" />
 
