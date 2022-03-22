@@ -1,5 +1,7 @@
 package edu.polytech.fridge.ui.notifications;
 
+import android.widget.Button;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

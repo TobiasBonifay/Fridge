@@ -10,10 +10,13 @@
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1515" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1515" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/drawable/ic_recipe.xml" value="0.1" />
+        <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/drawable/ic_refrigerator.xml" value="0.1" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/activity_notification.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/fragment_fridge.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/fragment_home.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/fragment_notifications.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/layout/fragment_recipe.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
         <entry key="..\:/Users/Tobias Bonifay/Documents/MEGAsync/Documents/Public/SI/SI3/S6/IHM/Fridge/app/src/main/res/mipmap-anydpi-v26/ic_fridge.xml" value="0.1515" />

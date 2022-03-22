@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.dashboard;
+package edu.polytech.fridge.ui.recipe;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
