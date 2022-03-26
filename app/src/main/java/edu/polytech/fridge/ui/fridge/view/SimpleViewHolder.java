@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.view;
 
 import android.widget.TextView;
 

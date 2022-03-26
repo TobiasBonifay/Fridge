@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:id="@+id/simple_image"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_refrigerator"
+        android:contentDescription="food" />
+
 
     <TextView
         android:id="@+id/simple_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Some text"/>
+        android:layout_gravity="center_horizontal"
+        tools:text="Food item name" />
 
-</FrameLayout>
+
+</LinearLayout>
