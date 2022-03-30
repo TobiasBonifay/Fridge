@@ -40,8 +40,7 @@ public class NotificationsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -50,84 +49,20 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         final Button showNotificationButton = binding.showNotificationExample;
-        showNotificationButton.setOnClickListener(view -> showNotificationImage());
+        showNotificationButton.setOnClickListener(view -> showNotification("test","https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
 
         return root;
     }
 
-    private void showNotificationTextOnly(final String text) {
-        final int notificationId = new Random().nextInt(100);
-        String channelId = "notification.channel";
-
-        NotificationManager notificationManager = (NotificationManager) requireActivity()
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-
-        Intent intent = new Intent(
-                requireContext().getApplicationContext(),
-                MainActivity.class
-        );
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                requireContext().getApplicationContext(),
-                0,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
-                // setting the mutability flag
-        );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                requireContext().getApplicationContext(), channelId
-        );
-
-        builder.setSmallIcon(R.drawable.ic_refrigerator);
-        builder.setDefaults(NotificationCompat.DEFAULT_ALL);
-        builder.setContentTitle("FRIDGE");
-        builder.setContentText(text);
-        builder.setContentIntent(pendingIntent);
-        builder.setAutoCancel(true);
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-
-        if (notificationManager != null && notificationManager.getNotificationChannel(channelId) == null) {
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    channelId,
-                    "notification.channel",
-                    NotificationManager.IMPORTANCE_HIGH);
-
-            notificationChannel.setDescription("Notif channel to notify user");
-            notificationChannel.enableVibration(true);
-            notificationChannel.enableLights(true);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        Notification notification = builder.build();
-        Objects.requireNonNull(notificationManager).notify(notificationId, notification);
-    }
-
     private void showNotificationWithImage(final Bitmap img, final String text) {
+        final Context appContext = requireContext().getApplicationContext();
         final int notificationId = new Random().nextInt(100);
-        String channelId = "notification.channel2";
+        final String channelId = "notification.channel2";
 
-        NotificationManager notificationManager = (NotificationManager) requireActivity()
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-
-        Intent intent = new Intent(
-                requireContext().getApplicationContext(),
-                MainActivity.class
-        );
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                requireContext().getApplicationContext(),
-                0,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
-                // setting the mutability flag
-        );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                requireContext().getApplicationContext(), channelId
-        );
+        NotificationManager notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        Intent intent = new Intent(appContext, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, channelId);
 
         builder.setSmallIcon(R.drawable.ic_refrigerator);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
@@ -139,11 +74,7 @@ public class NotificationsFragment extends Fragment {
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
 
         if (notificationManager != null && notificationManager.getNotificationChannel(channelId) == null) {
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    channelId,
-                    "notification.channel2",
-                    NotificationManager.IMPORTANCE_HIGH);
-
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, "notification.channel2", NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setDescription("Notif channel to notify user");
             notificationChannel.enableVibration(true);
             notificationChannel.enableLights(true);
@@ -156,7 +87,7 @@ public class NotificationsFragment extends Fragment {
 
 
     @SuppressLint("StaticFieldLeak")
-    private void showNotificationImage() {
+    private void showNotification(String text, String url) {
         new AsyncTask<String, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(String... strings) {
@@ -179,7 +110,7 @@ public class NotificationsFragment extends Fragment {
                 super.onPostExecute(bitmap);
                 showNotificationWithImage(bitmap, "testing");
             }
-        }.execute("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg");
+        }.execute(url);
     }
 
     @Override
