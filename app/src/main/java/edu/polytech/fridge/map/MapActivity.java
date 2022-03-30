@@ -1,4 +1,4 @@
-package edu.polytech.fridge;
+package edu.polytech.fridge.map;
 
 import android.os.Bundle;
 import android.widget.ListView;
@@ -14,12 +14,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ActivityMainBinding;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
