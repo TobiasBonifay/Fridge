@@ -1,6 +1,5 @@
 package edu.polytech.fridge.ui.notifications;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +20,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -38,8 +34,7 @@ public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
@@ -49,9 +44,29 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         final Button showNotificationButton = binding.showNotificationExample;
-        showNotificationButton.setOnClickListener(view -> showNotification("test","https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
+        showNotificationButton.setOnClickListener(view -> newNotification("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
 
         return root;
+    }
+
+    private void newNotification(final String url) {
+        new Thread(() -> {
+            final Bitmap img = fetchImage(url);
+            showNotificationWithImage(img, "test");
+        }).start();
+    }
+
+    private Bitmap fetchImage(final String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.connect();
+            return BitmapFactory.decodeStream(httpURLConnection.getInputStream());
+        } catch (Exception e) {
+            Logger.getLogger("notif", "streamerror");
+            return null;
+        }
     }
 
     private void showNotificationWithImage(final Bitmap img, final String text) {
@@ -78,39 +93,12 @@ public class NotificationsFragment extends Fragment {
             notificationChannel.setDescription("Notif channel to notify user");
             notificationChannel.enableVibration(true);
             notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(0xFFFF0000);
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
         Notification notification = builder.build();
         Objects.requireNonNull(notificationManager).notify(notificationId, notification);
-    }
-
-
-    @SuppressLint("StaticFieldLeak")
-    private void showNotification(String text, String url) {
-        new AsyncTask<String, Void, Bitmap>() {
-            @Override
-            protected Bitmap doInBackground(String... strings) {
-                InputStream inputStream;
-                try {
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setDoInput(true);
-                    httpURLConnection.connect();
-                    inputStream = httpURLConnection.getInputStream();
-                    return BitmapFactory.decodeStream(inputStream);
-                } catch (Exception e) {
-                    Logger.getLogger("notif", "streamerror");
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                showNotificationWithImage(bitmap, "testing");
-            }
-        }.execute(url);
     }
 
     @Override
