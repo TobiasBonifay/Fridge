@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "488687560540",
+    "firebase_url": "https://fridge-54e04-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fridge-54e04",
+    "storage_bucket": "fridge-54e04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488687560540:android:9999bef8a945a8ca6f4399",
+        "android_client_info": {
+          "package_name": "edu.polytech.fridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488687560540-dm8utvu5pbg2ghgmvl48kdk9f5dpn4b2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJXIbsB89lOJmGTBltMCghhBVaIIyN2dY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488687560540-dm8utvu5pbg2ghgmvl48kdk9f5dpn4b2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
