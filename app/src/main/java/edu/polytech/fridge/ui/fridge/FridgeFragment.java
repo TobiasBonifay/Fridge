@@ -15,11 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
-import edu.polytech.fridge.ui.fridge.view.SimpleAdapter;
-import edu.polytech.fridge.ui.fridge.view.SimpleViewModel;
+import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
+import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
 public class FridgeFragment extends Fragment {
     private FridgeViewModel fridgeViewModel;
@@ -44,7 +43,7 @@ public class FridgeFragment extends Fragment {
     }
 
     private void instantiateSimpleView() {
-        SimpleAdapter adapter = new SimpleAdapter(generateSimpleList());
+        FoodAdapter adapter = new FoodAdapter(generateSimpleList());
         RecyclerView recyclerView = binding.simpleRecyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -57,11 +56,15 @@ public class FridgeFragment extends Fragment {
         binding = null;
     }
 
-    private List<SimpleViewModel> generateSimpleList() {
-        List<SimpleViewModel> simpleViewModelList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            simpleViewModelList.add(new SimpleViewModel(String.format(Locale.US, "This item %d", i)));
-        }
-        return simpleViewModelList;
+    private List<FoodViewModel> generateSimpleList() {
+        List<FoodViewModel> foodViewModelList = new ArrayList<>();
+        // fetch data from FireBase
+        FoodViewModel aliment = new FoodViewModel("Carrot", "27/04/2022");
+        FoodViewModel aliment2 = new FoodViewModel("Pear", "24/04/2022");
+        FoodViewModel aliment3 = new FoodViewModel("Pasta", "29/04/2022");
+        foodViewModelList.add(aliment);
+        foodViewModelList.add(aliment2);
+        foodViewModelList.add(aliment3);
+        return foodViewModelList;
     }
 }

@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/simple_image"
+        android:id="@+id/food_image"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_margin="10dp"
@@ -22,27 +22,31 @@
         app:layout_constraintVertical_bias="0.6" />
 
     <TextView
-        android:id="@+id/simple_text"
+        android:id="@+id/food_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/simple_image"
+        app:layout_constraintStart_toEndOf="@+id/food_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.37"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         tools:text="Food item name" />
 
     <TextView
-        android:id="@+id/simple_text2"
+        android:id="@+id/food_expiration_date"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/simple_image"
+        app:layout_constraintStart_toEndOf="@+id/food_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         tools:text="dd/mm/yyyy" />
 
     <LinearLayout
@@ -67,7 +71,7 @@
 
         <TextView
             android:id="@+id/currentQuantity"
-            android:layout_width="48dp"
+            android:layout_width="32dp"
             android:layout_height="match_parent"
             android:text="0"
             android:textAlignment="center" />

@@ -14,10 +14,10 @@ import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
-public class SimpleAdapter extends RecyclerView.Adapter {
-    private final List<SimpleViewModel> models = new ArrayList<>();
+public class FoodAdapter extends RecyclerView.Adapter {
+    private final List<FoodViewModel> models = new ArrayList<>();
 
-    public SimpleAdapter(final List<SimpleViewModel> viewModels) {
+    public FoodAdapter(final List<FoodViewModel> viewModels) {
         if (viewModels != null) {
             this.models.addAll(viewModels);
         }
@@ -30,12 +30,12 @@ public class SimpleAdapter extends RecyclerView.Adapter {
                 LayoutInflater.from(parent.getContext()), parent, false);
         final ItemSimpleItemviewBinding itemSimpleItemviewBinding = ItemSimpleItemviewBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false);
-        return new SimpleViewHolder(itemSimpleItemviewBinding);
+        return new FoodViewHolder(itemSimpleItemviewBinding);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((SimpleViewHolder) holder).bindData(models.get(position));
+        ((FoodViewHolder) holder).bindData(models.get(position));
     }
 
 
