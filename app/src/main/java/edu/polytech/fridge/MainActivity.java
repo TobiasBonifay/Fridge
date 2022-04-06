@@ -28,7 +28,7 @@ import edu.polytech.fridge.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //private ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
     Button scanBtn;
     TextView messageText,messageFormat;
