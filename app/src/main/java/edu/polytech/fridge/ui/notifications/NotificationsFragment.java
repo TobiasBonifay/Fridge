@@ -76,7 +76,8 @@ public class NotificationsFragment extends Fragment {
 
         NotificationManager notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(appContext, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        final int flags = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
+        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, flags);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, channelId);
 
         builder.setSmallIcon(R.drawable.ic_refrigerator);
