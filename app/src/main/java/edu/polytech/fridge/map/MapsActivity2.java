@@ -16,7 +16,7 @@ import edu.polytech.fridge.databinding.ActivityMaps2Binding;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap map;
     private ActivityMaps2Binding binding;
 
     @Override
@@ -43,7 +43,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        map = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng Nice =  new LatLng(43.681035, 7.224034);
