@@ -4,4 +4,5 @@
     <string name="title_recipe">Recipe</string>
     <string name="title_notifications">Notifications</string>
     <string name="fridge_content_including_listview">Fridge content including listview</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
 </resources>
