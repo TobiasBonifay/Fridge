@@ -49,13 +49,22 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
-    private void newNotification(final String url) {
+    /**
+     * Create a thread which display a notification
+     * @param imageUrl url of the image to display under the notification
+     */
+    private void newNotification(final String imageUrl) {
         new Thread(() -> {
-            final Bitmap img = fetchImage(url);
-            showNotificationWithImage(img, "test");
+            final Bitmap img = fetchImage(imageUrl);
+            showNotificationWithImage("test", img);
         }).start();
     }
 
+    /**
+     * Try to get the image as a Bitmap from a given link as parameter
+     * @param src link of the image to download
+     * @return Bitmap image
+     */
     private Bitmap fetchImage(final String src) {
         try {
             URL url = new URL(src);
@@ -69,7 +78,12 @@ public class NotificationsFragment extends Fragment {
         }
     }
 
-    private void showNotificationWithImage(final Bitmap img, final String text) {
+    /**
+     * Show the notification with a given text, and given image
+     * @param img Image in bitmap format
+     * @param text Text (String) to display on the notification
+     */
+    private void showNotificationWithImage(final String text, final Bitmap img) {
         final Context appContext = requireContext().getApplicationContext();
         final int notificationId = new Random().nextInt(100);
         final String channelId = "notification.channel2";
@@ -85,7 +99,7 @@ public class NotificationsFragment extends Fragment {
         builder.setContentTitle("FRIDGE");
         builder.setContentText(text);
         builder.setContentIntent(pendingIntent);
-        builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(img));
+        if (img != null) builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(img));
         builder.setAutoCancel(true);
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
 
