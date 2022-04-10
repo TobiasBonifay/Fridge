@@ -34,5 +34,6 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     public void bindData(final FoodViewModel viewModel) {
         foodName_TV.setText(viewModel.getFoodName());
         expirationDate_TV.setText(viewModel.getExpirationDate());
+        currentQuantity_TV.setText(String.valueOf(viewModel.getCurrentQuantity()));
     }
 }

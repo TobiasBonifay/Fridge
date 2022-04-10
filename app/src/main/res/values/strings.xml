@@ -8,4 +8,5 @@
     <string name="try_it">See the notification</string>
     <string name="plus">Plus</string>
     <string name="minus">Minus</string>
+    <string name="nb">number of item</string>
 </resources>

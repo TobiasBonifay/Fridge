@@ -59,9 +59,9 @@ public class FridgeFragment extends Fragment {
     private List<FoodViewModel> generateSimpleList() {
         List<FoodViewModel> foodViewModelList = new ArrayList<>();
         // fetch data from FireBase
-        FoodViewModel aliment = new FoodViewModel("Carrot", "27/04/2022");
-        FoodViewModel aliment2 = new FoodViewModel("Pear", "24/04/2022");
-        FoodViewModel aliment3 = new FoodViewModel("Pasta", "29/04/2022");
+        FoodViewModel aliment = new FoodViewModel("Carrot", "27/04/2022", 4);
+        FoodViewModel aliment2 = new FoodViewModel("Pear", "24/04/2022", 2);
+        FoodViewModel aliment3 = new FoodViewModel("Pasta", "29/04/2022", 1);
         foodViewModelList.add(aliment);
         foodViewModelList.add(aliment2);
         foodViewModelList.add(aliment3);

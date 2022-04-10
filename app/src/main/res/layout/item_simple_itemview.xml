@@ -73,7 +73,8 @@
             android:id="@+id/currentQuantity"
             android:layout_width="32dp"
             android:layout_height="match_parent"
-            android:text="0"
+            android:background="@color/white"
+            android:contentDescription="@string/nb"
             android:textAlignment="center" />
 
         <ImageButton
