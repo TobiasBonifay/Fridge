@@ -77,17 +77,17 @@ public class GPSFragment extends Fragment {
         return rootView;
     }
 
-    LatLng getPosition(){
+    public LatLng getPosition(){
         return new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
     }
 
-    String getPlaceName() throws IOException {
+    public String getPlaceName() throws IOException {
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         List<Address> addresses = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(),1);
         return addresses.get(0).getLocality();
     }
 
-    void setPlaceName(String placeName){
+    public void setPlaceName(String placeName){
         placeNameTextView.setText(placeName);
     }
 

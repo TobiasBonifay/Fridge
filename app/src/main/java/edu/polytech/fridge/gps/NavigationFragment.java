@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import edu.polytech.fridge.R;
 
 public class NavigationFragment extends Fragment {
-    NavigationFragment(){}
+    public NavigationFragment(){}
 
     @Nullable
     @Override
