@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +37,13 @@ import edu.polytech.fridge.map.MapsActivity2;
 public class MainActivity extends AppCompatActivity {
     GoogleMap map;
     private Button button;
+    private Button button2;
+
     private ListView listView;
+    EditText editText;
 
     private ActivityMainBinding binding;
+    DatabaseReference test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this,"Firebase connected",Toast.LENGTH_LONG).show();
 
         button = findViewById(R.id.butt1);
+        button2= findViewById(R.id.saveBtn);
+        editText = findViewById(R.id.edit1);
+        test = FirebaseDatabase.getInstance().getReference().child("testos");
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                insertData();
+            }
+        });
+
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void insertData(){
+        String name = editText.getText().toString();
+        test.push().setValue(name);
     }
 
 
