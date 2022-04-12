@@ -1,7 +1,10 @@
 package edu.polytech.fridge;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,9 +28,12 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.ArrayList;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
+import edu.polytech.fridge.map.MapActivity;
+import edu.polytech.fridge.map.MapsActivity2;
 
 public class MainActivity extends AppCompatActivity {
     GoogleMap map;
+    private Button button;
     private ListView listView;
 
     private ActivityMainBinding binding;
@@ -53,7 +59,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         Toast.makeText(MainActivity.this,"Firebase connected",Toast.LENGTH_LONG).show();
 
+        button = findViewById(R.id.butt1);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity2.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
