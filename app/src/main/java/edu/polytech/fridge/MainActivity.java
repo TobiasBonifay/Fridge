@@ -5,19 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
-import edu.polytech.fridge.map.MapActivity;
+import edu.polytech.fridge.map.MapsActivity2;
 
 public class MainActivity extends AppCompatActivity {
     GoogleMap map;
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_notifications)
                 .build();
         btn=findViewById(R.id.butt1);
-        intent = new Intent(MainActivity.this, MapActivity.class);
+        intent = new Intent(MainActivity.this, MapsActivity2.class);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,10 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        Toast.makeText(MainActivity.this,"Firebase connected",Toast.LENGTH_LONG).show();
+
 
 
     }
