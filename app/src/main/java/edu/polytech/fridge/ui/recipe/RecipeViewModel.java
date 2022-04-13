@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.dashboard;
+package edu.polytech.fridge.ui.recipe;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
