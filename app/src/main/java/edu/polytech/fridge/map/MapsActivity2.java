@@ -23,7 +23,7 @@ import edu.polytech.fridge.gps.GPSFragment;
 import edu.polytech.fridge.gps.IGPSActivity;
 import edu.polytech.fridge.gps.NavigationFragment;
 
-public class MapsActivity2 extends FragmentActivity implements IGPSActivity,OnMapReadyCallback  {
+public class MapsActivity2 extends FragmentActivity implements IGPSActivity, OnMapReadyCallback {
     private GPSFragment gpsFragment;
     private GoogleMap map;
     private ActivityMaps2Binding binding;
@@ -39,22 +39,23 @@ public class MapsActivity2 extends FragmentActivity implements IGPSActivity,OnMa
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
         gpsFragment = (GPSFragment) getSupportFragmentManager().findFragmentById(R.id.gpsLocation);
         if (gpsFragment == null) {
             gpsFragment = new GPSFragment();
-            FragmentTransaction gpsTrasansaction = getSupportFragmentManager().beginTransaction();
-            gpsTrasansaction.replace(R.id.gpsLocation, gpsFragment);
-            gpsTrasansaction.addToBackStack(null);
-            gpsTrasansaction.commit();
+            FragmentTransaction gpsTransaction = getSupportFragmentManager().beginTransaction();
+            gpsTransaction.replace(R.id.gpsLocation, gpsFragment);
+            gpsTransaction.addToBackStack(null);
+            gpsTransaction.commit();
         }
         navigationFragment = (NavigationFragment) getSupportFragmentManager().findFragmentById(R.id.navigation);
         if (navigationFragment == null) {
             navigationFragment = new NavigationFragment();
-            FragmentTransaction gpsTrasansaction = getSupportFragmentManager().beginTransaction();
-            gpsTrasansaction.replace(R.id.gpsLocation, navigationFragment);
-            gpsTrasansaction.addToBackStack(null);
-            gpsTrasansaction.commit();
+            FragmentTransaction gpsTransaction = getSupportFragmentManager().beginTransaction();
+            gpsTransaction.replace(R.id.gpsLocation, navigationFragment);
+            gpsTransaction.addToBackStack(null);
+            gpsTransaction.commit();
         }
 
     }
@@ -73,10 +74,11 @@ public class MapsActivity2 extends FragmentActivity implements IGPSActivity,OnMa
         map = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng Nice =  new LatLng(43.681035, 7.224034);
+        LatLng Nice = new LatLng(43.681035, 7.224034);
         map.addMarker(new MarkerOptions().position(Nice).title("Nice"));
         map.moveCamera(CameraUpdateFactory.newLatLng(Nice));
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -90,19 +92,19 @@ public class MapsActivity2 extends FragmentActivity implements IGPSActivity,OnMa
             break;
         }
         gpsFragment = new GPSFragment(this);
-        FragmentTransaction gpsTrasansaction = getSupportFragmentManager().beginTransaction();
-        gpsTrasansaction.replace(R.id.gpsLocation, gpsFragment);
-        gpsTrasansaction.addToBackStack(null);
-        gpsTrasansaction.commit();
+        FragmentTransaction gpsTransaction = getSupportFragmentManager().beginTransaction();
+        gpsTransaction.replace(R.id.gpsLocation, gpsFragment);
+        gpsTransaction.addToBackStack(null);
+        gpsTransaction.commit();
     }
 
     @Override
     public void moveCamera() {
         try {
-            gpsFragment.setPlaceName("Ville"+gpsFragment.getPlaceName());
-        }catch (IOException e){
-            gpsFragment.setPlaceName("Ville inconnue");
+            gpsFragment.setPlaceName("City: " + gpsFragment.getPlaceName());
+        } catch (IOException e) {
+            gpsFragment.setPlaceName("Unknown city");
         }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(gpsFragment.getPosition(),15f));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(gpsFragment.getPosition(), 15f));
     }
 }
