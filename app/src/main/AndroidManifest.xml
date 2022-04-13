@@ -21,10 +21,7 @@
             android:value="AIzaSyBtJo4kSMTPBDmf-d4Vt2BFRjn6NKJqv7g" />
 
         <activity
-            android:name=".map.MapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".map.MapsActivity2"
+            android:name=".map.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

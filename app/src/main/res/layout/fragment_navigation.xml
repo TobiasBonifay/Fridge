@@ -12,16 +12,16 @@
         android:id="@+id/buttonCheckPermission"
         android:text="check"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonSwitchOnOffGPS"
         android:text="GPS on/off"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonSettings"
         android:text="App Settings"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

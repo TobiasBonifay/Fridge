@@ -12,29 +12,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 
+import edu.polytech.fridge.NavigationFragment;
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.databinding.ActivityMaps2Binding;
+
 import edu.polytech.fridge.gps.GPSFragment;
 import edu.polytech.fridge.gps.IGPSActivity;
-import edu.polytech.fridge.gps.NavigationFragment;
 
-public class MapsActivity2 extends FragmentActivity implements IGPSActivity, OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMapReadyCallback {
     private GPSFragment gpsFragment;
     private GoogleMap map;
-    private ActivityMaps2Binding binding;
     private NavigationFragment navigationFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMaps2Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,7 +38,7 @@ public class MapsActivity2 extends FragmentActivity implements IGPSActivity, OnM
         mapFragment.getMapAsync(this);
         gpsFragment = (GPSFragment) getSupportFragmentManager().findFragmentById(R.id.gpsLocation);
         if (gpsFragment == null) {
-            gpsFragment = new GPSFragment();
+            gpsFragment = new GPSFragment(this);
             FragmentTransaction gpsTransaction = getSupportFragmentManager().beginTransaction();
             gpsTransaction.replace(R.id.gpsLocation, gpsFragment);
             gpsTransaction.addToBackStack(null);
@@ -72,11 +67,6 @@ public class MapsActivity2 extends FragmentActivity implements IGPSActivity, OnM
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng Nice = new LatLng(43.681035, 7.224034);
-        map.addMarker(new MarkerOptions().position(Nice).title("Nice"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(Nice));
     }
 
     @Override
