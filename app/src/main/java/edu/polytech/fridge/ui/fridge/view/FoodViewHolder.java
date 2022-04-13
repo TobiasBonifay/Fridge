@@ -13,9 +13,12 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     private final ImageView foodImage_IMG;
     private final TextView expirationDate_TV;
     private final TextView currentQuantity_TV;
-    private final ImageButton incrementQuantity_IB;
-    private final ImageButton decrementQuantity_IB;
-    private final ImageButton donate_Btn;
+    //private final ImageButton incrementQuantity_IB;
+    //private final ImageButton decrementQuantity_IB;
+    //private final ImageButton donate_Btn;
+    private final ImageView incrementQuantity_IB;
+    private final ImageView decrementQuantity_IB;
+    private final ImageView donate_Btn;
 
     public FoodViewHolder(final ItemSimpleItemviewBinding binding) {
         super(binding.getRoot());
