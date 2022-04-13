@@ -22,9 +22,6 @@
         <activity
             android:name=".map.MapsActivity2"
             android:exported="false" />
-        <activity
-            android:name=".map.MapActivity"
-            android:exported="false" />
 
 
         <activity
