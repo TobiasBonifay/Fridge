@@ -1,7 +1,10 @@
 package edu.polytech.fridge.map;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.IOException;
 
+import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.NavigationFragment;
 import edu.polytech.fridge.R;
 
@@ -25,7 +29,7 @@ public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMa
     private GPSFragment gpsFragment;
     private GoogleMap map;
     private NavigationFragment navigationFragment;
-
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,14 @@ public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMa
             gpsTransaction.addToBackStack(null);
             gpsTransaction.commit();
         }
+        button = findViewById(R.id.back);
+        Intent intent = new Intent(MapsActivity.this, MainActivity.class);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -97,4 +109,7 @@ public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMa
         }
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(gpsFragment.getPosition(), 15f));
     }
+
+
+
 }
