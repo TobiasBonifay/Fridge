@@ -2,9 +2,12 @@ package edu.polytech.fridge.map;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,8 +18,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.List;
 
 import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.NavigationFragment;
@@ -30,6 +36,8 @@ public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMa
     private GoogleMap map;
     private NavigationFragment navigationFragment;
     private Button button;
+    private SupportMapFragment supportMapFragment ;
+    SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,35 @@ public class MapsActivity extends FragmentActivity implements IGPSActivity, OnMa
             @Override
             public void onClick(View view) {
                 startActivity(intent);
+            }
+        });
+
+        searchView = findViewById(R.id.location);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String location = searchView.getQuery().toString();
+                List<Address> addressList =null;
+                if(location !=null || !location.equals("")){
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+                    try {
+                        addressList =geocoder.getFromLocationName(location,1);
+
+                    }catch (IOException e){
+                         e.printStackTrace();
+                    }
+                    Address address =addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+                    map.addMarker(new MarkerOptions().position(latLng).title(location));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
             }
         });
 
