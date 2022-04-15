@@ -53,16 +53,14 @@ public class FridgeFindFoodsActivity extends AppCompatActivity {
 
     private void filterList(String text) {
         List<FoodViewModel> filteredList = new ArrayList<>();
-        for (FoodViewModel food: Fridge.getInstance().getFoodList()) {
-            if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+        // devra être récup depuis la base de donnée
+        List<FoodViewModel> databaseFoodItems = Fridge.getInstance().getFoodList();
+        for (FoodViewModel food : databaseFoodItems) {
+            if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)))
                 filteredList.add(food);
-            }
         }
-        if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No food items", Toast.LENGTH_SHORT).show();
-        } else {
-            foodItemFromDatabase.setAdapter(new FoodAdapter(filteredList));
-        }
+        if (filteredList.isEmpty()) Toast.makeText(this, "No food items", Toast.LENGTH_SHORT).show();
+        else foodItemFromDatabase.setAdapter(new FoodAdapter(filteredList));
     }
 
     public void addFoodOnFridge() {
