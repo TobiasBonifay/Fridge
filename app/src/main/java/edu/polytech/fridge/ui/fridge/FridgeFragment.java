@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
@@ -58,13 +60,17 @@ public class FridgeFragment extends Fragment {
 
     private List<FoodViewModel> generateSimpleList() {
         List<FoodViewModel> foodViewModelList = new ArrayList<>();
+
         // fetch data from FireBase
-        FoodViewModel aliment = new FoodViewModel("Carrot", "27/04/2022", 4);
-        FoodViewModel aliment2 = new FoodViewModel("Pear", "24/04/2022", 2);
-        FoodViewModel aliment3 = new FoodViewModel("Pasta", "29/04/2022", 1);
+        FoodViewModel aliment = new FoodViewModel("Carrot", R.drawable.ic_carrot , "27/04/2022", 4);
+        FoodViewModel aliment2 = new FoodViewModel("Pear", R.drawable.ic_pear, "24/04/2022", 2);
+        FoodViewModel aliment3 = new FoodViewModel("Pasta", R.drawable.ic_spaghetti, "29/04/2022", 1);
+        FoodViewModel aliment4 = new FoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti, "09/04/2017", 1);
+
         foodViewModelList.add(aliment);
         foodViewModelList.add(aliment2);
         foodViewModelList.add(aliment3);
+        foodViewModelList.add(aliment4);
         return foodViewModelList;
     }
 }

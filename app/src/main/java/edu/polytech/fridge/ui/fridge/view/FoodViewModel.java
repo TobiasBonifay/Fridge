@@ -1,20 +1,33 @@
 package edu.polytech.fridge.ui.fridge.view;
 
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 
 public class FoodViewModel {
     private String foodName;
+    private int foodImage;
     private String expirationDate;
     private int currentQuantity;
 
     public FoodViewModel(
             @NonNull final String foodName,
+            final int foodImage,
             @NonNull final String expirationDate,
             int currentQuantity
     ) {
         setFoodName(foodName);
+        setFoodImage(foodImage);
         setExpirationDate(expirationDate);
         setCurrentQuantity(currentQuantity);
+    }
+
+    public int getFoodImage() {
+        return foodImage;
+    }
+
+    public void setFoodImage(int foodImage) {
+        this.foodImage = foodImage;
     }
 
     @NonNull
@@ -22,21 +35,21 @@ public class FoodViewModel {
         return foodName;
     }
 
+    public void setFoodName(@NonNull final String foodName) {
+        this.foodName = foodName;
+    }
+
     @NonNull
     public String getExpirationDate() {
         return expirationDate;
     }
 
-    public int getCurrentQuantity() {
-        return currentQuantity;
-    }
-
-    public void setFoodName(@NonNull final String foodName) {
-        this.foodName = foodName;
-    }
-
     public void setExpirationDate(@NonNull final String expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public int getCurrentQuantity() {
+        return currentQuantity;
     }
 
     public void setCurrentQuantity(int currentQuantity) {

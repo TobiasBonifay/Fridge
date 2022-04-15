@@ -6,16 +6,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
 public class FoodViewHolder extends RecyclerView.ViewHolder {
     private final TextView foodName_TV;
-    private final ImageView foodImage_IMG;
+    private ImageView foodImage_IMG;
     private final TextView expirationDate_TV;
     private final TextView currentQuantity_TV;
-    //private final ImageButton incrementQuantity_IB;
-    //private final ImageButton decrementQuantity_IB;
-    //private final ImageButton donate_Btn;
     private final ImageView incrementQuantity_IB;
     private final ImageView decrementQuantity_IB;
     private final ImageView donate_Btn;
@@ -36,6 +34,7 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
 
     public void bindData(final FoodViewModel viewModel) {
         foodName_TV.setText(viewModel.getFoodName());
+        foodImage_IMG.setImageResource(viewModel.getFoodImage());
         expirationDate_TV.setText(viewModel.getExpirationDate());
         currentQuantity_TV.setText(String.valueOf(viewModel.getCurrentQuantity()));
     }
