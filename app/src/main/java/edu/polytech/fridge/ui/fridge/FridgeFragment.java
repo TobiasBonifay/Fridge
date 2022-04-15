@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,33 +22,40 @@ import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
 public class FridgeFragment extends Fragment {
-    private FridgeViewModel fridgeViewModel;
     private FragmentFridgeBinding binding;
-    private ImageButton imageButtonAddFood;
+    private FoodAdapter foodAdapter;
+    private RecyclerView recyclerView;
+
+    private List<FoodViewModel> foods;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fridgeViewModel = new ViewModelProvider(this).get(FridgeViewModel.class);
+        FridgeViewModel fridgeViewModel = new ViewModelProvider(this).get(FridgeViewModel.class);
 
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        imageButtonAddFood = binding.addFood;
+        ImageButton imageButtonAddFood = binding.addFood;
         imageButtonAddFood.setOnClickListener(view -> addFoodOnFridge());
-        instantiateSimpleView();
+
+        foods = generateFridgeTemplateWithFakeFoods();
+        instantiateSimpleView(foods);
 
         return root;
     }
 
     private void addFoodOnFridge() {
-        Toast.makeText(getContext(), "Add food", Toast.LENGTH_SHORT).show();
+        // YEAH IT'S TRASH
+        FoodViewModel newFood = new FoodViewModel("new", R.drawable.ic_carrot, "27/04/2022", 1);
+        foods.add(newFood);
+        instantiateSimpleView(foods);
     }
 
-    private void instantiateSimpleView() {
-        FoodAdapter adapter = new FoodAdapter(generateSimpleList());
-        RecyclerView recyclerView = binding.simpleRecyclerview;
+    private void instantiateSimpleView(List<FoodViewModel> foods) {
+        foodAdapter = new FoodAdapter(foods);
+        recyclerView = binding.simpleRecyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(foodAdapter);
     }
 
     @Override
@@ -58,7 +64,7 @@ public class FridgeFragment extends Fragment {
         binding = null;
     }
 
-    private List<FoodViewModel> generateSimpleList() {
+    private List<FoodViewModel> generateFridgeTemplateWithFakeFoods() {
         List<FoodViewModel> foodViewModelList = new ArrayList<>();
 
         // fetch data from FireBase
