@@ -14,6 +14,9 @@ import java.util.List;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
+/**
+ * Adapter to put food on the RecyclerView aka the fridge content
+ */
 public class FoodAdapter extends RecyclerView.Adapter {
     private final List<FoodViewModel> models = new ArrayList<>();
 

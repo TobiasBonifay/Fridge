@@ -15,4 +15,11 @@
     </style>
     <style name="Theme.MaterialComponents.DayNight.DarkActionBar">
     </style>
+
+    <!-- filter by items -->
+    <string-array name="filter_by_fridge">
+        <item>Name (a-Z)</item>
+        <item>Expiration date</item>
+        <item>Quantity</item>
+    </string-array>
 </resources>

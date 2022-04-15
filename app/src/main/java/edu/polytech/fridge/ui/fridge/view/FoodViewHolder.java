@@ -1,14 +1,15 @@
 package edu.polytech.fridge.ui.fridge.view;
 
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
+/**
+ * Content of a food item
+ */
 public class FoodViewHolder extends RecyclerView.ViewHolder {
     private final TextView foodName_TV;
     private final ImageView foodImage_IMG;

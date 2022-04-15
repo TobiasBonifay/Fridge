@@ -2,18 +2,17 @@ package edu.polytech.fridge.ui.fridge.view;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Represent a food item
+ * Defined by name, expirationDate, picture and currentQuantity
+ */
 public class FoodViewModel {
     private String foodName;
     private int foodImage;
     private String expirationDate;
     private int currentQuantity;
 
-    public FoodViewModel(
-            @NonNull final String foodName,
-            final int foodImage,
-            @NonNull final String expirationDate,
-            int currentQuantity
-    ) {
+    public FoodViewModel(@NonNull final String foodName, final int foodImage, @NonNull final String expirationDate, int currentQuantity) {
         setFoodName(foodName);
         setFoodImage(foodImage);
         setExpirationDate(expirationDate);

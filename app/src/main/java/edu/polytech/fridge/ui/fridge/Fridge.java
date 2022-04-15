@@ -6,17 +6,21 @@ import java.util.List;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
-public class FridgeContent {
-    private static FridgeContent instance;
+
+/**
+ * Singleton class to store fridge data/content
+ */
+public class Fridge {
+    private static Fridge instance;
     private List<FoodViewModel> foodList = new ArrayList<>();
 
-    private FridgeContent() {
+    private Fridge() {
 
     }
 
-    public static synchronized FridgeContent getInstance() {
+    public static synchronized Fridge getInstance() {
         if (instance == null) {
-            instance = new FridgeContent();
+            instance = new Fridge();
         }
         return instance;
     }
@@ -97,6 +101,6 @@ public class FridgeContent {
         foodViewModelList.add(aliment3);
         foodViewModelList.add(aliment4);
         // return foodViewModelList;
-        FridgeContent.getInstance().setFoodList(foodViewModelList);
+        Fridge.getInstance().setFoodList(foodViewModelList);
     }
 }
