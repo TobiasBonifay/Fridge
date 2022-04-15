@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
-import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
@@ -59,7 +61,7 @@ public class FridgeFragmentFoods extends Fragment {
 
     private void setUpAddFoodButton() {
         FloatingActionButton faButtonAddFood = binding.addFood;
-        faButtonAddFood.setOnClickListener(view -> addFoodOnFridge());
+        faButtonAddFood.setOnClickListener(view -> addFoodOnFridgeActivity());
     }
 
     private void setUpFridgeContent() {
@@ -68,30 +70,17 @@ public class FridgeFragmentFoods extends Fragment {
         recyclerViewToDisplayFridgeFood.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewToDisplayFridgeFood.setHasFixedSize(true);
         recyclerViewToDisplayFridgeFood.setAdapter(foodAdapterForUserFridge);
+        filterListAlphabeticOrder();
     }
 
-    private void filterList(String text) {
-        List<FoodViewModel> filteredList = new ArrayList<>();
-        for (FoodViewModel food: Fridge.getInstance().getFoodList()) {
-            if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
-                filteredList.add(food);
-            }
-        }
-        if (filteredList.isEmpty()) {
-            Toast.makeText(getContext(), "No food items", Toast.LENGTH_SHORT).show();
-        } else {
-            recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(filteredList));
-        }
+    private void filterListAlphabeticOrder() {
+        List<FoodViewModel> foodItems = Fridge.getInstance().getFoodList();
+        foodItems.sort(Comparator.comparing(FoodViewModel::getFoodName));
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(foodItems));
     }
 
-    public void addFoodOnFridge() {
-        FoodViewModel newFood = new FoodViewModel("Carrot", R.drawable.ic_carrot, "27/04/2022", 1);
-        Fridge.getInstance().addFoodOnFridge(newFood, 1);
-        foodAdapterForUserFridge.notifyItemInserted(Fridge.getInstance().getFoodList().size());
-        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
-
-        Intent intent = new Intent(getActivity(), FridgeFindFoodsActivity.class);
-        startActivity(intent);
+    public void addFoodOnFridgeActivity() {
+        startActivity(new Intent(getActivity(), FridgeFindFoodsActivity.class));
     }
 
     @Override

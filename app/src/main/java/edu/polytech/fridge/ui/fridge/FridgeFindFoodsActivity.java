@@ -29,8 +29,6 @@ public class FridgeFindFoodsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-
         setContentView(R.layout.activity_find_food);
         setUpSearchView();
     }
