@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
@@ -65,18 +64,35 @@ public class FridgeFragmentFoods extends Fragment {
     }
 
     private void setUpFridgeContent() {
+        filterListAlphabeticOrder();
+        filterListQuantity();
+        filterListExpirationDate();
         foodAdapterForUserFridge = new FoodAdapter(Fridge.getInstance().getFoodList());
         recyclerViewToDisplayFridgeFood = binding.simpleRecyclerview;
         recyclerViewToDisplayFridgeFood.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewToDisplayFridgeFood.setHasFixedSize(true);
         recyclerViewToDisplayFridgeFood.setAdapter(foodAdapterForUserFridge);
-        filterListAlphabeticOrder();
+
     }
 
     private void filterListAlphabeticOrder() {
-        List<FoodViewModel> foodItems = Fridge.getInstance().getFoodList();
-        foodItems.sort(Comparator.comparing(FoodViewModel::getFoodName));
-        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(foodItems));
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getFoodName));
+    }
+
+    private void filterListQuantity() {
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getCurrentQuantity).reversed());
+    }
+
+    private void filterListExpirationDate() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing((FoodViewModel foodViewModel) -> {
+            try {
+                return format.parse(foodViewModel.getExpirationDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }));
     }
 
     public void addFoodOnFridgeActivity() {
