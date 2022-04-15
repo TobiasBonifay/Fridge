@@ -1,10 +1,12 @@
 package edu.polytech.fridge.ui.fridge;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
@@ -25,6 +28,7 @@ public class FridgeFragment extends Fragment {
     private FragmentFridgeBinding binding;
     private FoodAdapter foodAdapter;
     private RecyclerView recyclerView;
+    private SearchView searchView;
 
     private List<FoodViewModel> foods;
 
@@ -34,13 +38,43 @@ public class FridgeFragment extends Fragment {
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        ImageButton imageButtonAddFood = binding.addFood;
-        imageButtonAddFood.setOnClickListener(view -> addFoodOnFridge());
+        searchView = binding.searchView;
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                filterList(s);
+                return true;
+            }
+        });
 
         foods = generateFridgeTemplateWithFakeFoods();
         instantiateSimpleView(foods);
 
+        ImageButton imageButtonAddFood = binding.addFood;
+        imageButtonAddFood.setOnClickListener(view -> addFoodOnFridge());
+
         return root;
+    }
+
+    private void filterList(String text) {
+        List<FoodViewModel> filteredList = new ArrayList<>();
+        for (FoodViewModel food: foods) {
+            if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+                filteredList.add(food);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(getContext(), "No food items", Toast.LENGTH_SHORT).show();
+        } else {
+            FoodAdapter foodAdapterFiltered = new FoodAdapter(filteredList);
+            recyclerView.setAdapter(foodAdapterFiltered);
+        }
     }
 
     private void addFoodOnFridge() {
