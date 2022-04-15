@@ -9,5 +9,5 @@
     <string name="plus">Plus</string>
     <string name="minus">Minus</string>
     <string name="nb">number of item</string>
-    <string name="filter_by">Filter by:</string>
+    <string name="order_by">Order by:</string>
 </resources>

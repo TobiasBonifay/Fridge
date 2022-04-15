@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -56,6 +59,22 @@ public class FridgeFragmentFoods extends Fragment {
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (parent.getItemAtPosition(position).toString()) {
+                    case "Date": filterListExpirationDate(); break;
+                    case "Quantity": filterListQuantity(); break;
+                    case "Name":
+                    default:
+                        filterListAlphabeticOrder(); break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
     private void setUpAddFoodButton() {
@@ -64,9 +83,6 @@ public class FridgeFragmentFoods extends Fragment {
     }
 
     private void setUpFridgeContent() {
-        filterListAlphabeticOrder();
-        filterListQuantity();
-        filterListExpirationDate();
         foodAdapterForUserFridge = new FoodAdapter(Fridge.getInstance().getFoodList());
         recyclerViewToDisplayFridgeFood = binding.simpleRecyclerview;
         recyclerViewToDisplayFridgeFood.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -77,10 +93,12 @@ public class FridgeFragmentFoods extends Fragment {
 
     private void filterListAlphabeticOrder() {
         Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getFoodName));
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
     }
 
     private void filterListQuantity() {
         Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getCurrentQuantity).reversed());
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
     }
 
     private void filterListExpirationDate() {
@@ -93,6 +111,7 @@ public class FridgeFragmentFoods extends Fragment {
             }
             return null;
         }));
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
     }
 
     public void addFoodOnFridgeActivity() {

@@ -18,8 +18,8 @@
 
     <!-- filter by items -->
     <string-array name="filter_by_fridge">
-        <item>Name (a-Z)</item>
-        <item>Expiration date</item>
+        <item>Name</item>
+        <item>Date</item>
         <item>Quantity</item>
     </string-array>
 </resources>
