@@ -1,7 +1,5 @@
 package edu.polytech.fridge.ui.fridge.view;
 
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 
 public class FoodViewModel {

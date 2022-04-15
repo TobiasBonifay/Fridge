@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
 public class FoodAdapter extends RecyclerView.Adapter {

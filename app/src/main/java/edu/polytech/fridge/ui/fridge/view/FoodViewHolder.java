@@ -11,7 +11,7 @@ import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
 
 public class FoodViewHolder extends RecyclerView.ViewHolder {
     private final TextView foodName_TV;
-    private ImageView foodImage_IMG;
+    private final ImageView foodImage_IMG;
     private final TextView expirationDate_TV;
     private final TextView currentQuantity_TV;
     private final ImageView incrementQuantity_IB;
