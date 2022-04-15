@@ -63,7 +63,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         getSupportActionBar().hide();
         setContentView(R.layout.activity_maps);
 
-        coder = new Geocoder(this, Locale.getDefault());
+        coder = new Geocoder(getApplicationContext(), Locale.getDefault());
 
         searchView = findViewById(R.id.idSearchView);
 
@@ -102,6 +102,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         // googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                     }else{
@@ -123,8 +124,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
         this.googleMap = mGoogleMap;
-        MapActivity.this.googleMap = googleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
     }
 
