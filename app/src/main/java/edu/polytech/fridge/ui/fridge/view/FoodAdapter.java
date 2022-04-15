@@ -4,6 +4,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 
@@ -26,8 +28,6 @@ public class FoodAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final FragmentFridgeBinding fragmentFridgeBinding = FragmentFridgeBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent, false);
         final ItemSimpleItemviewBinding itemSimpleItemviewBinding = ItemSimpleItemviewBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false);
         return new FoodViewHolder(itemSimpleItemviewBinding);
@@ -36,6 +36,7 @@ public class FoodAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         ((FoodViewHolder) holder).bindData(models.get(position));
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_fridge_recyclerview));
     }
 
 
