@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_fridge"
-        android:name="edu.polytech.fridge.ui.fridge.FridgeFragmentFoods"
+        android:name="edu.polytech.fridge.ui.fridge.FridgeFragment"
         android:label="@string/title_fridge"
-        tools:layout="@layout/fragment_findIngredient" />
+        tools:layout="@layout/fragment_fridge" />
 
     <fragment
         android:id="@+id/navigation_recipe"

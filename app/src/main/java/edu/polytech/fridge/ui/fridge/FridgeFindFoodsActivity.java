@@ -1,38 +1,48 @@
 package edu.polytech.fridge.ui.fridge;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Parcelable;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
-import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
+import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.ui.fridge.findfoods.FindFoodAdapter;
+import edu.polytech.fridge.ui.fridge.findfoods.FindFoodViewModel;
 
 /**
  * Display a recyclerView from FireBase food items
  * And allow the user to add this food item in the user' fridge
  */
-public class FridgeFindFoodsActivity extends AppCompatActivity {
-    private FridgeFindFoodsActivity binding;
-    private FoodAdapter foodAdapter;
-    private RecyclerView foodItemFromDatabase;
+public class FridgeFindFoodsActivity extends AppCompatActivity implements FridgeFindFoodsRecyclerViewInterface{
+    private RecyclerView recyclerViewToDisplayAvailableItems;
+    private List<FindFoodViewModel> foodItemsAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_food);
+        setUp();
         setUpSearchView();
     }
 
+    private void setUp() {
+        foodItemsAvailable = foodItemsFakeDatabase();
+        final List<FindFoodViewModel> emptyList = new ArrayList<>();
+        FindFoodAdapter findFoodAdapter = new FindFoodAdapter(emptyList, this);
+        recyclerViewToDisplayAvailableItems = findViewById(R.id.find_ingredient_recyclerview);
+        recyclerViewToDisplayAvailableItems.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewToDisplayAvailableItems.setHasFixedSize(true);
+        recyclerViewToDisplayAvailableItems.setAdapter(findFoodAdapter);
+    }
 
     private void setUpSearchView() {
         SearchView searchView = findViewById(R.id.searchView);
@@ -51,24 +61,42 @@ public class FridgeFindFoodsActivity extends AppCompatActivity {
         });
     }
 
+    private static List<FindFoodViewModel> foodItemsFakeDatabase() {
+        List<FindFoodViewModel> items = new ArrayList<>();
+        // fetch data from FireBase
+        FindFoodViewModel aliment = new FindFoodViewModel("Carrot", R.drawable.ic_carrot);
+        FindFoodViewModel aliment2 = new FindFoodViewModel("Pear", R.drawable.ic_pear);
+        FindFoodViewModel aliment3 = new FindFoodViewModel("Pasta", R.drawable.ic_spaghetti);
+        FindFoodViewModel aliment4 = new FindFoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti);
+        FindFoodViewModel aliment5 = new FindFoodViewModel("Database item", R.drawable.ic_spaghetti);
+
+        items.add(aliment5);
+        items.add(aliment);
+        items.add(aliment2);
+        items.add(aliment3);
+        items.add(aliment4);
+        return items;
+    }
+
     private void filterList(String text) {
-        List<FoodViewModel> filteredList = new ArrayList<>();
-        // devra être récup depuis la base de donnée
-        List<FoodViewModel> databaseFoodItems = Fridge.getInstance().getFoodList();
-        for (FoodViewModel food : databaseFoodItems) {
+        List<FindFoodViewModel> filteredList = new ArrayList<>();
+
+        for (FindFoodViewModel food : foodItemsAvailable) {
             if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)))
                 filteredList.add(food);
         }
-        if (filteredList.isEmpty()) Toast.makeText(this, "No food items", Toast.LENGTH_SHORT).show();
-        else foodItemFromDatabase.setAdapter(new FoodAdapter(filteredList));
+        recyclerViewToDisplayAvailableItems.setAdapter(new FindFoodAdapter(filteredList, this));
     }
 
-    public void addFoodOnFridge() {
-        FoodViewModel newFood = new FoodViewModel("Carrot", R.drawable.ic_carrot, "27/04/2022", 1);
-        Fridge.getInstance().addFoodOnFridge(newFood, 1);
-        foodAdapter.notifyItemInserted(Fridge.getInstance().getFoodList().size());
-        foodItemFromDatabase.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
+    public void addFoodOnFridge(FindFoodViewModel foodToAdd) {
+        Intent addFoodIntent = new Intent(this, FridgeAddFoodItemActivity.class);
+        addFoodIntent.putExtra("food", (Parcelable) foodToAdd);
+        startActivity(addFoodIntent);
     }
 
 
+    @Override
+    public void OnItemClick(int position) {
+        addFoodOnFridge(foodItemsAvailable.get(position));
+    }
 }

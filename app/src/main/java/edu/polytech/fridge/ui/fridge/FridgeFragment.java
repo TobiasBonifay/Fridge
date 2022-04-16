@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,19 +19,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
+import edu.polytech.fridge.ui.fridge.data.Fridge;
 import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
-public class FridgeFragmentFoods extends Fragment {
+/**
+ * Display a recyclerView of food items own by the user
+ */
+public class FridgeFragment extends Fragment {
     private FragmentFridgeBinding binding;
-    private FoodAdapter foodAdapterForUserFridge;
     private RecyclerView recyclerViewToDisplayFridgeFood;
 
 
@@ -63,11 +63,16 @@ public class FridgeFragmentFoods extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (parent.getItemAtPosition(position).toString()) {
-                    case "Date": filterListExpirationDate(); break;
-                    case "Quantity": filterListQuantity(); break;
+                    case "Date":
+                        filterListExpirationDate();
+                        break;
+                    case "Quantity":
+                        filterListQuantity();
+                        break;
                     case "Name":
                     default:
-                        filterListAlphabeticOrder(); break;
+                        filterListAlphabeticOrder();
+                        break;
                 }
             }
 
@@ -83,12 +88,11 @@ public class FridgeFragmentFoods extends Fragment {
     }
 
     private void setUpFridgeContent() {
-        foodAdapterForUserFridge = new FoodAdapter(Fridge.getInstance().getFoodList());
-        recyclerViewToDisplayFridgeFood = binding.simpleRecyclerview;
+        FoodAdapter foodAdapterForUserFridge = new FoodAdapter(Fridge.getInstance().getFoodList());
+        recyclerViewToDisplayFridgeFood = binding.fridgeRecyclerview;
         recyclerViewToDisplayFridgeFood.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewToDisplayFridgeFood.setHasFixedSize(true);
         recyclerViewToDisplayFridgeFood.setAdapter(foodAdapterForUserFridge);
-
     }
 
     private void filterListAlphabeticOrder() {

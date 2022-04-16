@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +36,12 @@ public class Fridge {
     /**
      * stack same food item
      * @param food Food to add
-     * @param quantity Quantity of this food
      */
-    public void addFoodOnFridge(final FoodViewModel food, final int quantity) {
+    public void addFoodOnFridge(final FoodViewModel food) {
         if (isAlreadyHere(food)) {
             foodList.forEach(alreadyIn -> {
                 if (isSameFood(food, alreadyIn)) {
-                    alreadyIn.setCurrentQuantity(alreadyIn.getCurrentQuantity() + quantity);
+                    alreadyIn.setCurrentQuantity(alreadyIn.getCurrentQuantity() + food.getCurrentQuantity());
                 }
                 foodList.remove(food); // if present remove it
             });
