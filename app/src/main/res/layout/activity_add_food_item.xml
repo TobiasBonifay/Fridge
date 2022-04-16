@@ -6,69 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".ui.fridge.FridgeAddFoodItemActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_carrot"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="36dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="40dp" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="426dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/food_image_add"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:contentDescription="food image"
+            android:src="@drawable/ic_carrot" />
+
+        <TextView
+            android:id="@+id/food_name_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:text="Tofu"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="73dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
+            android:id="@+id/currentQuantity_add"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="Quantity"/>
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
+            android:id="@+id/purchaseDate_add"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Purchase date" />
+
+        <TextView
+            android:id="@+id/expirationDate_add"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Expiration date" />
+
+        <TextView
+            android:id="@+id/weight_add"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Weight" />
     </LinearLayout>
 
     <Button
         android:id="@+id/Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:background="@color/red"
         android:text="Cancel"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="500dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/addIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/green"
         android:text="Add"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="500dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Cancel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
