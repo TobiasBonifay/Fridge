@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
+import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
 
 /**
  * Adapter to put food on the RecyclerView aka the fridge content
@@ -31,8 +31,8 @@ public class FoodAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        final ItemSimpleItemviewBinding itemSimpleItemviewBinding = ItemSimpleItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new FoodViewHolder(itemSimpleItemviewBinding);
+        final ItemFridgeItemviewBinding itemFridgeItemviewBinding = ItemFridgeItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new FoodViewHolder(itemFridgeItemviewBinding);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FoodAdapter extends RecyclerView.Adapter {
     */
     @Override
     public int getItemViewType(int position) {
-        return R.layout.item_simple_itemview;
+        return R.layout.item_fridge_itemview;
     }
 }
 

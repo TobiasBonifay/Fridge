@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
+import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
 import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
 
 /**
@@ -16,7 +16,7 @@ public class FindFoodViewHolder extends RecyclerView.ViewHolder {
     private final TextView foodName_TV;
     private final ImageView foodImage_IMG;
 
-    public FindFoodViewHolder(final ItemSimpleItemviewBinding binding, final FridgeFindFoodsRecyclerViewInterface fridgeFindFoodsRecyclerViewInterface) {
+    public FindFoodViewHolder(final ItemFindFoodItemviewBinding binding, final FridgeFindFoodsRecyclerViewInterface fridgeFindFoodsRecyclerViewInterface) {
         super(binding.getRoot());
         View v = binding.getRoot();
         // food characteristics

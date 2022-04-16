@@ -64,7 +64,12 @@ public class FridgeAddFoodItemActivity extends AppCompatActivity implements Parc
                 foodToAdd.getFoodImage(),
                 foodToAdd.getExpirationDate(),
                 foodToAdd.getCurrentQuantity());
-        Fridge.getInstance().addFoodOnFridge(newFood);
+        FoodViewModel demo = new FoodViewModel(
+                "dino",
+                R.drawable.ic_minus,
+                "01/01/1970",
+                1);
+        Fridge.getInstance().addFoodOnFridge(demo);
         startActivity(new Intent(this, MainActivity.class));
     }
 

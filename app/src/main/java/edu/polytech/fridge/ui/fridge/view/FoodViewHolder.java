@@ -1,11 +1,12 @@
 package edu.polytech.fridge.ui.fridge.view;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import edu.polytech.fridge.databinding.ItemSimpleItemviewBinding;
+import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
 
 /**
  * Content of a food item
@@ -19,7 +20,7 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     private final ImageView decrementQuantity_IB;
     private final ImageView donate_Btn;
 
-    public FoodViewHolder(final ItemSimpleItemviewBinding binding) {
+    public FoodViewHolder(final ItemFridgeItemviewBinding binding) {
         super(binding.getRoot());
         // food characteristics
         foodName_TV = binding.foodName;
