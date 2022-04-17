@@ -40,7 +40,7 @@ import java.util.Locale;
 
 import edu.polytech.fridge.R;
 
-public class MapActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener,
+public class MapActivity extends AppCompatActivity implements LocationListener , GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
     private LocationManager lm;
     private ImageView filter;
@@ -55,15 +55,13 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
 
 
-
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_maps);
-
-        coder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        coder = new Geocoder(this, Locale.getDefault());
 
         searchView = findViewById(R.id.idSearchView);
 
@@ -102,7 +100,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         // googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                        googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                     }else{
@@ -116,7 +113,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 return false;
             }
         });
-
     }
 
 
@@ -124,6 +120,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
         this.googleMap = mGoogleMap;
+        MapActivity.this.googleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
     }
@@ -188,10 +185,9 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         }
     }
 
+
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-
         return false;
     }
-
 }
