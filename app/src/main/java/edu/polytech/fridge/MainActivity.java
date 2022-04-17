@@ -13,7 +13,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
-import edu.polytech.fridge.map.MapsActivity;
 
 public class MainActivity extends AppCompatActivity {
     GoogleMap map;
@@ -39,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_recipe,
                 R.id.navigation_notifications)
                 .build();
-        btn=findViewById(R.id.butt1);
-        intent = new Intent(MainActivity.this, MapsActivity.class);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-            }
-        });
 
 
 

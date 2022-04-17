@@ -21,9 +21,6 @@
             android:value="AIzaSyBtJo4kSMTPBDmf-d4Vt2BFRjn6NKJqv7g" />
 
         <activity
-            android:name=".map.MapsActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
