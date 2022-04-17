@@ -8,4 +8,8 @@
     <string name="expirationDateNotif">from notification</string>
     <string name="try_it">See the notification</string>
     <string name="placeName">Ville: Inconnue</string>
+    <string name="plus">Plus</string>
+    <string name="minus">Minus</string>
+    <string name="nb">number of item</string>
+    <string name="order_by">Order by:</string>
 </resources>
