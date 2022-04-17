@@ -33,12 +33,5 @@
         app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <Button
-        android:id="@+id/butt1"
-        android:layout_width="147dp"
-        android:layout_height="57dp"
-        android:text="Navigate map"
-        tools:layout_editor_absoluteX="264dp"
-        tools:layout_editor_absoluteY="-2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
