@@ -7,10 +7,15 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Objects;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
 import edu.polytech.fridge.map.MapActivity;
@@ -40,17 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_recipe,
                 R.id.navigation_notifications)
                 .build();
-        btn=findViewById(R.id.butt1);
-        intent = new Intent(MainActivity.this, MapActivity.class);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-            }
-        });
 
 
 
+
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
 
     }
 

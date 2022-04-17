@@ -1,47 +1,125 @@
 package edu.polytech.fridge.ui.fridge;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+
+
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
+import edu.polytech.fridge.ui.fridge.data.Fridge;
+import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
+import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
+/**
+ * Display a recyclerView of food items own by the user
+ */
 public class FridgeFragment extends Fragment {
-
     private FragmentFridgeBinding binding;
+    private RecyclerView recyclerViewToDisplayFridgeFood;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FridgeViewModel fridgeViewModel = new ViewModelProvider(this).get(FridgeViewModel.class);
 
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        fridgeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        Fridge.generateFridgeTemplateWithFakeFoods();
 
-        instantiateSimpleView();
+        setUpFridgeContent();
+        setUpSpinner();
+        setUpAddFoodButton();
 
         return root;
     }
 
-    private void instantiateSimpleView() {
-        SimpleAdapter adapter = new SimpleAdapter(generateSimpleList());
-        RecyclerView recyclerView = binding.simpleRecyclerview;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+    private void setUpSpinner() {
+        Spinner spinner = binding.spinnerFilter;
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(
+                        getContext(),
+                        R.array.filter_by_fridge,
+                        android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (parent.getItemAtPosition(position).toString()) {
+                    case "Date":
+                        filterListExpirationDate();
+                        break;
+                    case "Quantity":
+                        filterListQuantity();
+                        break;
+                    case "Name":
+                    default:
+                        filterListAlphabeticOrder();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    private void setUpAddFoodButton() {
+        FloatingActionButton faButtonAddFood = binding.addFood;
+        faButtonAddFood.setOnClickListener(view -> addFoodOnFridgeActivity());
+    }
+
+    private void setUpFridgeContent() {
+        FoodAdapter foodAdapterForUserFridge = new FoodAdapter(Fridge.getInstance().getFoodList());
+        recyclerViewToDisplayFridgeFood = binding.fridgeRecyclerview;
+        recyclerViewToDisplayFridgeFood.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewToDisplayFridgeFood.setHasFixedSize(true);
+        recyclerViewToDisplayFridgeFood.setAdapter(foodAdapterForUserFridge);
+    }
+
+    private void filterListAlphabeticOrder() {
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getFoodName));
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
+    }
+
+    private void filterListQuantity() {
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getCurrentQuantity).reversed());
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
+    }
+
+    private void filterListExpirationDate() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing((FoodViewModel foodViewModel) -> {
+            try {
+                return format.parse(foodViewModel.getExpirationDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }));
+        recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
+    }
+
+    public void addFoodOnFridgeActivity() {
+        startActivity(new Intent(getActivity(), FridgeFindFoodsActivity.class));
     }
 
     @Override
@@ -50,11 +128,4 @@ public class FridgeFragment extends Fragment {
         binding = null;
     }
 
-    private List<SimpleViewModel> generateSimpleList() {
-        List<SimpleViewModel> simpleViewModelList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            simpleViewModelList.add(new SimpleViewModel(String.format(Locale.US, "This item %d", i)));
-        }
-        return simpleViewModelList;
-    }
 }

@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.MaterialComponents.DayNight.DarkActionBar">
+    </style>
+
+    <!-- filter by items -->
+    <string-array name="filter_by_fridge">
+        <item>Name</item>
+        <item>Date</item>
+        <item>Quantity</item>
+    </string-array>
 </resources>
