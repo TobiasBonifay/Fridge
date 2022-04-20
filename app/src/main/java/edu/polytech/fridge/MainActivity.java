@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Objects;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
+import edu.polytech.fridge.ui.fridge.FridgeFragment;
 
 public class MainActivity extends AppCompatActivity {
 

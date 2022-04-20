@@ -35,7 +35,6 @@ public class FridgeFragment extends Fragment {
     private FragmentFridgeBinding binding;
     private RecyclerView recyclerViewToDisplayFridgeFood;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentFridgeBinding.inflate(inflater, container, false);

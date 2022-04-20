@@ -1,86 +1,48 @@
 package edu.polytech.fridge.ui.fridge;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
+import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.findfoods.FindFoodViewModel;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
-public class FridgeAddFoodItemActivity extends AppCompatActivity implements Parcelable {
-    private final String foodName;
-    private final int foodImage;
+public class FridgeAddFoodItemActivity extends AppCompatActivity {
 
-    public FridgeAddFoodItemActivity(String foodName, int foodImage) {
-        // should never be called
-        this.foodName = foodName;
-        this.foodImage = foodImage;
-    }
-
-    protected FridgeAddFoodItemActivity(Parcel in) {
-        foodName = in.readString();
-        foodImage = in.readInt();
-    }
-
-    public static final Creator<FridgeAddFoodItemActivity> CREATOR = new Creator<FridgeAddFoodItemActivity>() {
-        @Override
-        public FridgeAddFoodItemActivity createFromParcel(Parcel in) {
-            return new FridgeAddFoodItemActivity(in);
-        }
-
-        @Override
-        public FridgeAddFoodItemActivity[] newArray(int size) {
-            return new FridgeAddFoodItemActivity[size];
-        }
-    };
+    public FridgeAddFoodItemActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_item);
 
-        FindFoodViewModel foodToAdd = getIntent().getExtras().getParcelable("food");
-        String expirationDate = "27/08/2025";
-        int quantity = 1;
-
-        FoodViewModel foodToAddCompleted = new FoodViewModel(
-                foodToAdd.getFoodName(),
-                foodToAdd.getFoodImage(),
-                expirationDate,
-                quantity
-        );
+        FoodViewModel foodToAddCompleted = getFoodItemToAdd();
         addFoodInFridge(foodToAddCompleted);
     }
 
+    @NonNull
+    private FoodViewModel getFoodItemToAdd() {
+        FoodItemParcelable foodItemParcelableToAdd = getIntent().getParcelableExtra("food");
+        String expirationDate = "27/04/2022";
+        int quantity = 2;
+        return new FoodViewModel(
+                foodItemParcelableToAdd.getFoodName(),
+                foodItemParcelableToAdd.getFoodImage(),
+                expirationDate,
+                quantity
+        );
+    }
+
     private void addFoodInFridge(FoodViewModel foodToAdd) {
-        FoodViewModel newFood = new FoodViewModel(
-                foodToAdd.getFoodName(),
-                foodToAdd.getFoodImage(),
-                foodToAdd.getExpirationDate(),
-                foodToAdd.getCurrentQuantity());
-        FoodViewModel demo = new FoodViewModel(
-                "dino",
-                R.drawable.ic_minus,
-                "01/01/1970",
-                1);
-        Fridge.getInstance().addFoodOnFridge(demo);
+        // add to json
+        Fridge.getInstance().addFoodOnFridge(foodToAdd);
+        Log.d("ITEMFOOD", "addFoodOnFridge " + Fridge.getInstance().getFoodList().toString());
         startActivity(new Intent(this, MainActivity.class));
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(foodName);
-        parcel.writeInt(foodImage);
     }
 }
