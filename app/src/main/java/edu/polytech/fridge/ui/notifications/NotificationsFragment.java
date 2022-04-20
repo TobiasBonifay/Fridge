@@ -20,6 +20,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -29,10 +31,13 @@ import java.util.logging.Logger;
 import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentNotificationsBinding;
+import edu.polytech.fridge.map.MapActivity;
+import edu.polytech.fridge.ui.fridge.FridgeFindFoodsActivity;
 
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
+    Intent intent;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
@@ -45,6 +50,8 @@ public class NotificationsFragment extends Fragment {
 
         final Button showNotificationButton = binding.showNotificationExample;
         showNotificationButton.setOnClickListener(view -> newNotification("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
+        Button map = binding.map;
+        map.setOnClickListener(view -> NavigateMap());
 
         return root;
     }
@@ -120,5 +127,8 @@ public class NotificationsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    public void NavigateMap() {
+        startActivity(new Intent(getActivity(), MapActivity.class));
     }
 }

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,9 +77,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 30, 30);
-
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -100,6 +98,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         // googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                     }else{
@@ -113,6 +112,10 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
                 return false;
             }
         });
+
+
+
+
     }
 
 
@@ -120,7 +123,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
         this.googleMap = mGoogleMap;
-        MapActivity.this.googleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
     }
