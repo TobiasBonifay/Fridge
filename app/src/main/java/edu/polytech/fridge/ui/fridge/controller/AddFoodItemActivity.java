@@ -1,32 +1,29 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.polytech.fridge.MainActivity;
-import edu.polytech.fridge.R;
+import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
 import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
-public class FridgeAddFoodItemActivity extends AppCompatActivity {
-    private ImageView food_image_add;
-    private TextView food_name_add;
-    private Button cancel, addIngredient;
+public class AddFoodItemActivity extends AppCompatActivity {
+    private ActivityAddFoodItemBinding binding;
 
-    public FridgeAddFoodItemActivity(){}
+    public AddFoodItemActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_food_item);
+        binding = ActivityAddFoodItemBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
 
         FoodViewModel foodToAddCompleted = getFoodItemToAdd();
         addFoodInFridge(foodToAddCompleted);

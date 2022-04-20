@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.notifications;
+package edu.polytech.fridge.ui.fridge.controller;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -26,9 +26,9 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentNotificationsBinding;
+import edu.polytech.fridge.ui.fridge.model.NotificationsViewModel;
 
 public class NotificationsFragment extends Fragment {
 
