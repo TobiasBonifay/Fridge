@@ -1,6 +1,8 @@
 package edu.polytech.fridge;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,11 +12,15 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
-import edu.polytech.fridge.ui.fridge.FridgeFragment;
-import edu.polytech.fridge.ui.fridge.data.JsonReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setUpBottomNavigationBar();
-        // JsonReader.fetchContent(getApplicationContext());
     }
 
     private void setUpBottomNavigationBar() {
