@@ -1,4 +1,4 @@
-package edu.polytech.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ActivityMainBinding;
 import edu.polytech.fridge.map.MapActivity;
 
