@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Utils {
-    /*
     static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
         try {
@@ -27,5 +26,4 @@ public class Utils {
         }
         return jsonString;
     }
-     */
 }

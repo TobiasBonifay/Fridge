@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import edu.polytech.fridge.databinding.ActivityMainBinding;
 import edu.polytech.fridge.ui.fridge.FridgeFragment;
+import edu.polytech.fridge.ui.fridge.data.JsonReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setUpBottomNavigationBar();
+        // JsonReader.fetchContent(getApplicationContext());
     }
 
     private void setUpBottomNavigationBar() {
