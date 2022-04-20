@@ -3,6 +3,8 @@ package edu.polytech.fridge.ui.fridge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,9 @@ import edu.polytech.fridge.ui.fridge.data.Fridge;
 import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
 
 public class FridgeAddFoodItemActivity extends AppCompatActivity {
+    Button add,cancel;
+    Intent intent;
+
 
     public FridgeAddFoodItemActivity(){}
 
@@ -21,9 +26,21 @@ public class FridgeAddFoodItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_item);
-
+        intent = new Intent(this, MainActivity.class);
         FoodViewModel foodToAddCompleted = getFoodItemToAdd();
-        addFoodInFridge(foodToAddCompleted);
+        add.findViewById(R.id.add_food);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addFoodInFridge(foodToAddCompleted);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent);
+            }
+        });
     }
 
     @NonNull
@@ -39,7 +56,7 @@ public class FridgeAddFoodItemActivity extends AppCompatActivity {
         );
     }
 
-    private void addFoodInFridge(FoodViewModel foodToAdd) {
+    public void addFoodInFridge(FoodViewModel foodToAdd) {
         // add to json
         Fridge.getInstance().addFoodOnFridge(foodToAdd);
         Log.d("ITEMFOOD", "addFoodOnFridge " + Fridge.getInstance().getFoodList().toString());
