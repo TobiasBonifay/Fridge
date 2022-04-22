@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.model;
+package edu.polytech.fridge.ui.recipe;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,7 +20,7 @@ public class RecipeViewModel extends ViewModel {
         String listRecipes = "Liste des recettes\n";
         for (Recipe recipe : RecipeManager.getInstance().getAllRecipesData()){
             listRecipes+= recipe+"\n";
-        }
+         }
         mText.setValue(listRecipes);
         return mText;
     }
