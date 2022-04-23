@@ -6,72 +6,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DonationsFragement">
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="AddLocation"
-        android:textSize="32dp" />
+
+    =======
 
     <Button
         android:id="@+id/donate"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text1"
-        android:layout_alignEnd="@+id/text1"
-        android:layout_alignBottom="@+id/text1"
-        android:layout_marginTop="205dp"
+
+
+        android:layout_below="@+id/donationDetails"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="591dp"
         android:layout_marginEnd="-19dp"
         android:layout_marginBottom="-253dp"
-        android:text="@string/donate"
-        app:layout_constraintBottom_toBottomOf="@id/text1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/donate" />
 
     <EditText
         android:id="@+id/inputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text1"
-        android:layout_alignEnd="@+id/text1"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="-59dp"
+
+        android:layout_below="@+id/donationDetails"
+        android:layout_alignEnd="@+id/picture"
+        android:layout_marginTop="455dp"
+        android:layout_marginEnd="-147dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textSize="25dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/inputQuantity"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignEnd="@+id/picture"
+        android:layout_alignBottom="@+id/picture"
+        android:layout_marginEnd="-175dp"
+        android:layout_marginBottom="62dp"
         android:textSize="25dp" />
 
-=======
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/picture"
+        android:layout_alignBottom="@+id/picture"
+        android:layout_marginEnd="-182dp"
+        android:layout_marginBottom="129dp"
+        android:textSize="25dp" />
 
     <ImageView
         android:id="@+id/picture"
-        android:layout_width="157dp"
-        android:layout_height="132dp"
+        android:layout_width="200dp"
+        android:layout_height="193dp"
+        android:layout_below="@+id/donationDetails"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="78dp"
+        android:layout_marginRight="200dp"
         android:scaleType="centerCrop" />
 
     <Button
         android:id="@+id/openCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="339dp"
+
+        android:layout_below="@+id/donationDetails"
+        android:layout_alignEnd="@+id/picture"
+        android:layout_marginTop="253dp"
+        android:layout_marginEnd="-58dp"
         android:layout_weight="1"
-        android:text="Open camera" />
+        android:text="camera" />
 
-    <EditText
+    <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="191dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/donationDetails"
+        android:layout_alignEnd="@+id/openCamera"
+        android:layout_marginTop="411dp"
+        android:layout_marginEnd="-30dp"
+        android:text="Add your location"
+        android:textSize="20dp" />
 
-        android:layout_marginBottom="393dp"
+    <TextView
+        android:id="@+id/donationDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/inputName"
+        android:layout_marginEnd="132dp"
+        android:text="Details"
+        android:textSize="30dp" />
 
-        android:text="Description" />
->>>>>>> Stashed changes
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/donationDetails"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/inputName"
+        android:text="Name:"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/donationDetails"
+        android:layout_marginTop="141dp"
+        android:layout_marginEnd="37dp"
+        android:layout_toStartOf="@+id/inputQuantity"
+        android:text="Quantity:"
+        android:textSize="20dp" />
+
 
 </RelativeLayout>
