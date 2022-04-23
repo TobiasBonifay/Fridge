@@ -4,10 +4,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".DonationsFragement">
+    tools:context=".DonationsFragement"><![CDATA[
 
 
     =======
+
+
+
+
+
+
+
+
+
+
+
+
+
+        android:id="@+id/donationDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/inputName"
+        android:layout_marginEnd="132dp"
+        android:text="Details"
+        android:textSize="30dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
 
     <Button
         android:id="@+id/donate"
@@ -17,110 +69,64 @@
 
         android:layout_below="@+id/donationDetails"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="94dp"
         android:layout_marginTop="591dp"
         android:layout_marginEnd="-19dp"
-        android:layout_marginBottom="-253dp"
+        android:layout_marginBottom="101dp"
         android:text="@string/donate" />
 
-    <EditText
-        android:id="@+id/inputText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/donationDetails"
-        android:layout_alignEnd="@+id/picture"
-        android:layout_marginTop="455dp"
-        android:layout_marginEnd="-147dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="25dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <EditText
-        android:id="@+id/inputQuantity"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-
-        android:layout_alignEnd="@+id/picture"
-        android:layout_alignBottom="@+id/picture"
-        android:layout_marginEnd="-175dp"
-        android:layout_marginBottom="62dp"
-        android:textSize="25dp" />
-
-    <EditText
-        android:id="@+id/inputName"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/picture"
-        android:layout_alignBottom="@+id/picture"
-        android:layout_marginEnd="-182dp"
-        android:layout_marginBottom="129dp"
-        android:textSize="25dp" />
 
     <ImageView
-        android:id="@+id/picture"
-        android:layout_width="200dp"
-        android:layout_height="193dp"
-        android:layout_below="@+id/donationDetails"
+        android:id="@+id/openCamera2"
+        android:layout_width="241dp"
+        android:layout_height="254dp"
+
+
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="78dp"
-        android:layout_marginRight="200dp"
-        android:scaleType="centerCrop" />
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="171dp"
+        android:cropToPadding="true"
+        android:src="@android:drawable/ic_menu_camera" />
 
-    <Button
-        android:id="@+id/openCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/donationDetails"
-        android:layout_alignEnd="@+id/picture"
-        android:layout_marginTop="253dp"
-        android:layout_marginEnd="-58dp"
-        android:layout_weight="1"
-        android:text="camera" />
-
-    <TextView
+    <EditText
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="158dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/donationDetails"
-        android:layout_alignEnd="@+id/openCamera"
-        android:layout_marginTop="411dp"
-        android:layout_marginEnd="-30dp"
-        android:text="Add your location"
-        android:textSize="20dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="5dp"
 
-    <TextView
-        android:id="@+id/donationDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/inputName"
-        android:layout_marginEnd="132dp"
-        android:text="Details"
-        android:textSize="30dp" />
+        android:hint="Name"
+         />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/donationDetails"
-        android:layout_marginTop="72dp"
+    <EditText
+        android:id="@+id/textView2"
+        android:layout_width="156dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="9dp"
-        android:layout_toStartOf="@+id/inputName"
-        android:text="Name:"
-        android:textSize="20dp" />
+        android:hint="Quantity"
+         />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="167dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/donationDetails"
-        android:layout_marginTop="141dp"
-        android:layout_marginEnd="37dp"
-        android:layout_toStartOf="@+id/inputQuantity"
-        android:text="Quantity:"
-        android:textSize="20dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter Location" />
 
 
 </RelativeLayout>

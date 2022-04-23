@@ -23,8 +23,8 @@ import edu.polytech.fridge.map.MapActivity;
 
 
 public class DonationsFragement extends Fragment {
-    ImageView imageView;
-    Button button , donation;
+    ImageView  openCamera;
+    Button  donation;
 
 
 
@@ -32,8 +32,8 @@ public class DonationsFragement extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_donations_fragement, container, false);
-        imageView = view.findViewById(R.id.picture);
-        button = view.findViewById(R.id.openCamera);
+//        imageView = view.findViewById(R.id.picture);
+        openCamera = view.findViewById(R.id.openCamera2);
         donation = view.findViewById(R.id.donate);
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +47,7 @@ public class DonationsFragement extends Fragment {
 
 
         }
-        button.setOnClickListener(new View.OnClickListener() {
+        openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -66,7 +66,7 @@ public class DonationsFragement extends Fragment {
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == 101){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(bitmap);
+            openCamera.setImageBitmap(bitmap);
         }
     }
 }
