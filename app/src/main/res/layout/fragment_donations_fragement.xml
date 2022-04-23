@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DonationsFragement">
 
+<<<<<<< Updated upstream
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
@@ -42,5 +43,36 @@
         android:inputType="textPersonName"
         android:textSize="25dp" />
 
+=======
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="157dp"
+        android:layout_height="132dp"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/openCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="339dp"
+        android:layout_weight="1"
+        android:text="Open camera" />
+
+    <EditText
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="191dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+
+        android:layout_marginBottom="393dp"
+
+        android:text="Description" />
+>>>>>>> Stashed changes
 
 </RelativeLayout>
