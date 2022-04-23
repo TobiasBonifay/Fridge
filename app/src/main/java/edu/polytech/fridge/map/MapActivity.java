@@ -3,9 +3,12 @@ package edu.polytech.fridge.map;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,11 +25,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -180,12 +185,21 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
             googleMap.setOnMarkerClickListener(this);
             if (sumbitText == false && first == true) {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(googleLocation, 15));
-                googleMap.addMarker(new MarkerOptions().position(googleLocation).title("donation"));
+                googleMap.addMarker(new MarkerOptions().position(googleLocation).title("donation").icon(bitmapDesciptorFromVector(getApplicationContext()
+                ,R.drawable.ic_carrot)));
             }
             first = false;
 
 
         }
+    }
+    private BitmapDescriptor bitmapDesciptorFromVector(Context context,int vectorResId){
+        Drawable vectorDrawable = ContextCompat.getDrawable(context,vectorResId);
+        vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap=Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
 
