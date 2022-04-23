@@ -1,5 +1,7 @@
 package edu.polytech.fridge.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
@@ -15,6 +17,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+
 
 import edu.polytech.fridge.models.Recipe;
 
@@ -27,6 +32,7 @@ public final class RecipeRepository {
 	private static final String PREPARATION_FIELD = "preparation";
 
 	private static volatile RecipeRepository instance;
+	public static List<Recipe> recipes = new ArrayList<>();
 
 	private RecipeRepository() {
 
@@ -47,55 +53,44 @@ public final class RecipeRepository {
 	}
 
 
-	// Get the Collection Reference
-	private CollectionReference getRecipesCollection() {
-		return FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
-	}
+
 
 	// Get Recipe Data from Firestore
-	public List<Recipe> getRecipeData() {
-		List<Recipe> recipes = new ArrayList<>();
-		/*
-		QuerySnapshot result = this.getRecipesCollection().get().getResult();
-		List<DocumentSnapshot> documents = result.getDocuments();
-		for (DocumentSnapshot document : documents) {
-			int id = (int) document.get(ID_FIELD);
-			String nom = document.getString(NOM_FIELD);
-			String ingredients = document.getString(INGREDIENTS_FIELD);
-			String preparation = document.getString(PREPARATION_FIELD);
-			Recipe recipe = new Recipe(id,nom,ingredients, preparation);
-			recipes.add(recipe);
-			System.out.println("Recette récupérée : "+recipe);
-		}*/
-		//-----------------------------------------
-		this.getRecipesCollection().get()
-				.continueWithTask(new Continuation<QuerySnapshot, Task<List<QuerySnapshot>>>() {
-					@Override
-					public Task<List<QuerySnapshot>> then(@NonNull Task<QuerySnapshot> task) {
-						List<Task<QuerySnapshot>> tasks = new ArrayList<Task<QuerySnapshot>>();
-						for (DocumentSnapshot ds : task.getResult()) {
-							tasks.add(ds.getReference().collection("thingstodo").get());
-						}
+	public List<Recipe> getRecipeData()  {
 
-						return Tasks.whenAllSuccess(tasks);
-					}
-				})
-				.addOnCompleteListener(new OnCompleteListener<List<QuerySnapshot>>() {
-					@Override
-					public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
-						// BTW, `getResult()` will throw an exception if the task fails unless you first check for `task.isSuccessful()`
-						List<QuerySnapshot> list = task.getResult();
-						for (QuerySnapshot qs : list) {
-							for (DocumentSnapshot ds : qs) {
-								System.out.println("Recette récupérée : "+ds.getString("nom"));
-								Recipe item = ds.toObject(Recipe.class);
-								//add to list including day
-								recipes.add(item);
+		recipes = new ArrayList<>();
+		synchronized (recipes) {
 
+			FirebaseFirestore.getInstance().collection("Receipes")
+					.get()
+					.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+						@Override
+						public void onComplete(@NonNull Task<QuerySnapshot> task) {
+							if (task.isSuccessful()) {
+								for (QueryDocumentSnapshot document : task.getResult()) {
+									System.out.println("Recette récupérée : " + document.getString("nom"));
+									Recipe item = document.toObject(Recipe.class);
+									System.out.println("******" + item.toString());
+									//add to list
+									recipes.add(item);
+									System.out.println("nombre de recettes: " + recipes.size());
+									//recipes.notify();
+									Log.d("récupération depuis firebase", document.getId() + " => " + document.getData());
+								}
+							Log.d("fin des recettes","");
+							} else {
+								Log.w("Erreur de récupération firebase", "Error getting documents.", task.getException());
 							}
+
 						}
-					}
-				});
-		return recipes;
+					});
+		}
+
+
+			//recipes.add(new Recipe(1, "couscous", "aaaa", "ppp"));
+			System.out.println("######nombre de recettes récupérées: " + recipes.size());
+
+			return recipes;
+		//}
 	}
 }

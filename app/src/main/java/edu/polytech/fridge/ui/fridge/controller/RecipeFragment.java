@@ -17,13 +17,17 @@ public class RecipeFragment extends Fragment {
 
     private FragmentRecipeBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RecipeViewModel recipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        RecipeViewModel recipeViewModel =
+                new ViewModelProvider(this).get(RecipeViewModel.class);
+
 
         binding = FragmentRecipeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
+        /** à vérifier*/
         recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
