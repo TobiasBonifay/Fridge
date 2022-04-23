@@ -180,6 +180,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
             googleMap.setOnMarkerClickListener(this);
             if (sumbitText == false && first == true) {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(googleLocation, 15));
+                googleMap.addMarker(new MarkerOptions().position(googleLocation).title("donation"));
             }
             first = false;
 

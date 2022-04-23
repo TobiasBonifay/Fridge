@@ -19,10 +19,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import edu.polytech.fridge.map.MapActivity;
+
 
 public class DonationsFragement extends Fragment {
     ImageView imageView;
-    Button button;
+    Button button , donation;
 
 
 
@@ -32,7 +34,13 @@ public class DonationsFragement extends Fragment {
         View view = inflater.inflate(R.layout.fragment_donations_fragement, container, false);
         imageView = view.findViewById(R.id.picture);
         button = view.findViewById(R.id.openCamera);
-
+        donation = view.findViewById(R.id.donate);
+        donation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MapActivity.class));
+            }
+        });
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions( getActivity(),
                     new String[]{Manifest.permission.CAMERA},  101);
