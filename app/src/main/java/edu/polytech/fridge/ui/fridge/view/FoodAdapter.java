@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
 /**
  * Adapter to put food on the RecyclerView aka the fridge content
@@ -32,12 +33,12 @@ public class FoodAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final ItemFridgeItemviewBinding itemFridgeItemviewBinding = ItemFridgeItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new FoodViewHolder(itemFridgeItemviewBinding);
+        return new FoodView(itemFridgeItemviewBinding);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((FoodViewHolder) holder).bindData(models.get(position));
+        ((FoodView) holder).bindData(models.get(position));
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_fridge_recyclerview));
     }
 

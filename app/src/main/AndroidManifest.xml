@@ -4,6 +4,8 @@
 
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -29,7 +31,7 @@
             android:name=".map.MapActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.fridge.controller.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -38,9 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.fridge.FridgeFindFoodsActivity" />
-        <activity android:name=".ui.fridge.FridgeAddFoodItemActivity" />
-        <activity android:name=".DonationsFragement" />
+
+        <activity android:name=".ui.fridge.controller.FindFoodsActivity" />
+        <activity android:name=".ui.fridge.controller.AddFoodItemActivity" />
     </application>
 
 </manifest>

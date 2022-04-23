@@ -120,7 +120,7 @@
                 android:layout_height="70dp"
                 android:background="@color/white"
                 android:contentDescription="@string/plus"
-                android:src="@drawable/ic_refrigerator"
+                android:src="@drawable/ic_donate_donation_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.95"

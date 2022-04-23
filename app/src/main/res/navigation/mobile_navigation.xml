@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_fridge"
-        android:name="edu.polytech.fridge.ui.fridge.FridgeFragment"
+        android:name="edu.polytech.fridge.ui.fridge.controller.FridgeFragment"
         android:label="@string/title_fridge"
         tools:layout="@layout/fragment_fridge" />
 
     <fragment
         android:id="@+id/navigation_recipe"
-        android:name="edu.polytech.fridge.ui.recipe.RecipeFragment"
+        android:name="edu.polytech.fridge.ui.fridge.controller.RecipeFragment"
         android:label="@string/title_recipe"
         tools:layout="@layout/fragment_recipe" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="edu.polytech.fridge.ui.notifications.NotificationsFragment"
+        android:name="edu.polytech.fridge.ui.fridge.controller.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment

@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.findfoods;
+package edu.polytech.fridge.ui.fridge.view;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import java.util.List;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
 import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.ui.fridge.model.FindFoodViewModel;
 
 /**
  * Adapter to put food on the RecyclerView aka the fridge content
@@ -34,12 +35,12 @@ public class FindFoodAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final ItemFindFoodItemviewBinding itemFindFoodItemviewBinding = ItemFindFoodItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new FindFoodViewHolder(itemFindFoodItemviewBinding, findFoodsRecyclerViewInterface);
+        return new FindFoodView(itemFindFoodItemviewBinding, findFoodsRecyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((FindFoodViewHolder) holder).bindData(models.get(position));
+        ((FindFoodView) holder).bindData(models.get(position));
         holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim_fridge_recyclerview));
     }
 

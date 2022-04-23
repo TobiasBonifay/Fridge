@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,7 @@ import java.util.Locale;
 
 import edu.polytech.fridge.R;
 
-public class MapActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener,
+public class MapActivity extends AppCompatActivity implements LocationListener , GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
     private LocationManager lm;
     private ImageView filter;
@@ -55,15 +56,13 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
 
 
-
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_maps);
-
-        coder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        coder = new Geocoder(this, Locale.getDefault());
 
         searchView = findViewById(R.id.idSearchView);
 
@@ -78,9 +77,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 30, 30);
-
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -116,6 +112,9 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 return false;
             }
         });
+
+
+
 
     }
 
@@ -188,10 +187,9 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         }
     }
 
+
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-
         return false;
     }
-
 }

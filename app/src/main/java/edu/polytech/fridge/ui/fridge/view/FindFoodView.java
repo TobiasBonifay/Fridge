@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.findfoods;
+package edu.polytech.fridge.ui.fridge.view;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
 import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.ui.fridge.model.FindFoodViewModel;
 
 /**
  * Content of a food item
  */
-public class FindFoodViewHolder extends RecyclerView.ViewHolder {
+public class FindFoodView extends RecyclerView.ViewHolder {
     private final TextView foodName_TV;
     private final ImageView foodImage_IMG;
 
-    public FindFoodViewHolder(final ItemFindFoodItemviewBinding binding, final FridgeFindFoodsRecyclerViewInterface fridgeFindFoodsRecyclerViewInterface) {
+    public FindFoodView(final ItemFindFoodItemviewBinding binding, final FridgeFindFoodsRecyclerViewInterface fridgeFindFoodsRecyclerViewInterface) {
         super(binding.getRoot());
         View v = binding.getRoot();
         // food characteristics
@@ -26,7 +27,7 @@ public class FindFoodViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if (fridgeFindFoodsRecyclerViewInterface != null) {
-                    int pos = getAdapterPosition();
+                    int pos = getBindingAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         fridgeFindFoodsRecyclerViewInterface.OnItemClick(pos);
                     }
