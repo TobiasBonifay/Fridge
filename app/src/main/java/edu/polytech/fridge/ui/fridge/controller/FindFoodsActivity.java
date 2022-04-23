@@ -1,7 +1,8 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,23 +14,30 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.polytech.fridge.R;
+import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
+import edu.polytech.fridge.databinding.ActivityFindFoodBinding;
 import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.ui.fridge.findfoods.FindFoodAdapter;
-import edu.polytech.fridge.ui.fridge.findfoods.FindFoodViewModel;
+import edu.polytech.fridge.ui.fridge.view.FindFoodAdapter;
+import edu.polytech.fridge.ui.fridge.model.FindFoodViewModel;
 
 /**
  * Display a recyclerView from FireBase food items
  * And allow the user to add this food item in the user' fridge
  */
-public class FridgeFindFoodsActivity extends AppCompatActivity implements FridgeFindFoodsRecyclerViewInterface{
+public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFoodsRecyclerViewInterface {
+    private ActivityFindFoodBinding binding;
     private RecyclerView recyclerViewToDisplayAvailableItems;
     private List<FindFoodViewModel> foodItemsAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_food);
+        binding = ActivityFindFoodBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+
         setUp();
         setUpSearchView();
     }
@@ -89,7 +97,7 @@ public class FridgeFindFoodsActivity extends AppCompatActivity implements Fridge
     }
 
     public void addFoodOnFridge(FindFoodViewModel foodToAdd) {
-        Intent addFoodIntent = new Intent(this, FridgeAddFoodItemActivity.class);
+        Intent addFoodIntent = new Intent(this, AddFoodItemActivity.class);
         addFoodIntent.putExtra("food", new FoodItemParcelable(foodToAdd.getFoodName(), foodToAdd.getFoodImage()));
         startActivity(addFoodIntent);
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
 
 /**

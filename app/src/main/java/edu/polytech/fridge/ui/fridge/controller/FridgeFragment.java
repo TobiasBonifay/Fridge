@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.ui.fridge.data.Fridge;
 import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
-import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
 /**
  * Display a recyclerView of food items own by the user
@@ -118,7 +118,7 @@ public class FridgeFragment extends Fragment {
     }
 
     public void addFoodOnFridgeActivity() {
-        startActivity(new Intent(getActivity(), FridgeFindFoodsActivity.class));
+        startActivity(new Intent(getActivity(), FindFoodsActivity.class));
     }
 
     @Override

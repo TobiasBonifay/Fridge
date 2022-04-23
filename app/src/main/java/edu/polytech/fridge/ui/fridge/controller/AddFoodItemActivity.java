@@ -1,46 +1,32 @@
-package edu.polytech.fridge.ui.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.polytech.fridge.MainActivity;
-import edu.polytech.fridge.R;
+import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
 import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.view.FoodViewModel;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
-public class FridgeAddFoodItemActivity extends AppCompatActivity {
-    Button add,cancel;
-    Intent intent;
+public class AddFoodItemActivity extends AppCompatActivity {
+    private ActivityAddFoodItemBinding binding;
 
-
-    public FridgeAddFoodItemActivity(){}
+    public AddFoodItemActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_food_item);
-        intent = new Intent(this, MainActivity.class);
+        binding = ActivityAddFoodItemBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+
         FoodViewModel foodToAddCompleted = getFoodItemToAdd();
-        add.findViewById(R.id.add_food);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addFoodInFridge(foodToAddCompleted);
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-            }
-        });
+        addFoodInFridge(foodToAddCompleted);
     }
 
     @NonNull
@@ -56,10 +42,10 @@ public class FridgeAddFoodItemActivity extends AppCompatActivity {
         );
     }
 
-    public void addFoodInFridge(FoodViewModel foodToAdd) {
+    private void addFoodInFridge(FoodViewModel foodToAdd) {
         // add to json
         Fridge.getInstance().addFoodOnFridge(foodToAdd);
         Log.d("ITEMFOOD", "addFoodOnFridge " + Fridge.getInstance().getFoodList().toString());
-        startActivity(new Intent(this, MainActivity.class));
+        // startActivity(new Intent(this, MainActivity.class));
     }
 }

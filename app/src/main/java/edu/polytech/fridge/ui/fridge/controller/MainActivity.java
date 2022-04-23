@@ -1,6 +1,10 @@
-package edu.polytech.fridge;
+package edu.polytech.fridge.ui.fridge.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -8,14 +12,21 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
+import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ActivityMainBinding;
-import edu.polytech.fridge.ui.fridge.FridgeFragment;
+import edu.polytech.fridge.map.MapActivity;
+
 
 public class MainActivity extends AppCompatActivity {
+    GoogleMap map;
+    Button btn;
+    Intent intent;
+    private ListView listView;
 
     private ActivityMainBinding binding;
 
@@ -25,11 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        listView=findViewById(androidx.appcompat.R.id.select_dialog_listview);
 
-        setUpBottomNavigationBar();
-    }
-
-    private void setUpBottomNavigationBar() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -39,10 +47,16 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_notifications)
                 .build();
 
+
+
+
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
+
 
 }
