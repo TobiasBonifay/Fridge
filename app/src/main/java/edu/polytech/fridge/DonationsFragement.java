@@ -17,14 +17,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import edu.polytech.fridge.map.MapActivity;
+import edu.polytech.fridge.ui.fridge.data.Fridge;
+import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
 
 public class DonationsFragement extends Fragment {
     ImageView  openCamera;
     Button  donation;
+    EditText name, quantity;
 
 
 
@@ -35,9 +41,18 @@ public class DonationsFragement extends Fragment {
 //        imageView = view.findViewById(R.id.picture);
         openCamera = view.findViewById(R.id.openCamera2);
         donation = view.findViewById(R.id.donate);
+        name = view.findViewById(R.id.textView);
+        quantity = view.findViewById(R.id.textView2);
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<FoodViewModel> list =  Fridge.getInstance().getFoodList();
+                for (FoodViewModel e : list){
+                    if(e.getFoodName().equals(name.getText().toString())){
+                        int q = e.getCurrentQuantity()-Integer.parseInt(quantity.getText().toString());
+                        e.setCurrentQuantity(q);
+                    }
+                }
                 startActivity(new Intent(getActivity(), MapActivity.class));
             }
         });
