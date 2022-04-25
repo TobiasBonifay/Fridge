@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<RelativeLayout
+    android:id="@+id/popup_element"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:scrollbars="vertical"
+    android:background="@drawable/customborder">
+
+    <ImageView
+        android:id="@+id/recipeIcon"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/recette_icon" />
+
+    <TextView android:id="@+id/recipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@+id/recipeIcon"
+        android:text="Recipe Name"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView android:id="@+id/ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recipeTitle"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_marginTop="8dp"
+        android:text="Ingrédients"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView android:id="@+id/Préparation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/ingredients"
+        android:text="Préparation"
+        android:layout_below="@id/ingredients"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Préparation"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:text="Retour" />
+</RelativeLayout>
+    </ScrollView>
