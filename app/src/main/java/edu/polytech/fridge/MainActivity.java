@@ -13,19 +13,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 
 import java.util.Objects;
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
-    GoogleMap map;
-    Button btn;
-    Intent intent;
-    private ListView listView;
-
     private ActivityMainBinding binding;
 
     @Override
@@ -34,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        listView=findViewById(androidx.appcompat.R.id.select_dialog_listview);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        ListView listView = findViewById(androidx.appcompat.R.id.select_dialog_listview);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -46,15 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
-
-
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        FirebaseApp.initializeApp(this);
     }
-
-
 }
