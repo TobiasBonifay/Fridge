@@ -19,7 +19,7 @@ import edu.polytech.fridge.fridge.view.FoodView;
 /**
  * Adapter to put food on the RecyclerView aka the fridge content
  */
-public class FoodAdapter extends RecyclerView.Adapter {
+public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<FoodViewModel> models = new ArrayList<>();
 
     /**
