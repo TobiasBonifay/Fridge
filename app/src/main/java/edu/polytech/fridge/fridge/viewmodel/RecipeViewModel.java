@@ -38,34 +38,4 @@ public class RecipeViewModel extends ViewModel {
         return mText;
     }
 
-    // Get Recipe Data from Firestore
-    public synchronized void getRecipeData() {
-
-        synchronized (recipes) {
-            recipes = new ArrayList<>();
-            FirebaseFirestore.getInstance().collection("Receipes")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    System.out.println("Recette récupérée : " + document.getString("nom"));
-                                    Recipe item = document.toObject(Recipe.class);
-                                    //add to list
-                                    recipes.add(item);
-                                    System.out.println("nombre de recettes: " + recipes.size());
-                                    //recipes.notify();
-                                    Log.d("récupération depuis firebase", document.getId() + " => " + document.getData());
-                                }
-                                Log.d("fin des recettes", "");
-                            } else {
-                                Log.w("Erreur de récupération firebase", "Error getting documents.", task.getException());
-                            }
-
-                        }
-                    });
-            System.out.println("######  nombre de recettes récupérées: " + recipes.size());
-        }
     }
-}
