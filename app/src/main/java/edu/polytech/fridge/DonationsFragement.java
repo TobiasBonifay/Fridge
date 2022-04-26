@@ -22,9 +22,9 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import edu.polytech.fridge.fridge.data.Fridge;
+import edu.polytech.fridge.fridge.model.FoodViewModel;
 import edu.polytech.fridge.map.MapActivity;
-import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
 
 
 public class DonationsFragement extends Fragment {

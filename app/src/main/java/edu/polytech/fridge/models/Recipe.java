@@ -1,10 +1,11 @@
 package edu.polytech.fridge.models;
 
 public class Recipe {
-    int id;
-    String nom;
-    String ingredients;
-    String preparation;
+    private int id;
+    private String nom;
+    private String ingredients;
+    private String preparation;
+    private String imageUrl;
 
     public Recipe() {
     }
@@ -14,6 +15,14 @@ public class Recipe {
         this.nom = nom;
         this.ingredients = ingredients;
         this.preparation = preparation;
+    }
+
+    public Recipe(int id, String nom, String ingredients, String preparation, String imageUrl) {
+        this.id = id;
+        this.nom = nom;
+        this.ingredients = ingredients;
+        this.preparation = preparation;
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {
@@ -46,6 +55,14 @@ public class Recipe {
 
     public void setPreparation(String preparation) {
         this.preparation = preparation;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     @Override
