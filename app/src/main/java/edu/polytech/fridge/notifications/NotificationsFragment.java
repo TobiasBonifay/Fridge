@@ -44,7 +44,9 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         final Button showNotificationButton = binding.showNotificationExample;
-        showNotificationButton.setOnClickListener(view -> newNotification("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
+        showNotificationButton.setOnClickListener(view ->
+                newNotification("Leek expiration date warning",
+                        "https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
 
         return root;
     }
@@ -54,10 +56,10 @@ public class NotificationsFragment extends Fragment {
      *
      * @param imageUrl url of the image to display under the notification
      */
-    private void newNotification(final String imageUrl) {
+    private void newNotification(final String text, final String imageUrl) {
         new Thread(() -> {
             final Bitmap img = fetchImage(imageUrl);
-            showNotificationWithImage("test", img);
+            showNotificationWithImage(text, img);
         }).start();
     }
 
