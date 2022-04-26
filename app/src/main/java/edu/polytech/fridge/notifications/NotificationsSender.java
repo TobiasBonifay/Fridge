@@ -70,10 +70,10 @@ public class NotificationsSender {
         final String title = "FRIDGE";
         final int notificationId = new Random().nextInt(100);
         final String channelId = "notification.channel2";
+        final int flags = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
 
         NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
         Intent intent = new Intent(context, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        final int flags = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, flags);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
 

@@ -6,14 +6,15 @@ import java.util.HashSet;
 
 public class NotificationsModel {
     private static NotificationsModel instance;
-    private HashSet<Notification> notificationList;
+    private static HashSet<Notification> notificationList;
 
-    private NotificationsModel() {
+    private NotificationsModel(HashSet<Notification> notificationList) {
+        NotificationsModel.notificationList = notificationList;
     }
 
     public static NotificationsModel getInstance() {
         if (instance == null) {
-            instance = new NotificationsModel();
+            instance = new NotificationsModel(notificationList);
         }
         return instance;
     }
