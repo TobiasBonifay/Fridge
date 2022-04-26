@@ -44,6 +44,7 @@ public class RecipeFragment extends Fragment {
     public RecipeFragment() {
     }
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         recipeViewModel =
@@ -55,7 +56,7 @@ public class RecipeFragment extends Fragment {
         final TextView textView = binding.textDashboard;
         /** à garder pour le rafraichissement*/
         recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        if (recipes.size() == 0) {
+        if (recipes.isEmpty()) {
             recipeViewModel.getRecipeData();
         }
         System.out.println("**** onCreateView Fragment: size of recipes=" + recipes.size());
@@ -74,37 +75,31 @@ public class RecipeFragment extends Fragment {
         //listView.setAdapter(new RecipeCustomAdapter(getActivity(), fake_details,mode));
 
         // When the user clicks on the ListItem
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = listView.getItemAtPosition(position);
-                Recipe recipe = (Recipe) o;
-                showRecipeDetails(recipe);
-                //Toast.makeText(getActivity(), "Préparation de la recette:\n :" + " " + recipe.getPreparation(), Toast.LENGTH_LONG).show();
-            }
+        listView.setOnItemClickListener((a, v, position, id) -> {
+            Object o = listView.getItemAtPosition(position);
+            Recipe recipe = (Recipe) o;
+            showRecipeDetails(recipe);
+            //Toast.makeText(getActivity(), "Préparation de la recette:\n :" + " " + recipe.getPreparation(), Toast.LENGTH_LONG).show();
         });
         switchMode.setChecked(mode);
         if (firstTime) {
             firstTime = false;
             refresh();
         }
-        switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes, false));
-                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes=" + recipes.size());
+        switchMode.setOnCheckedChangeListener((compoundButton, b) -> {
+            listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes, false));
+            System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes=" + recipes.size());
 
 //                Log.e("Switch: setOnClickListener: ",switchMode.isChecked()+"");
-                mode = !mode;
-                RecipeFragment f1 = new RecipeFragment();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment_activity_main, f1); // f1_container is your FrameLayout container
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.setReorderingAllowed(true);
-                ft.commit();
-            }
+            mode = !mode;
+            RecipeFragment f1 = new RecipeFragment();
+            assert getFragmentManager() != null;
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment_activity_main, f1); // f1_container is your FrameLayout container
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.setReorderingAllowed(true);
+            ft.commit();
         });
 
     }

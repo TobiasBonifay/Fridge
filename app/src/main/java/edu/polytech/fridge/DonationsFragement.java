@@ -30,7 +30,8 @@ import edu.polytech.fridge.map.MapActivity;
 public class DonationsFragement extends Fragment {
     ImageView openCamera;
     Button donation;
-    EditText name, quantity;
+    EditText name;
+    EditText quantity;
 
 
     @Override
@@ -75,7 +76,7 @@ public class DonationsFragement extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap = (Bitmap) (data != null ? data.getExtras().get("data") : null);
             openCamera.setImageBitmap(bitmap);
         }
     }
