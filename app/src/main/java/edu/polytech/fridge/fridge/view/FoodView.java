@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
-import edu.polytech.fridge.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 
 /**
  * Content of a food item

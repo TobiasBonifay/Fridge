@@ -17,7 +17,7 @@ import edu.polytech.fridge.databinding.ActivityFindFoodBinding;
 import edu.polytech.fridge.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
 import edu.polytech.fridge.fridge.adapters.FindFoodAdapter;
-import edu.polytech.fridge.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FindFoodViewModel;
 
 /**
  * Display a recyclerView from FireBase food items

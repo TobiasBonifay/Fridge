@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
 import edu.polytech.fridge.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.fridge.data.Fridge;
-import edu.polytech.fridge.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;

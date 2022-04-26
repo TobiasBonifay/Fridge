@@ -29,8 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.databinding.FragmentRecipeBinding;
+import edu.polytech.fridge.fridge.adapters.RecipeCustomAdapter;
 import edu.polytech.fridge.models.Recipe;
-import edu.polytech.fridge.fridge.model.RecipeViewModel;
+import edu.polytech.fridge.fridge.viewmodel.RecipeViewModel;
 
 public class RecipeFragment extends Fragment {
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
 import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FindFoodViewModel;
 
 /**
  * Content of a food item
