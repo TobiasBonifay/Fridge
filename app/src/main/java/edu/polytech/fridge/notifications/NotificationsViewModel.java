@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.model;
+package edu.polytech.fridge.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

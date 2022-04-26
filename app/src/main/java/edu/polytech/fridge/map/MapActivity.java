@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import edu.polytech.fridge.R;
 
-public class MapActivity extends AppCompatActivity implements LocationListener , GoogleMap.OnMarkerClickListener,
+public class MapActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
     private LocationManager lm;
     private ImageView filter;
@@ -49,11 +49,10 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
     private SupportMapFragment mapFragment;
     private GoogleMap googleMap;
     private LatLng googleLocation;
-    private   Geocoder coder;
-    private boolean first =true;
+    private Geocoder coder;
+    private boolean first = true;
     SearchView searchView;
-    private boolean sumbitText =false;
-
+    private boolean sumbitText = false;
 
 
     @SuppressLint("WrongThread")
@@ -82,7 +81,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
             @Override
             public boolean onQueryTextSubmit(String query) {
                 String location = searchView.getQuery().toString();
-                sumbitText = true ;
+                sumbitText = true;
                 List<Address> addressList = null;
                 if (location != null || location.equals("")) {
                     Geocoder geocoder = new Geocoder(MapActivity.this);
@@ -93,7 +92,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if(addressList!=null && addressList.size()>0){
+                    if (addressList != null && addressList.size() > 0) {
 
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
@@ -101,19 +100,18 @@ public class MapActivity extends AppCompatActivity implements LocationListener ,
                         googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-                    }else{
+                    } else {
 
                     }
                 }
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
-
-
 
 
     }

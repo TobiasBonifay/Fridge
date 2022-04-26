@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.data;
+package edu.polytech.fridge.fridge.data;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.model.FoodViewModel;
 
 
 /**
@@ -54,6 +54,7 @@ public class Fridge {
 
     /**
      * stack same food item
+     *
      * @param food Food to add
      */
     public void addFoodOnFridge(final FoodViewModel food) {

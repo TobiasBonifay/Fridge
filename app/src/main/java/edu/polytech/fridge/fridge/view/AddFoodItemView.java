@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.view;
+package edu.polytech.fridge.fridge.view;
 
 import android.view.View;
 import android.widget.Button;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
-import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.ui.fridge.model.AddFoodItemModel;
+import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.fridge.model.AddFoodItemModel;
 
 /**
  * Content of a food item

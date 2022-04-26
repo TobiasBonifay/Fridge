@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.data;
+package edu.polytech.fridge.fridge.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -31,6 +31,7 @@ public class FoodItemParcelable implements Parcelable {
             return new FoodItemParcelable[size];
         }
     };
+
     protected FoodItemParcelable(Parcel in) {
         foodName = in.readString();
         foodImage = in.readInt();

@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.model;
+package edu.polytech.fridge.fridge.model;
 
 import androidx.annotation.NonNull;
 
@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
  * Represent a food item fetched from database
  * Used by the user to add a new item on the fridge
  */
-public class AddFoodItemModel {
+public class FindFoodViewModel {
     private String foodName;
     private int foodImage;
 
-    public AddFoodItemModel(@NonNull final String foodName, final int foodImage) {
+    public FindFoodViewModel(@NonNull final String foodName, final int foodImage) {
         setFoodName(foodName);
         setFoodImage(foodImage);
     }

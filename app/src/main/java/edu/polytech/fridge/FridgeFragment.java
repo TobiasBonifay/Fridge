@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
-import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.view.FoodAdapter;
-import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.data.Fridge;
+import edu.polytech.fridge.fridge.adapters.FoodAdapter;
+import edu.polytech.fridge.fridge.model.FoodViewModel;
 
 /**
  * Display a recyclerView of food items own by the user

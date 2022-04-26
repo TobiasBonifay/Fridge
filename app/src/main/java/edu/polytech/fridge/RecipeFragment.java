@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -28,10 +28,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentRecipeBinding;
 import edu.polytech.fridge.models.Recipe;
-import edu.polytech.fridge.ui.fridge.model.RecipeViewModel;
+import edu.polytech.fridge.fridge.model.RecipeViewModel;
 
 public class RecipeFragment extends Fragment {
 

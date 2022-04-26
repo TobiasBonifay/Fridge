@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
-import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
-import edu.polytech.fridge.ui.fridge.data.Fridge;
-import edu.polytech.fridge.ui.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.data.FoodItemParcelable;
+import edu.polytech.fridge.fridge.data.Fridge;
+import edu.polytech.fridge.fridge.model.FoodViewModel;
 
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;

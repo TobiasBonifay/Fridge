@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.notifications;
+package edu.polytech.fridge;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -26,13 +26,14 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentNotificationsBinding;
-import edu.polytech.fridge.ui.fridge.controller.MainActivity;
+import edu.polytech.fridge.map.MapActivity;
+import edu.polytech.fridge.fridge.model.NotificationsViewModel;
 
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
+    Intent intent;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
@@ -45,6 +46,8 @@ public class NotificationsFragment extends Fragment {
 
         final Button showNotificationButton = binding.showNotificationExample;
         showNotificationButton.setOnClickListener(view -> newNotification("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
+        Button map = binding.map;
+        map.setOnClickListener(view -> NavigateMap());
 
         return root;
     }
@@ -120,5 +123,8 @@ public class NotificationsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    public void NavigateMap() {
+        startActivity(new Intent(getActivity(), MapActivity.class));
     }
 }

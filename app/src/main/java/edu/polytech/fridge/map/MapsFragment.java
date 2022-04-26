@@ -45,7 +45,7 @@ import java.util.Locale;
 import edu.polytech.fridge.R;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback, LocationListener,
-        GoogleMap.OnMarkerClickListener  {
+        GoogleMap.OnMarkerClickListener {
     private LocationManager lm;
     private ImageView filter;
     private static final int PERMS_CALL_ID = 1234;
@@ -53,11 +53,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
     private GoogleMap googleMap;
     private LatLng googleLocation;
     private Geocoder coder;
-    private boolean first =true;
+    private boolean first = true;
     androidx.appcompat.widget.SearchView searchView;
-    private boolean sumbitText =false;
-
-
+    private boolean sumbitText = false;
 
 
     public MapsFragment() {
@@ -86,14 +84,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         coder = new Geocoder(getActivity(), Locale.getDefault());
 
-        searchView =view.findViewById(R.id.idSearchView);
+        searchView = view.findViewById(R.id.idSearchView);
 
 
-        mapFragment=((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+        mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
 
 
         checkPermission();
@@ -111,7 +109,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
             @Override
             public boolean onQueryTextSubmit(String query) {
                 String location = searchView.getQuery().toString();
-                sumbitText = true ;
+                sumbitText = true;
                 List<Address> addressList = null;
                 if (location != null || location.equals("")) {
                     Geocoder geocoder = new Geocoder(getActivity());
@@ -122,17 +120,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if(addressList!=null && addressList.size()>0){
+                    if (addressList != null && addressList.size() > 0) {
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-                    }else{
+                    } else {
                         Toast.makeText(getActivity(), "l'adresse est introuvable ", Toast.LENGTH_SHORT).show();  // Check whether the fields are not blank
                     }
                 }
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -140,10 +139,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
         });
 
 
-
-
-
-        return view ;
+        return view;
     }
 
     @SuppressLint("MissingPermission")
@@ -173,7 +169,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
             }, this.PERMS_CALL_ID);
             return;
         }
-        lm =(LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             lm.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, 10000, 0, this);
@@ -189,18 +185,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
     }
 
 
-
     @Override
     public void onLocationChanged(@NonNull Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         if (googleMap != null) {
             googleLocation = new LatLng(latitude, longitude);
-            googleMap.setOnMarkerClickListener( this);
-            if(sumbitText==false && first==true ){
+            googleMap.setOnMarkerClickListener(this);
+            if (sumbitText == false && first == true) {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(googleLocation, 15));
             }
-            first =false;
+            first = false;
 
 
         }
@@ -208,7 +203,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Locati
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        return false ;
+        return false;
     }
 
 

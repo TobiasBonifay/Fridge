@@ -1,8 +1,7 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -19,7 +18,6 @@ import java.util.Objects;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ActivityMainBinding;
-import edu.polytech.fridge.map.MapActivity;
 
 
 public class MainActivity extends AppCompatActivity {

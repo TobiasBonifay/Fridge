@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.content.Context;
 import android.util.Log;

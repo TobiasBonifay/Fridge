@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.controller;
+package edu.polytech.fridge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import edu.polytech.fridge.R;
-import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
 import edu.polytech.fridge.databinding.ActivityFindFoodBinding;
-import edu.polytech.fridge.ui.fridge.data.FoodItemParcelable;
-import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.ui.fridge.view.FindFoodAdapter;
-import edu.polytech.fridge.ui.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.data.FoodItemParcelable;
+import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.fridge.adapters.FindFoodAdapter;
+import edu.polytech.fridge.fridge.model.FindFoodViewModel;
 
 /**
  * Display a recyclerView from FireBase food items

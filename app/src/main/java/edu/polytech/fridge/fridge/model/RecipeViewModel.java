@@ -1,7 +1,7 @@
-package edu.polytech.fridge.ui.fridge.model;
+package edu.polytech.fridge.fridge.model;
 
 
-import static edu.polytech.fridge.ui.fridge.controller.RecipeFragment.recipes;
+import static edu.polytech.fridge.RecipeFragment.recipes;
 
 import android.util.Log;
 
@@ -34,7 +34,7 @@ public class RecipeViewModel extends ViewModel {
         //recipes = new ArrayList<>();
         mText.setValue("Chargement depuis Firebase...");
 
-    //******
+        //******
         return mText;
     }
 

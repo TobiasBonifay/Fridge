@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.view;
+package edu.polytech.fridge.fridge.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,8 +12,9 @@ import java.util.List;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
-import edu.polytech.fridge.ui.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.ui.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
+import edu.polytech.fridge.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.view.FindFoodView;
 
 /**
  * Adapter to put food on the RecyclerView aka the fridge content
@@ -24,6 +25,7 @@ public class FindFoodAdapter extends RecyclerView.Adapter {
 
     /**
      * Contains Food elements for fridge content
+     *
      * @param viewModels Food items
      */
     public FindFoodAdapter(final List<FindFoodViewModel> viewModels, FridgeFindFoodsRecyclerViewInterface findFoodsRecyclerViewInterface) {

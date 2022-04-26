@@ -16,6 +16,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.preparation = preparation;
     }
+
     public Recipe(int id, String nom, String ingredients, String preparation, String imageUrl) {
         this.id = id;
         this.nom = nom;

@@ -1,4 +1,4 @@
-package edu.polytech.fridge.ui.fridge.model;
+package edu.polytech.fridge.fridge.model;
 
 import androidx.annotation.NonNull;
 
