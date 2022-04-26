@@ -16,7 +16,7 @@ import java.util.List;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.models.Recipe;
 
-public class RecipeCustomAdapter  extends BaseAdapter {
+public class RecipeCustomAdapter extends BaseAdapter {
 
     private final List<Recipe> listData;
     private final LayoutInflater layoutInflater;
@@ -50,9 +50,9 @@ public class RecipeCustomAdapter  extends BaseAdapter {
         final ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            if(this.mode) {//mode âgé activé
+            if (this.mode) {//mode âgé activé
                 convertView = this.layoutInflater.inflate(R.layout.list_recipe_item_layout_lite, null);
-            }else{//mode normal
+            } else {//mode normal
                 convertView = this.layoutInflater.inflate(R.layout.list_recipe_item_layout, null);
                 holder.ingredientsView = convertView.findViewById(R.id.tvIngredients);
                 holder.preparationView = convertView.findViewById(R.id.tvPreparation);
@@ -67,15 +67,15 @@ public class RecipeCustomAdapter  extends BaseAdapter {
 
         final Recipe recipe = listData.get(position);
         holder.titreView.setText(recipe.getNom());
-        if(!mode) {
+        if (!mode) {
             holder.ingredientsView.setText("Ingrédients: " + recipe.getIngredients());
             holder.preparationView.setText("Préparation: " + recipe.getPreparation());
         }
         //Chargement de l'image
         //recipe.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
-        if(recipe.getImageUrl()!=null) {
+        if (recipe.getImageUrl() != null) {
             Picasso.get().load(recipe.getImageUrl()).into(holder.imageView);
-        }else {
+        } else {
             recipe.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
         }
         //2eme methode
@@ -87,11 +87,11 @@ public class RecipeCustomAdapter  extends BaseAdapter {
     }
 
     // Find Image ID corresponding to the name of the image (in the directory mipmap).
-    public int getMipmapResIdByName(final String resName)  {
+    public int getMipmapResIdByName(final String resName) {
         final String pkgName = this.context.getPackageName();
         // Return 0 if not found.
-        final int resID = this.context.getResources().getIdentifier(resName , "mipmap", pkgName);
-        Log.i("CustomListView", "Res Name: "+ resName+"==> Res ID = "+ resID);
+        final int resID = this.context.getResources().getIdentifier(resName, "mipmap", pkgName);
+        Log.i("CustomListView", "Res Name: " + resName + "==> Res ID = " + resID);
         return resID;
     }
 

@@ -33,7 +33,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final ItemFridgeItemviewBinding itemFridgeItemviewBinding = ItemFridgeItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FoodView(itemFridgeItemviewBinding);
     }
