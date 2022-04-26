@@ -35,7 +35,7 @@ public class FindFoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final ItemFindFoodItemviewBinding itemFindFoodItemviewBinding = ItemFindFoodItemviewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FindFoodView(itemFindFoodItemviewBinding, findFoodsRecyclerViewInterface);
     }
