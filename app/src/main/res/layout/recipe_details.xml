@@ -37,7 +37,7 @@
         android:layout_below="@+id/recipeTitle"
         android:layout_marginTop="8dp"
         android:text="Ingrédients"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <TextView android:id="@+id/Préparation"
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_alignLeft="@id/ingredients"
         android:text="Préparation"
         android:layout_below="@id/ingredients"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button android:id="@+id/close"
         android:layout_width="wrap_content"
