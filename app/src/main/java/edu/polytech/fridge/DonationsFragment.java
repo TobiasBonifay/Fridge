@@ -32,6 +32,8 @@ public class DonationsFragment extends Fragment {
     EditText name;
     EditText quantity;
 
+    Button btn;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,7 @@ public class DonationsFragment extends Fragment {
         donation = view.findViewById(R.id.donate);
         name = view.findViewById(R.id.textView);
         quantity = view.findViewById(R.id.textView2);
+        btn=view.findViewById(R.id.button2);
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +69,19 @@ public class DonationsFragment extends Fragment {
                 startActivityForResult(intent, 101);
             }
         });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DonationsFragment.this.getActivity(),AddEvent.class);
+                startActivity(i);
+                
+            }
+
+        });
+
+
+        
 
 
         return view;
