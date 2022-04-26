@@ -1,8 +1,6 @@
 package edu.polytech.fridge;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +9,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
 import java.util.Objects;

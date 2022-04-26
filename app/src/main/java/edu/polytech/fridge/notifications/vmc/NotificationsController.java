@@ -12,6 +12,6 @@ public class NotificationsController {
 
     public void newNotification() {
         Notification notification = new Notification();
-        NotificationsModel.getInstance().createNotification(notification);
+        // NotificationsModel.getInstance().createNotification(notification);
     }
 }
