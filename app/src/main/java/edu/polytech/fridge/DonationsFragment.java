@@ -26,7 +26,7 @@ import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 import edu.polytech.fridge.map.MapActivity;
 
 
-public class DonationsFragement extends Fragment {
+public class DonationsFragment extends Fragment {
     ImageView openCamera;
     Button donation;
     EditText name;

@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_donations"
-        android:name="edu.polytech.fridge.DonationsFragement"
+        android:name="edu.polytech.fridge.DonationsFragment"
         android:label="@string/Donations"
         tools:layout="@layout/fragment_donations"/>
 </navigation>
