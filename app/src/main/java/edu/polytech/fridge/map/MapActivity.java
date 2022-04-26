@@ -47,7 +47,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     private GoogleMap ggMap;
     private LatLng ggPosition;
     private Geocoder coder;
-    private boolean first = true;
+    private boolean aBoolean = true;
     SearchView searchView;
     private boolean sumbitText = false;
     ImageButton association;
@@ -170,11 +170,11 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         if (ggMap != null) {
             ggPosition = new LatLng(latitude, longitude);
             ggMap.setOnMarkerClickListener(this);
-            if (sumbitText == false && first == true) {
+            if (sumbitText == false && aBoolean == true) {
                 ggMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ggPosition, 15));
-                ggMap.addMarker(new MarkerOptions().position(ggPosition).title("donation"));
+                //ggMap.addMarker(new MarkerOptions().position(ggPosition).title("donation"));
             }
-            first = false;
+            aBoolean = false;
 
 
         }
@@ -192,5 +192,19 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
         return false;
+    }
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
     }
 }
