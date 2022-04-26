@@ -10,6 +10,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Liste des recettes"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -20,10 +21,10 @@
 
     <TextView
         android:id="@+id/text_dashboard"
-        android:layout_width="411dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
