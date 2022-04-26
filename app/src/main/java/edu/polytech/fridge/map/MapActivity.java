@@ -2,12 +2,10 @@ package edu.polytech.fridge.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,11 +13,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,9 +32,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,15 +42,16 @@ import edu.polytech.fridge.R;
 public class MapActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
     private LocationManager lm;
-    private ImageView filter;
-    private static final int PERMS_CALL_ID = 1234;
+    private static final int REQUEST_CODE = 1234;
     private SupportMapFragment mapFragment;
-    private GoogleMap googleMap;
-    private LatLng googleLocation;
+    private GoogleMap ggMap;
+    private LatLng ggPosition;
     private Geocoder coder;
     private boolean first = true;
     SearchView searchView;
     private boolean sumbitText = false;
+    ImageButton association;
+    private double lat, lng;
 
 
     @SuppressLint("WrongThread")
@@ -74,7 +68,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 .findFragmentById(R.id.map);
         checkPermission();
         mapFragment.getMapAsync(this);
-
 
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
@@ -101,12 +94,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        // googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                        googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
-                    } else {
-
+                        ggMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        ggMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                     }
                 }
                 return false;
@@ -125,9 +114,9 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
-        this.googleMap = mGoogleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setMyLocationEnabled(true);
+        this.ggMap = mGoogleMap;
+        ggMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        ggMap.setMyLocationEnabled(true);
     }
 
     @Override
@@ -139,7 +128,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == this.PERMS_CALL_ID) {
+        if (requestCode == this.REQUEST_CODE) {
             checkPermission();
         }
     }
@@ -150,7 +139,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
-            }, this.PERMS_CALL_ID);
+            }, this.REQUEST_CODE);
             return;
         }
         lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
@@ -178,13 +167,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     public void onLocationChanged(@NonNull Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        if (googleMap != null) {
-            googleLocation = new LatLng(latitude, longitude);
-            googleMap.setOnMarkerClickListener(this);
+        if (ggMap != null) {
+            ggPosition = new LatLng(latitude, longitude);
+            ggMap.setOnMarkerClickListener(this);
             if (sumbitText == false && first == true) {
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(googleLocation, 15));
-                googleMap.addMarker(new MarkerOptions().position(googleLocation).title("donation").icon(bitmapDesciptorFromVector(getApplicationContext()
-                ,R.drawable.ic_carrot)));
+                ggMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ggPosition, 15));
+                ggMap.addMarker(new MarkerOptions().position(ggPosition).title("donation"));
             }
             first = false;
 
