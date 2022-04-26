@@ -32,6 +32,8 @@ public class DonationsFragement extends Fragment {
     Button  donation;
     EditText name, quantity;
 
+    Button btn;
+
 
 
     @Override
@@ -43,6 +45,7 @@ public class DonationsFragement extends Fragment {
         donation = view.findViewById(R.id.donate);
         name = view.findViewById(R.id.textView);
         quantity = view.findViewById(R.id.textView2);
+        btn = view.findViewById(R.id.button2);
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +72,14 @@ public class DonationsFragement extends Fragment {
                 startActivityForResult(intent,101);
 
 
+            }
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DonationsFragement.this.getActivity(),AddEvent.class);
+                startActivity(i);
             }
         });
 
