@@ -25,7 +25,7 @@ import java.util.Comparator;
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.fridge.data.Fridge;
 import edu.polytech.fridge.fridge.adapters.FoodAdapter;
-import edu.polytech.fridge.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 
 /**
  * Display a recyclerView of food items own by the user

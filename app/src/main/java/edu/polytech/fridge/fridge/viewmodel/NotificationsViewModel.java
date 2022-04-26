@@ -1,4 +1,4 @@
-package edu.polytech.fridge.fridge.model;
+package edu.polytech.fridge.fridge.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

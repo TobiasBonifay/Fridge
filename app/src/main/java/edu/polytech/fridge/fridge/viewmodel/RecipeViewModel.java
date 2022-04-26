@@ -1,4 +1,4 @@
-package edu.polytech.fridge.fridge.model;
+package edu.polytech.fridge.fridge.viewmodel;
 
 
 import static edu.polytech.fridge.RecipeFragment.recipes;

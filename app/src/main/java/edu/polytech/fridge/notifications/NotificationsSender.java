@@ -1,4 +1,4 @@
-package edu.polytech.fridge;
+package edu.polytech.fridge.notifications;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -8,17 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -26,45 +17,33 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import edu.polytech.fridge.databinding.FragmentNotificationsBinding;
-import edu.polytech.fridge.map.MapActivity;
-import edu.polytech.fridge.fridge.viewmodel.NotificationsViewModel;
+import edu.polytech.fridge.MainActivity;
+import edu.polytech.fridge.R;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsSender {
+    private Context context;
 
-    private FragmentNotificationsBinding binding;
-    Intent intent;
-
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
-
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        final Button showNotificationButton = binding.showNotificationExample;
-        showNotificationButton.setOnClickListener(view -> newNotification("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"));
-        Button map = binding.map;
-        map.setOnClickListener(view -> NavigateMap());
-
-        return root;
+    public NotificationsSender(Context context) {
+        this.context = context;
     }
 
     /**
      * Create a thread which display a notification
+     *
+     * @param notificationsSender
      * @param imageUrl url of the image to display under the notification
      */
-    private void newNotification(final String imageUrl) {
+    public void newNotification(NotificationsSender notificationsSender, final String text, final String imageUrl) {
+        this.context = notificationsSender.context;
         new Thread(() -> {
             final Bitmap img = fetchImage(imageUrl);
-            showNotificationWithImage("test", img);
+            showNotificationWithImage(text, img);
         }).start();
     }
 
     /**
      * Try to get the image as a Bitmap from a given link as parameter
+     *
      * @param src link of the image to download
      * @return Bitmap image
      */
@@ -83,23 +62,24 @@ public class NotificationsFragment extends Fragment {
 
     /**
      * Show the notification with a given text, and given image
-     * @param img Image in bitmap format
+     *
+     * @param img  Image in bitmap format
      * @param text Text (String) to display on the notification
      */
     private void showNotificationWithImage(final String text, final Bitmap img) {
-        final Context appContext = requireContext().getApplicationContext();
+        final String title = "FRIDGE";
         final int notificationId = new Random().nextInt(100);
         final String channelId = "notification.channel2";
 
-        NotificationManager notificationManager = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent = new Intent(appContext, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+        Intent intent = new Intent(context, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         final int flags = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
-        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, flags);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, channelId);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, flags);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
 
         builder.setSmallIcon(R.drawable.ic_refrigerator);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
-        builder.setContentTitle("FRIDGE");
+        builder.setContentTitle(title);
         builder.setContentText(text);
         builder.setContentIntent(pendingIntent);
         if (img != null) builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(img));
@@ -117,14 +97,5 @@ public class NotificationsFragment extends Fragment {
 
         Notification notification = builder.build();
         Objects.requireNonNull(notificationManager).notify(notificationId, notification);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-    public void NavigateMap() {
-        startActivity(new Intent(getActivity(), MapActivity.class));
     }
 }

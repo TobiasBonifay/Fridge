@@ -13,7 +13,7 @@ import java.util.List;
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemFindFoodItemviewBinding;
 import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
-import edu.polytech.fridge.fridge.model.FindFoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FindFoodViewModel;
 import edu.polytech.fridge.fridge.view.FindFoodView;
 
 /**

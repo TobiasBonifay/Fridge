@@ -13,7 +13,7 @@ import java.util.List;
 
 import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
-import edu.polytech.fridge.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 import edu.polytech.fridge.fridge.view.FoodView;
 
 /**
