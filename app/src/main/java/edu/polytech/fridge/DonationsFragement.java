@@ -23,15 +23,14 @@ import android.widget.ImageView;
 import java.util.List;
 
 import edu.polytech.fridge.fridge.data.Fridge;
-import edu.polytech.fridge.fridge.model.FoodViewModel;
+import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 import edu.polytech.fridge.map.MapActivity;
 
 
 public class DonationsFragement extends Fragment {
-    ImageView  openCamera;
-    Button  donation;
+    ImageView openCamera;
+    Button donation;
     EditText name, quantity;
-
 
 
     @Override
@@ -46,29 +45,25 @@ public class DonationsFragement extends Fragment {
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<FoodViewModel> list =  Fridge.getInstance().getFoodList();
-                for (FoodViewModel e : list){
-                    if(e.getFoodName().equals(name.getText().toString())){
-                        int q = e.getCurrentQuantity()-Integer.parseInt(quantity.getText().toString());
+                List<FoodViewModel> list = Fridge.getInstance().getFoodList();
+                for (FoodViewModel e : list) {
+                    if (e.getFoodName().equals(name.getText().toString())) {
+                        int q = e.getCurrentQuantity() - Integer.parseInt(quantity.getText().toString());
                         e.setCurrentQuantity(q);
                     }
                 }
                 startActivity(new Intent(getActivity(), MapActivity.class));
             }
         });
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions( getActivity(),
-                    new String[]{Manifest.permission.CAMERA},  101);
-
-
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CAMERA}, 101);
         }
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,101);
-
-
+                startActivityForResult(intent, 101);
             }
         });
 
@@ -78,8 +73,8 @@ public class DonationsFragement extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == 101){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             openCamera.setImageBitmap(bitmap);
         }
