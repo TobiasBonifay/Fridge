@@ -3,6 +3,7 @@ package edu.polytech.fridge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
     private ActivityFindFoodBinding binding;
     private RecyclerView recyclerViewToDisplayAvailableItems;
     private List<FindFoodViewModel> foodItemsAvailable;
+    Button btn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,19 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
         binding = ActivityFindFoodBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        btn4=(Button)findViewById(R.id.button4) ;
 
 
         setUp();
         setUpSearchView();
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ScanToAdd.class));
+
+            }
+        });
     }
 
     private void setUp() {

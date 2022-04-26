@@ -25,6 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fridge">
         <activity
+            android:name=".ScanToAdd"
+            android:exported="false" />
+        <activity
             android:name=".AddEvent"
             android:exported="false" />
 
