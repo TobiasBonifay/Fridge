@@ -39,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
 
-        FirebaseApp.initializeApp(this);
+    public static class Application extends android.app.Application {
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            FirebaseApp.initializeApp(this);
+        }
     }
 }

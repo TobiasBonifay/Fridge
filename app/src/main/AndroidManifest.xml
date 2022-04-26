@@ -16,7 +16,7 @@
 
 
     <application
-        android:name=".Application"
+        android:name=".MainActivity$Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_refrigerator"
         android:label="@string/app_name"
