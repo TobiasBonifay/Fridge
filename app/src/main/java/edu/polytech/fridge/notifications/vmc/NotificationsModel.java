@@ -19,8 +19,8 @@ public class NotificationsModel {
         return instance;
     }
 
-    public Notification removeNotifications() {
-        return null;
+    public void removeNotifications(Notification notification) {
+        notificationList.remove(notification);
     }
 
     public void createNotification(Notification notification) {
