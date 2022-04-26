@@ -32,8 +32,8 @@ import edu.polytech.fridge.fridge.viewmodel.NotificationsViewModel;
 
 public class NotificationsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
     Intent intent;
+    private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
@@ -54,6 +54,7 @@ public class NotificationsFragment extends Fragment {
 
     /**
      * Create a thread which display a notification
+     *
      * @param imageUrl url of the image to display under the notification
      */
     private void newNotification(final String imageUrl) {
@@ -65,6 +66,7 @@ public class NotificationsFragment extends Fragment {
 
     /**
      * Try to get the image as a Bitmap from a given link as parameter
+     *
      * @param src link of the image to download
      * @return Bitmap image
      */
@@ -83,7 +85,8 @@ public class NotificationsFragment extends Fragment {
 
     /**
      * Show the notification with a given text, and given image
-     * @param img Image in bitmap format
+     *
+     * @param img  Image in bitmap format
      * @param text Text (String) to display on the notification
      */
     private void showNotificationWithImage(final String text, final Bitmap img) {
@@ -124,6 +127,7 @@ public class NotificationsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     public void NavigateMap() {
         startActivity(new Intent(getActivity(), MapActivity.class));
     }

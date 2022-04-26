@@ -31,7 +31,7 @@ public class NotificationsSender {
      * Create a thread which display a notification
      *
      * @param notificationsSender
-     * @param imageUrl url of the image to display under the notification
+     * @param imageUrl            url of the image to display under the notification
      */
     public void newNotification(NotificationsSender notificationsSender, final String text, final String imageUrl) {
         this.context = notificationsSender.context;

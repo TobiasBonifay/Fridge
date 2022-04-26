@@ -15,7 +15,8 @@ import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;
 
-    public AddFoodItemActivity(){}
+    public AddFoodItemActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -35,11 +35,12 @@ import edu.polytech.fridge.fridge.viewmodel.RecipeViewModel;
 
 public class RecipeFragment extends Fragment {
 
-    private FragmentRecipeBinding binding;
     public static List<Recipe> recipes = new ArrayList<>();
-    static boolean mode= false;
-    RecipeViewModel recipeViewModel;
     public static boolean firstTime = true;
+    static boolean mode = false;
+    RecipeViewModel recipeViewModel;
+    private FragmentRecipeBinding binding;
+
     public RecipeFragment() {
     }
 
@@ -54,10 +55,10 @@ public class RecipeFragment extends Fragment {
         final TextView textView = binding.textDashboard;
         /** à garder pour le rafraichissement*/
         recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        if(recipes.size()==0){
+        if (recipes.size() == 0) {
             recipeViewModel.getRecipeData();
         }
-        System.out.println("**** onCreateView Fragment: size of recipes="+recipes.size());
+        System.out.println("**** onCreateView Fragment: size of recipes=" + recipes.size());
         return root;
     }
 
@@ -69,7 +70,7 @@ public class RecipeFragment extends Fragment {
         final Switch switchMode = getView().findViewById(R.id.switchMode);
         final ListView listView = getView().findViewById(R.id.listViewRecipes);
         //real of fake data
-        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes,mode));
+        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes, mode));
         //listView.setAdapter(new RecipeCustomAdapter(getActivity(), fake_details,mode));
 
         // When the user clicks on the ListItem
@@ -84,15 +85,15 @@ public class RecipeFragment extends Fragment {
             }
         });
         switchMode.setChecked(mode);
-        if(firstTime) {
+        if (firstTime) {
             firstTime = false;
             refresh();
         }
         switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes,false));
-                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes="+recipes.size());
+                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes, false));
+                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes=" + recipes.size());
 
 //                Log.e("Switch: setOnClickListener: ",switchMode.isChecked()+"");
                 mode = !mode;
@@ -153,24 +154,24 @@ public class RecipeFragment extends Fragment {
         return list;
     }
 
-    private void showRecipeDetails(Recipe recipe){
+    private void showRecipeDetails(Recipe recipe) {
         //We need to get the instance of the LayoutInflater, use the context of this activity
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //Inflate the view from a predefined XML layout (no need for root id, using entire layout)
-        View layout = inflater.inflate(R.layout.recipe_details,null);
+        View layout = inflater.inflate(R.layout.recipe_details, null);
         //load results
         ImageView imageView = (ImageView) layout.findViewById(R.id.recipeIcon);
         //static image
         //recipe.setImageUrl("https://image.shutterstock.com/image-photo/crepe-banana-chocolate-260nw-359513414.jpg");
         Picasso.get().load(recipe.getImageUrl()).into(imageView);
 
-        ((TextView)layout.findViewById(R.id.recipeTitle)).setText(recipe.getNom());
-        ((TextView)layout.findViewById(R.id.ingredients)).setText("Ingrédients: "+recipe.getIngredients());
-        ((TextView)layout.findViewById(R.id.Préparation)).setText("Préparation: "+recipe.getPreparation());
+        ((TextView) layout.findViewById(R.id.recipeTitle)).setText(recipe.getNom());
+        ((TextView) layout.findViewById(R.id.ingredients)).setText("Ingrédients: " + recipe.getIngredients());
+        ((TextView) layout.findViewById(R.id.Préparation)).setText("Préparation: " + recipe.getPreparation());
         //Get the devices screen density to calculate correct pixel sizes
-        float density=getActivity().getResources().getDisplayMetrics().density;
+        float density = getActivity().getResources().getDisplayMetrics().density;
         // create a focusable PopupWindow with the given layout and correct size
-        final PopupWindow pw = new PopupWindow(layout, (int)density*450, (int)density*600, true);
+        final PopupWindow pw = new PopupWindow(layout, (int) density * 450, (int) density * 600, true);
         //Button to close the pop-up
         ((Button) layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -181,7 +182,7 @@ public class RecipeFragment extends Fragment {
         pw.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pw.setTouchInterceptor(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                     pw.dismiss();
                     return true;
                 }
