@@ -1,13 +1,13 @@
-package edu.polytech.fridge.factory.ingredientmanager;
+package edu.polytech.fridge.factory.ingredients.manager;
 
 import edu.polytech.fridge.factory.Ingredient;
 import edu.polytech.fridge.factory.IngredientFactory;
-import edu.polytech.fridge.factory.ingredientype.CannedFood;
-import edu.polytech.fridge.factory.ingredientype.Dairy;
-import edu.polytech.fridge.factory.ingredientype.Fruit;
-import edu.polytech.fridge.factory.ingredientype.Liquid;
-import edu.polytech.fridge.factory.ingredientype.Meat;
-import edu.polytech.fridge.factory.ingredientype.Vegetable;
+import edu.polytech.fridge.factory.ingredients.type.CannedFood;
+import edu.polytech.fridge.factory.ingredients.type.Dairy;
+import edu.polytech.fridge.factory.ingredients.type.Fruit;
+import edu.polytech.fridge.factory.ingredients.type.Liquid;
+import edu.polytech.fridge.factory.ingredients.type.Meat;
+import edu.polytech.fridge.factory.ingredients.type.Vegetable;
 
 public class IngredientManager extends IngredientFactory {
     @Override

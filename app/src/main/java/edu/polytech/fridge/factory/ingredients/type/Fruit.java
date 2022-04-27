@@ -1,4 +1,4 @@
-package edu.polytech.fridge.factory.ingredientype;
+package edu.polytech.fridge.factory.ingredients.type;
 
 import edu.polytech.fridge.factory.Ingredient;
 
