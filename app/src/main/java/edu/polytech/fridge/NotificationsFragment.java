@@ -1,4 +1,4 @@
-package edu.polytech.fridge.notifications;
+package edu.polytech.fridge;
 
 import android.os.Bundle;
 import android.os.StrictMode;

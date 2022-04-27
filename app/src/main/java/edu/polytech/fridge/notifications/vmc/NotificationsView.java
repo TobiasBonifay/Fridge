@@ -7,17 +7,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +19,6 @@ import java.util.Random;
 
 import edu.polytech.fridge.MainActivity;
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.notifications.NotificationsFragment;
 
 public class NotificationsView implements Observer {
     private NotificationsController notificationsController;

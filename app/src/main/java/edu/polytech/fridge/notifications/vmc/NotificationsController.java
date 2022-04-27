@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 
-import edu.polytech.fridge.notifications.NotificationsFragment;
+import edu.polytech.fridge.NotificationsFragment;
 
 public class NotificationsController {
     private final NotificationsView notificationsView;
