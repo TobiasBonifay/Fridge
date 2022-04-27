@@ -14,16 +14,16 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.models.Recipe;
+import edu.polytech.fridge.models.RecipeModel;
 
 public class RecipeCustomAdapter extends BaseAdapter {
 
-    private final List<Recipe> listData;
+    private final List<RecipeModel> listData;
     private final LayoutInflater layoutInflater;
     private final Context context;
     private final boolean mode;
 
-    public RecipeCustomAdapter(final Context aContext, final List<Recipe> listData, final boolean mode) {
+    public RecipeCustomAdapter(final Context aContext, final List<RecipeModel> listData, final boolean mode) {
         context = aContext;
         this.listData = listData;
         this.layoutInflater = LayoutInflater.from(aContext);
@@ -65,18 +65,18 @@ public class RecipeCustomAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final Recipe recipe = listData.get(position);
-        holder.titreView.setText(recipe.getNom());
+        final RecipeModel recipeModel = listData.get(position);
+        holder.titreView.setText(recipeModel.getNom());
         if (!mode) {
-            holder.ingredientsView.setText("Ingrédients: " + recipe.getIngredients());
-            holder.preparationView.setText("Préparation: " + recipe.getPreparation());
+            holder.ingredientsView.setText("Ingrédients: " + recipeModel.getIngredients());
+            holder.preparationView.setText("Préparation: " + recipeModel.getPreparation());
         }
         //Chargement de l'image
         //recipe.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
-        if (recipe.getImageUrl() != null) {
-            Picasso.get().load(recipe.getImageUrl()).into(holder.imageView);
+        if (recipeModel.getImageUrl() != null) {
+            Picasso.get().load(recipeModel.getImageUrl()).into(holder.imageView);
         } else {
-            recipe.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
+            recipeModel.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
         }
         //2eme methode
         //imageView

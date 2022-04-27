@@ -34,16 +34,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.polytech.fridge.R;
 import edu.polytech.fridge.databinding.FragmentRecipeBinding;
 import edu.polytech.fridge.fridge.adapters.RecipeCustomAdapter;
 import edu.polytech.fridge.fridge.viewmodel.RecipeViewModel;
-import edu.polytech.fridge.models.Recipe;
+import edu.polytech.fridge.models.RecipeModel;
 
 public class RecipeFragment extends Fragment {
 
     private FragmentRecipeBinding binding;
-    public static List<Recipe> recipes = new ArrayList<>();
+    public static List<RecipeModel> recipeModels = new ArrayList<>();
     static boolean mode= false;
     RecipeViewModel recipeViewModel;
     public static boolean firstTime = true;
@@ -63,7 +62,7 @@ public class RecipeFragment extends Fragment {
         /** à garder pour le rafraichissement*/
         recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        System.out.println("**** onCreateView Fragment: size of recipes="+recipes.size());
+        System.out.println("**** onCreateView Fragment: size of recipes="+ recipeModels.size());
         return root;
     }
 
@@ -71,13 +70,13 @@ public class RecipeFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         /* Populate List View Recipes*/
         //List<Recipe> fake_details = getFakeData(); //Fake Data
-        if(recipes.size()==0){
+        if(recipeModels.size()==0){
             getRecipeData();
         }
         final Switch switchMode = getView().findViewById(R.id.switchMode);
         final ListView listView = getView().findViewById(R.id.listViewRecipes);
         //real of fake data
-        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes,mode));
+        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels,mode));
         //listView.setAdapter(new RecipeCustomAdapter(getActivity(), fake_details,mode));
 
         // When the user clicks on the ListItem
@@ -86,8 +85,8 @@ public class RecipeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                Recipe recipe = (Recipe) o;
-                showRecipeDetails(recipe);
+                RecipeModel recipeModel = (RecipeModel) o;
+                showRecipeDetails(recipeModel);
                 //Toast.makeText(getActivity(), "Préparation de la recette:\n :" + " " + recipe.getPreparation(), Toast.LENGTH_LONG).show();
             }
         });
@@ -99,8 +98,8 @@ public class RecipeFragment extends Fragment {
         switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipes,false));
-                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes="+recipes.size());
+                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels,false));
+                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes="+ recipeModels.size());
 
 //                Log.e("Switch: setOnClickListener: ",switchMode.isChecked()+"");
                 mode = !mode;
@@ -133,7 +132,7 @@ public class RecipeFragment extends Fragment {
     }
 
 
-    private void showRecipeDetails(Recipe recipe){
+    private void showRecipeDetails(RecipeModel recipeModel){
         //We need to get the instance of the LayoutInflater, use the context of this activity
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //Inflate the view from a predefined XML layout (no need for root id, using entire layout)
@@ -142,11 +141,11 @@ public class RecipeFragment extends Fragment {
         ImageView imageView = (ImageView) layout.findViewById(R.id.recipeIcon);
         //static image
         //recipe.setImageUrl("https://image.shutterstock.com/image-photo/crepe-banana-chocolate-260nw-359513414.jpg");
-        Picasso.get().load(recipe.getImageUrl()).into(imageView);
+        Picasso.get().load(recipeModel.getImageUrl()).into(imageView);
 
-        ((TextView)layout.findViewById(R.id.recipeTitle)).setText(recipe.getNom());
-        ((TextView)layout.findViewById(R.id.ingredients)).setText("Ingrédients: "+recipe.getIngredients());
-        ((TextView)layout.findViewById(R.id.Préparation)).setText("Préparation: "+recipe.getPreparation());
+        ((TextView)layout.findViewById(R.id.recipeTitle)).setText(recipeModel.getNom());
+        ((TextView)layout.findViewById(R.id.ingredients)).setText("Ingrédients: "+ recipeModel.getIngredients());
+        ((TextView)layout.findViewById(R.id.Préparation)).setText("Préparation: "+ recipeModel.getPreparation());
         //Get the devices screen density to calculate correct pixel sizes
         float density=getActivity().getResources().getDisplayMetrics().density;
         // create a focusable PopupWindow with the given layout and correct size
@@ -174,8 +173,8 @@ public class RecipeFragment extends Fragment {
     }
     public void getRecipeData() {
         if(firstFirebase ){
-            synchronized (recipes) {
-                recipes = new ArrayList<>();
+            synchronized (recipeModels) {
+                recipeModels = new ArrayList<>();
                 FirebaseFirestore.getInstance().collection("Receipes")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -184,10 +183,10 @@ public class RecipeFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         System.out.println("Recette récupérée : " + document.getString("nom"));
-                                        Recipe item = document.toObject(Recipe.class);
+                                        RecipeModel item = document.toObject(RecipeModel.class);
                                         //add to list
-                                        recipes.add(item);
-                                        System.out.println("nombre de recettes: " + recipes.size());
+                                        recipeModels.add(item);
+                                        System.out.println("nombre de recettes: " + recipeModels.size());
                                         //recipes.notify();
                                         Log.d("récupération depuis firebase", document.getId() + " => " + document.getData());
                                     }
@@ -199,7 +198,7 @@ public class RecipeFragment extends Fragment {
 
                             }
                         });
-                System.out.println("######  nombre de recettes récupérées: " + recipes.size());
+                System.out.println("######  nombre de recettes récupérées: " + recipeModels.size());
             };
         }
         firstFirebase = false;

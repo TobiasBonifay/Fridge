@@ -1,23 +1,23 @@
 package edu.polytech.fridge.models;
 
-public class Recipe {
+public class RecipeModel {
     private int id;
     private String nom;
     private String ingredients;
     private String preparation;
     private String imageUrl;
 
-    public Recipe() {
+    public RecipeModel() {
     }
 
-    public Recipe(int id, String nom, String ingredients, String preparation) {
+    public RecipeModel(int id, String nom, String ingredients, String preparation) {
         this.id = id;
         this.nom = nom;
         this.ingredients = ingredients;
         this.preparation = preparation;
     }
 
-    public Recipe(int id, String nom, String ingredients, String preparation, String imageUrl) {
+    public RecipeModel(int id, String nom, String ingredients, String preparation, String imageUrl) {
         this.id = id;
         this.nom = nom;
         this.ingredients = ingredients;

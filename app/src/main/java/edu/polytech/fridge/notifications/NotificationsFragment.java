@@ -1,6 +1,7 @@
 package edu.polytech.fridge.notifications;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +14,23 @@ import edu.polytech.fridge.notifications.vmc.NotificationsController;
 import edu.polytech.fridge.notifications.vmc.NotificationsView;
 
 public class NotificationsFragment extends Fragment {
-    private NotificationsSender notificationsSender;
     private FragmentNotificationsBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        NotificationsView notificationsView = new NotificationsView(this, binding.getRoot());
-        NotificationsController notificationsController = new NotificationsController(notificationsView);
-        notificationsView.setController(notificationsController);
+        final int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
-        notificationsSender = new NotificationsSender(getContext());
-        notificationsSender.newNotification(
-                notificationsSender,
-                "Leek expiration date warning",
-                "https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg"
-        );
+        }
+
+        NotificationsView notificationsView = new NotificationsView(binding.getRoot());
+        NotificationsController notificationsController = new NotificationsController(this, notificationsView);
+        notificationsView.setController(notificationsController);
 
         return root;
     }
