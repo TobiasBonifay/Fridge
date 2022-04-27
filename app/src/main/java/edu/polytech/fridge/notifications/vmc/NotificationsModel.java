@@ -2,8 +2,8 @@ package edu.polytech.fridge.notifications.vmc;
 
 public class NotificationsModel {
     private static NotificationsModel instance;
-    private String notificationText = "none";
-    private String notificationImage = "https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg";
+    private String notificationText = "default value";
+    private String notificationImage = "";
 
     NotificationsModel() {
     }
