@@ -5,7 +5,7 @@ public class NotificationsModel {
     private String notificationText = "default value";
     private String notificationImage = "";
 
-    NotificationsModel() {
+    private NotificationsModel() {
     }
 
     public static NotificationsModel getInstance() {
