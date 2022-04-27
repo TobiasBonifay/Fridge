@@ -41,28 +41,30 @@ import edu.polytech.fridge.models.RecipeModel;
 
 public class RecipeFragment extends Fragment {
 
+    private static List<RecipeModel> recipeModels = new ArrayList<>();
+    private static boolean firstTime = true;
+    private static boolean firstFirebase = true;
+    private static boolean mode = false;
+    private RecipeViewModel recipeViewModel;
+    private TextView topLabel_TextView;
     private FragmentRecipeBinding binding;
-    public static List<RecipeModel> recipeModels = new ArrayList<>();
-    static boolean mode= false;
-    RecipeViewModel recipeViewModel;
-    public static boolean firstTime = true;
-    public static boolean firstFirebase = true;
+
     public RecipeFragment() {
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        recipeViewModel =
-                new ViewModelProvider(this).get(RecipeViewModel.class);
-
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRecipeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
+        topLabel_TextView = binding.textDashboard;
         /** à garder pour le rafraichissement*/
-        recipeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        System.out.println("**** onCreateView Fragment: size of recipes="+ recipeModels.size());
+        recipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
+        recipeViewModel.getText().observe(getViewLifecycleOwner(), topLabel_TextView::setText);
+        topLabel_TextView.setText("Fetching data from firebase...");
+
+        System.out.println("**** onCreateView Fragment: size of recipes=" + recipeModels.size());
         return root;
     }
 
@@ -70,13 +72,14 @@ public class RecipeFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         /* Populate List View Recipes*/
         //List<Recipe> fake_details = getFakeData(); //Fake Data
-        if(recipeModels.size()==0){
+        if (recipeModels.isEmpty()) {
             getRecipeData();
+
         }
         final Switch switchMode = getView().findViewById(R.id.switchMode);
         final ListView listView = getView().findViewById(R.id.listViewRecipes);
         //real of fake data
-        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels,mode));
+        listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels, mode));
         //listView.setAdapter(new RecipeCustomAdapter(getActivity(), fake_details,mode));
 
         // When the user clicks on the ListItem
@@ -91,15 +94,15 @@ public class RecipeFragment extends Fragment {
             }
         });
         switchMode.setChecked(mode);
-        if(firstTime) {
+        if (firstTime) {
             firstTime = false;
             refresh();
         }
         switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels,false));
-                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes="+ recipeModels.size());
+                listView.setAdapter(new RecipeCustomAdapter(getActivity(), recipeModels, false));
+                System.out.println("**** setOnCheckedChangeListener Fragment: size of recipes=" + recipeModels.size());
 
 //                Log.e("Switch: setOnClickListener: ",switchMode.isChecked()+"");
                 mode = !mode;
@@ -132,24 +135,24 @@ public class RecipeFragment extends Fragment {
     }
 
 
-    private void showRecipeDetails(RecipeModel recipeModel){
+    private void showRecipeDetails(RecipeModel recipeModel) {
         //We need to get the instance of the LayoutInflater, use the context of this activity
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //Inflate the view from a predefined XML layout (no need for root id, using entire layout)
-        View layout = inflater.inflate(R.layout.recipe_details,null);
+        View layout = inflater.inflate(R.layout.recipe_details, null);
         //load results
         ImageView imageView = (ImageView) layout.findViewById(R.id.recipeIcon);
         //static image
         //recipe.setImageUrl("https://image.shutterstock.com/image-photo/crepe-banana-chocolate-260nw-359513414.jpg");
         Picasso.get().load(recipeModel.getImageUrl()).into(imageView);
 
-        ((TextView)layout.findViewById(R.id.recipeTitle)).setText(recipeModel.getNom());
-        ((TextView)layout.findViewById(R.id.ingredients)).setText("Ingrédients: "+ recipeModel.getIngredients());
-        ((TextView)layout.findViewById(R.id.Préparation)).setText("Préparation: "+ recipeModel.getPreparation());
+        ((TextView) layout.findViewById(R.id.recipeTitle)).setText(recipeModel.getNom());
+        ((TextView) layout.findViewById(R.id.ingredients)).setText("Ingrédients: " + recipeModel.getIngredients());
+        ((TextView) layout.findViewById(R.id.Préparation)).setText("Préparation: " + recipeModel.getPreparation());
         //Get the devices screen density to calculate correct pixel sizes
-        float density=getActivity().getResources().getDisplayMetrics().density;
+        float density = getActivity().getResources().getDisplayMetrics().density;
         // create a focusable PopupWindow with the given layout and correct size
-        final PopupWindow pw = new PopupWindow(layout, (int)density*450, (int)density*700, true);
+        final PopupWindow pw = new PopupWindow(layout, (int) density * 450, (int) density * 700, true);
         //Button to close the pop-up
         ((Button) layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -160,7 +163,7 @@ public class RecipeFragment extends Fragment {
         pw.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pw.setTouchInterceptor(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                     pw.dismiss();
                     return true;
                 }
@@ -171,8 +174,9 @@ public class RecipeFragment extends Fragment {
         // display the pop-up in the center
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
     }
+
     public void getRecipeData() {
-        if(firstFirebase ){
+        if (firstFirebase) {
             synchronized (recipeModels) {
                 recipeModels = new ArrayList<>();
                 FirebaseFirestore.getInstance().collection("Receipes")
@@ -181,6 +185,7 @@ public class RecipeFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
+                                    topLabel_TextView.setText("");
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         System.out.println("Recette récupérée : " + document.getString("nom"));
                                         RecipeModel item = document.toObject(RecipeModel.class);
@@ -191,7 +196,6 @@ public class RecipeFragment extends Fragment {
                                         Log.d("récupération depuis firebase", document.getId() + " => " + document.getData());
                                     }
                                     Log.d("fin des recettes", "");
-                                    return;
                                 } else {
                                     Log.w("Erreur de récupération firebase", "Error getting documents.", task.getException());
                                 }
@@ -199,7 +203,8 @@ public class RecipeFragment extends Fragment {
                             }
                         });
                 System.out.println("######  nombre de recettes récupérées: " + recipeModels.size());
-            };
+            }
+            ;
         }
         firstFirebase = false;
     }

@@ -15,10 +15,8 @@ public class RecipeViewModel extends ViewModel {
     }
 
     public LiveData<String> getText() {
-
         //recipes = new ArrayList<>();
-        mText.setValue("Chargement depuis Firebase...");
-
+        mText.setValue("");
         //******
         return mText;
     }
