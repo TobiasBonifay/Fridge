@@ -42,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -67,6 +68,7 @@ public class DonationsFragment extends Fragment {
 //    private ProgressBar progressBar;
     private DatabaseReference databaseRef;
     private File file;
+    private StorageTask storageTask;
 
     private Button btn;
 
@@ -139,8 +141,12 @@ public class DonationsFragment extends Fragment {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadFile();
+                if(storageTask!=null && storageTask.isInProgress()){
+                    Toast.makeText(getActivity(),"Upload in progress",Toast.LENGTH_SHORT).show();
 
+            }else {
+                    uploadFile();
+                }
             }
         });
 //        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
@@ -209,7 +215,7 @@ public class DonationsFragment extends Fragment {
     private void uploadFile(){
         if (imageUri !=null){
             StorageReference fileRef = storageRef.child(System.currentTimeMillis() + "." +getExtension(imageUri));
-            fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            storageTask= fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Handler handler =  new Handler();
