@@ -3,6 +3,7 @@ package edu.polytech.fridge;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -38,6 +43,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -94,18 +100,29 @@ public class DonationsFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.CAMERA}, 101);
         }
+
+        //this if is for take a picture directly using the camera
+//        openCamera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                file = new File(getActivity().getExternalCacheDir(),
+//                        String.valueOf(System.currentTimeMillis()) + ".jpg");
+//                imageUri = Uri.fromFile(file);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                    getActivity().startActivityForResult(intent, 101);
+//            }
+//        });
+
+
+        //this is for to chose a file from the phone storage
+
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                file = new File(getActivity().getExternalCacheDir(),
-                        String.valueOf(System.currentTimeMillis()) + ".jpg");
-                imageUri = Uri.fromFile(file);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                getActivity().startActivityForResult(intent, 101);
+                chooseFile();
             }
         });
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +143,18 @@ public class DonationsFragment extends Fragment {
 
             }
         });
+//        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+//                new ActivityResultContracts.StartActivityForResult(),
+//                new ActivityResultCallback<ActivityResult>() {
+//                    @Override
+//                    public void onActivityResult(ActivityResult result) {
+//                            // There are no request codes
+//                            Intent data = result.getData();
+//                            Bitmap bitmap = (Bitmap) (data != null ? data.getExtras().get("data") : null);
+//                            openCamera.setImageBitmap(bitmap);
+//
+//                    }
+//                });
 
 
 
@@ -135,16 +164,17 @@ public class DonationsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101 ) {
-            Bitmap bitmap = (Bitmap) (data != null ? data.getExtras().get("data") : null);
-            openCamera.setImageBitmap(bitmap);
-//            assert bitmap != null;
-//            imageUri=getImageUri(requireActivity().getApplicationContext(),bitmap);
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 101 ) {
+//            Bitmap bitmap = (Bitmap) (data != null ? data.getExtras().get("data") : null);
+//            openCamera.setImageBitmap(bitmap);
+////            assert bitmap != null;
+////            imageUri=getImageUri(requireActivity().getApplicationContext(),bitmap);
+//        }
+//    }
+
 //    public Uri getImageUri(Context inContext, Bitmap inImage) {
 //        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 //        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -159,6 +189,23 @@ public class DonationsFragment extends Fragment {
         MimeTypeMap mime =  MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
+
+    private void chooseFile(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data!=null && data.getData()!=null){
+            imageUri = data.getData();
+            openCamera.setImageURI(imageUri);
+        }
+    }
+
     private void uploadFile(){
         if (imageUri !=null){
             StorageReference fileRef = storageRef.child(System.currentTimeMillis() + "." +getExtension(imageUri));
