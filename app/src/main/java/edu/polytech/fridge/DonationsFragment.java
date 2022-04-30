@@ -1,25 +1,48 @@
 package edu.polytech.fridge;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import edu.polytech.fridge.fridge.data.Fridge;
 import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
@@ -27,12 +50,19 @@ import edu.polytech.fridge.map.MapActivity;
 
 
 public class DonationsFragment extends Fragment {
-    ImageView openCamera;
-    Button donation;
-    EditText name;
-    EditText quantity;
+    private ImageView openCamera;
+    private Button donation;
+    private EditText name;
+    private EditText quantity;
+    private static final int PICK =1;
+    Button uploadBtn;
+    private Uri imageUri;
+    private StorageReference storageRef;
+//    private ProgressBar progressBar;
+    private DatabaseReference databaseRef;
+    private File file;
 
-    Button btn;
+    private Button btn;
 
 
     @Override
@@ -45,6 +75,8 @@ public class DonationsFragment extends Fragment {
         name = view.findViewById(R.id.textView);
         quantity = view.findViewById(R.id.textView2);
         btn=view.findViewById(R.id.button2);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +98,11 @@ public class DonationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 101);
+                file = new File(getActivity().getExternalCacheDir(),
+                        String.valueOf(System.currentTimeMillis()) + ".jpg");
+                imageUri = Uri.fromFile(file);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                getActivity().startActivityForResult(intent, 101);
             }
         });
 
@@ -79,6 +115,18 @@ public class DonationsFragment extends Fragment {
             }
 
         });
+        storageRef = FirebaseStorage.getInstance().getReference("uploads");
+        databaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        uploadBtn = view.findViewById(R.id.upload);
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadFile();
+
+            }
+        });
+
 
 
         
@@ -90,9 +138,63 @@ public class DonationsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101) {
+        if (requestCode == 101 ) {
             Bitmap bitmap = (Bitmap) (data != null ? data.getExtras().get("data") : null);
             openCamera.setImageBitmap(bitmap);
+//            assert bitmap != null;
+//            imageUri=getImageUri(requireActivity().getApplicationContext(),bitmap);
         }
+    }
+//    public Uri getImageUri(Context inContext, Bitmap inImage) {
+//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+//        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+//        assert path != null;
+//        return Uri.parse(path);
+
+
+//    }
+    private String getExtension(Uri uri){
+        ContentResolver cr = requireActivity().getContentResolver();
+        MimeTypeMap mime =  MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
+    }
+    private void uploadFile(){
+        if (imageUri !=null){
+            StorageReference fileRef = storageRef.child(System.currentTimeMillis() + "." +getExtension(imageUri));
+            fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler handler =  new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(),"stuff happening",Toast.LENGTH_SHORT).show();                        }
+                    },500);
+                    Toast.makeText(getActivity(),"Upload succsess",Toast.LENGTH_SHORT).show();
+                    Upload upload =new Upload(taskSnapshot.getStorage().getDownloadUrl().toString());
+                    String uploadId = databaseRef.push().getKey();
+                    databaseRef.child(uploadId).setValue(upload);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();;
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                    double progress = (100 * snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+//                    progressBar.setProgress((int) progress);
+                }
+            });
+        }
+
+         else {
+            Toast.makeText(getActivity(),"No file selected",Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
