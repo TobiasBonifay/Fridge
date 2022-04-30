@@ -78,6 +78,26 @@
         android:cropToPadding="true"
         android:src="@android:drawable/ic_menu_camera" />
 
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/openCamera2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-48dp"
+        android:layout_marginEnd="50dp"
+        android:text="upload" />
+
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/prog"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/upload"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="2dp"-->
+<!--        android:layout_marginEnd="74dp" />-->
+
     <EditText
         android:id="@+id/textView"
         android:layout_width="158dp"
@@ -117,8 +137,12 @@
         android:layout_height="50sp"
         android:layout_below="@+id/openCamera2"
         android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
-        android:layout_margin="20dp"
         android:text="@string/donate" />
 
     <Button
