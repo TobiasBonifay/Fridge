@@ -52,25 +52,29 @@
             android:id="@+id/currentQuantity_add"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Quantity"/>
+            android:text="Quantity"
+            android:textSize="60px"/>
 
         <TextView
             android:id="@+id/purchaseDate_add"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Purchase date" />
+            android:text="Purchase date"
+            android:textSize="60px"/>
 
         <TextView
             android:id="@+id/expirationDate_add"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Expiration date" />
+            android:text="Expiration date"
+            android:textSize="60px"/>
 
         <TextView
             android:id="@+id/weight_add"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Weight" />
+            android:text="Weight"
+            android:textSize="60px" />
     </LinearLayout>
 
     <Button
