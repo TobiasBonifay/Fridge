@@ -57,8 +57,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+import edu.polytech.fridge.factory.Ingredient;
 import edu.polytech.fridge.fridge.data.Fridge;
-import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 import edu.polytech.fridge.map.MapActivity;
 
 
@@ -78,7 +78,7 @@ public class DonationsFragment extends Fragment {
 
     private Button btn;
     private TextView showUploads;
-
+    private EditText donationName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +87,8 @@ public class DonationsFragment extends Fragment {
 //        imageView = view.findViewById(R.id.picture);
         openCamera = view.findViewById(R.id.openCamera2);
         donation = view.findViewById(R.id.donate);
+        donationName = view.findViewById(R.id.id_name);
+
         showUploads = view.findViewById(R.id.text_view_show_uploads);
         showUploads.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +104,8 @@ public class DonationsFragment extends Fragment {
         donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<FoodViewModel> list = Fridge.getInstance().getFoodList();
-                for (FoodViewModel e : list) {
+                List<Ingredient> list = Fridge.getInstance().getFoodList();
+                for (Ingredient e : list) {
                     if (e.getFoodName().equals(name.getText().toString())) {
                         int q = e.getCurrentQuantity() - Integer.parseInt(quantity.getText().toString());
                         e.setCurrentQuantity(q);
@@ -252,7 +254,7 @@ public class DonationsFragment extends Fragment {
                     Uri downloadUrl = urlTask.getResult();
 
                     Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString()); //use if testing...don't need this line.
-                    Upload upload = new Upload("textforNow",downloadUrl.toString());
+                    Upload upload = new Upload(donationName.getText().toString().trim(),downloadUrl.toString());
 
                     String uploadId = databaseRef.push().getKey();
                     databaseRef.child(uploadId).setValue(upload);
