@@ -1,6 +1,7 @@
 package edu.polytech.fridge;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,10 +22,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +37,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -71,6 +77,7 @@ public class DonationsFragment extends Fragment {
     private StorageTask storageTask;
 
     private Button btn;
+    private TextView showUploads;
 
 
     @Override
@@ -80,6 +87,13 @@ public class DonationsFragment extends Fragment {
 //        imageView = view.findViewById(R.id.picture);
         openCamera = view.findViewById(R.id.openCamera2);
         donation = view.findViewById(R.id.donate);
+        showUploads = view.findViewById(R.id.text_view_show_uploads);
+        showUploads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHistoryFragement();
+            }
+        });
         name = view.findViewById(R.id.textView);
         quantity = view.findViewById(R.id.textView2);
         btn=view.findViewById(R.id.button2);
@@ -170,6 +184,14 @@ public class DonationsFragment extends Fragment {
         return view;
     }
 
+    private void openHistoryFragement() {
+//        FragmentTransaction fr = getFragmentManager().beginTransaction();
+//        fr.replace(R.id.to_replace,new DonationHistory());
+//        fr.commit();
+      Intent intent = new Intent(getActivity(),DonationsHistory.class);
+      startActivity(intent);
+    }
+
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -225,9 +247,18 @@ public class DonationsFragment extends Fragment {
                             Toast.makeText(getActivity(),"stuff happening",Toast.LENGTH_SHORT).show();                        }
                     },500);
                     Toast.makeText(getActivity(),"Upload succsess",Toast.LENGTH_SHORT).show();
-                    Upload upload =new Upload(taskSnapshot.getStorage().getDownloadUrl().toString());
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful());
+                    Uri downloadUrl = urlTask.getResult();
+
+                    Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString()); //use if testing...don't need this line.
+                    Upload upload = new Upload("textforNow",downloadUrl.toString());
+
                     String uploadId = databaseRef.push().getKey();
                     databaseRef.child(uploadId).setValue(upload);
+//                    Upload upload =new Upload("text",taskSnapshot.getStorage().getDownloadUrl().toString());
+//                    String uploadId = databaseRef.push().getKey();
+//                    databaseRef.child(uploadId).setValue(upload);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {

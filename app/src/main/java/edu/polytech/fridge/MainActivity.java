@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.FirebaseApp;
 
 import java.util.Objects;
@@ -25,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         ListView listView = findViewById(androidx.appcompat.R.id.select_dialog_listview);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

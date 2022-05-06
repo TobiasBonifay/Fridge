@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/to_replace"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DonationsFragment">
@@ -78,25 +79,25 @@
         android:cropToPadding="true"
         android:src="@android:drawable/ic_menu_camera" />
 
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/prog"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/upload"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginTop="2dp"-->
+    <!--        android:layout_marginEnd="74dp" />-->
+
     <Button
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/openCamera2"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-48dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="-47dp"
+        android:layout_marginEnd="74dp"
         android:text="upload" />
-
-
-<!--    <ProgressBar-->
-<!--        android:id="@+id/prog"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/upload"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="2dp"-->
-<!--        android:layout_marginEnd="74dp" />-->
 
     <EditText
         android:id="@+id/textView"
@@ -149,9 +150,9 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajouter l'évènement à l'agenda"
-        android:layout_marginTop="380dip"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="380dip"
+        android:text="Ajouter l'évènement à l'agenda"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +162,16 @@
         app:layout_constraintVertical_bias="0.66"
         tools:ignore="MissingConstraints" />
 
-
+    <TextView
+        android:id="@+id/text_view_show_uploads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="144dp"
+        android:gravity="center"
+        android:text="show uploads"
+        android:textSize="16sp" />
 
 
 </RelativeLayout>
