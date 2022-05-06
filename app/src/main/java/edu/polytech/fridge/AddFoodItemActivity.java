@@ -35,10 +35,17 @@ public class AddFoodItemActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-
-
         Ingredient foodToAddCompleted = getFoodItemToAdd();
-        addFoodInFridge(foodToAddCompleted);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addFoodInFridge(foodToAddCompleted);
+            }
+        });
+
+
+
+
     }
 
     @NonNull
@@ -60,6 +67,6 @@ public class AddFoodItemActivity extends AppCompatActivity {
         // add to json
         Fridge.getInstance().addFoodOnFridge(foodToAdd);
         Log.d("ITEMFOOD", "addFoodOnFridge " + Fridge.getInstance().getFoodList().toString());
-        // startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
