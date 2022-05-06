@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
+import edu.polytech.fridge.factory.Ingredient;
+import edu.polytech.fridge.factory.ingredients.type.Fruit;
+import edu.polytech.fridge.factory.ingredients.type.Meal;
+import edu.polytech.fridge.factory.ingredients.type.Vegetable;
 
 
 /**
@@ -14,7 +17,7 @@ import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
  */
 public class Fridge {
     private static Fridge instance;
-    private List<FoodViewModel> foodList = new ArrayList<>();
+    private List<Ingredient> foodList = new ArrayList<>();
 
     private Fridge() {
 
@@ -28,27 +31,27 @@ public class Fridge {
     }
 
     public static void generateFridgeTemplateWithFakeFoods() {
-        List<FoodViewModel> foodViewModelList = new ArrayList<>();
+        List<Ingredient> foodList = new ArrayList<>();
 
         // fetch data from FireBase
-        FoodViewModel aliment = new FoodViewModel("Carrot", R.drawable.ic_carrot, "27/04/2022", 4);
-        FoodViewModel aliment2 = new FoodViewModel("Pear", R.drawable.ic_pear, "24/04/2022", 2);
-        FoodViewModel aliment3 = new FoodViewModel("Pasta", R.drawable.ic_spaghetti, "29/04/2022", 1);
-        FoodViewModel aliment4 = new FoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti, "09/04/2017", 1);
+        Ingredient aliment = new Vegetable("Carrot", R.drawable.ic_carrot, "27/04/2022", 4);
+        Ingredient aliment2 = new Fruit("Pear", R.drawable.ic_pear, "24/04/2022", 2);
+        Ingredient aliment3 = new Meal("Pasta", R.drawable.ic_spaghetti, "29/04/2022", 1);
+        Ingredient aliment4 = new Meal("Toxic Pasta", R.drawable.ic_spaghetti, "09/04/2017", 1);
 
-        foodViewModelList.add(aliment);
-        foodViewModelList.add(aliment2);
-        foodViewModelList.add(aliment3);
-        foodViewModelList.add(aliment4);
-        // return foodViewModelList;
-        Fridge.getInstance().setFoodList(foodViewModelList);
+        foodList.add(aliment);
+        foodList.add(aliment2);
+        foodList.add(aliment3);
+        foodList.add(aliment4);
+        // return foodList;
+        Fridge.getInstance().setFoodList(foodList);
     }
 
-    public List<FoodViewModel> getFoodList() {
+    public List<Ingredient> getFoodList() {
         return foodList;
     }
 
-    public void setFoodList(final List<FoodViewModel> foodList) {
+    public void setFoodList(final List<Ingredient> foodList) {
         this.foodList = foodList;
     }
 
@@ -57,7 +60,7 @@ public class Fridge {
      *
      * @param food Food to add
      */
-    public void addFoodOnFridge(final FoodViewModel food) {
+    public void addFoodOnFridge(final Ingredient food) {
         Log.d("ITEMFOOD", "addFoodOnFridgeInit " + food.getFoodName());
         if (isAlreadyHere(food)) {
             Log.d("ITEMFOOD", "already HERE " + food.getFoodName());
@@ -73,7 +76,7 @@ public class Fridge {
         }
     }
 
-    public void removeFoodOnFridge(final FoodViewModel food) {
+    public void removeFoodOnFridge(final Ingredient food) {
         foodList.remove(food);
     }
 
@@ -87,11 +90,11 @@ public class Fridge {
      * @param foodToAdd
      * @return The potential duplicated food
      */
-    private boolean isAlreadyHere(FoodViewModel foodToAdd) {
+    private boolean isAlreadyHere(Ingredient foodToAdd) {
         return foodList.stream().anyMatch(f -> isSameFood(f, foodToAdd));
     }
 
-    public void changeFoodQuantity(FoodViewModel food, int increment) {
+    public void changeFoodQuantity(Ingredient food, int increment) {
         if (food == null || increment == 0) return;
         if (food.getCurrentQuantity() <= 0 && increment < 0) return;
         foodList.forEach(f -> {
@@ -102,7 +105,7 @@ public class Fridge {
         if (food.getCurrentQuantity() == 0) removeFoodOnFridge(food);
     }
 
-    private boolean isSameFood(FoodViewModel f1, FoodViewModel f2) {
+    private boolean isSameFood(Ingredient f1, Ingredient f2) {
         if (f1 == f2) return true;
         return f1.getFoodName().equals(f2.getFoodName())
                 && f1.getExpirationDate().equals(f2.getExpirationDate());

@@ -13,9 +13,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,9 +41,12 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.polytech.fridge.R;
+import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
+import edu.polytech.fridge.databinding.ActivityMapsBinding;
 
 public class MapActivity extends AppCompatActivity implements LocationListener, GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
+    private ActivityMapsBinding binding;
     private LocationManager lm;
     private static final int REQUEST_CODE = 1234;
     private SupportMapFragment mapFragment;
@@ -50,7 +56,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     private boolean aBoolean = true;
     SearchView searchView;
     private boolean sumbitText = false;
-    ImageButton association;
+    Button association;
     private double lat, lng;
 
 
@@ -58,8 +64,10 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_maps);
+
+        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         coder = new Geocoder(this, Locale.getDefault());
 
         searchView = findViewById(R.id.idSearchView);
@@ -68,7 +76,26 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 .findFragmentById(R.id.map);
         checkPermission();
         mapFragment.getMapAsync(this);
+        association= view.findViewById(R.id.donation);
+        association.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+                googlePlaceUrl.append("location="+lat+","+lng);
+                googlePlaceUrl.append("&radius="+8000);
+                googlePlaceUrl.append("&type=parking");
+                googlePlaceUrl.append("&sensor=true");
+                googlePlaceUrl.append("&key="+"AIzaSyBtJo4kSMTPBDmf-d4Vt2BFRjn6NKJqv7g");
+                Toast.makeText(MapActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_SHORT).show();
+                String url = googlePlaceUrl.toString();
+                Object dataFetch[]=new Object[2];
+                dataFetch[0]=ggMap;
+                dataFetch[1]=url;
+                FetchData fetchData = new FetchData();
+                fetchData.execute(dataFetch);
 
+            }
+        });
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
@@ -109,6 +136,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
 
     }
+
 
 
     @SuppressLint("MissingPermission")

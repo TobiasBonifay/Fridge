@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.polytech.fridge.databinding.ActivityAddFoodItemBinding;
+import edu.polytech.fridge.factory.Ingredient;
 import edu.polytech.fridge.fridge.data.FoodItemParcelable;
 import edu.polytech.fridge.fridge.data.Fridge;
-import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;
@@ -26,24 +26,26 @@ public class AddFoodItemActivity extends AppCompatActivity {
         setContentView(view);
 
 
-        FoodViewModel foodToAddCompleted = getFoodItemToAdd();
+        Ingredient foodToAddCompleted = getFoodItemToAdd();
         addFoodInFridge(foodToAddCompleted);
     }
 
     @NonNull
-    private FoodViewModel getFoodItemToAdd() {
+    private Ingredient getFoodItemToAdd() {
         FoodItemParcelable foodItemParcelableToAdd = getIntent().getParcelableExtra("food");
         String expirationDate = "27/04/2022";
         int quantity = 2;
-        return new FoodViewModel(
+        return new Ingredient(
+                foodItemParcelableToAdd.getFoodType(),
                 foodItemParcelableToAdd.getFoodName(),
                 foodItemParcelableToAdd.getFoodImage(),
                 expirationDate,
                 quantity
+
         );
     }
 
-    private void addFoodInFridge(FoodViewModel foodToAdd) {
+    private void addFoodInFridge(Ingredient foodToAdd) {
         // add to json
         Fridge.getInstance().addFoodOnFridge(foodToAdd);
         Log.d("ITEMFOOD", "addFoodOnFridge " + Fridge.getInstance().getFoodList().toString());

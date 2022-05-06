@@ -4,6 +4,6 @@ import edu.polytech.fridge.factory.Ingredient;
 
 public class Fruit extends Ingredient {
     public Fruit(String foodName, int foodImage, String expirationDate, int currentQuantity) {
-        super(0, foodName, foodImage, expirationDate, currentQuantity);
+        super("fruit", foodName, foodImage, expirationDate, currentQuantity);
     }
 }

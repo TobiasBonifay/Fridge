@@ -41,6 +41,12 @@
 
         </androidx.appcompat.widget.SearchView>
 
+        <Button
+            android:id="@+id/donation"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Nearby donation places" />
 
 
     </LinearLayout>

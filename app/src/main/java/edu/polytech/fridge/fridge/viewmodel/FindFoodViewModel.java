@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 public class FindFoodViewModel {
     private String foodName;
     private int foodImage;
+    private String foodType;
 
-    public FindFoodViewModel(@NonNull final String foodName, final int foodImage) {
+    public FindFoodViewModel(@NonNull final String foodName, final int foodImage,final String foodType) {
         setFoodName(foodName);
         setFoodImage(foodImage);
+        setFoodType(foodType);
     }
 
     public int getFoodImage() {
@@ -30,5 +32,12 @@ public class FindFoodViewModel {
 
     public void setFoodName(@NonNull final String foodName) {
         this.foodName = foodName;
+    }
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(@NonNull final String foodType) {
+        this.foodType = foodType;
     }
 }
