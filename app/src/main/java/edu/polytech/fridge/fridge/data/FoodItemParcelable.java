@@ -6,10 +6,13 @@ import android.os.Parcelable;
 public class FoodItemParcelable implements Parcelable {
     private final String foodName;
     private final int foodImage;
+    private  String type;
 
-    public FoodItemParcelable(String foodName, int foodImage) {
+    public FoodItemParcelable(String foodName, int foodImage,String type) {
         this.foodName = foodName;
         this.foodImage = foodImage;
+        this.type=type;
+
     }
 
     public String getFoodName() {
@@ -18,6 +21,9 @@ public class FoodItemParcelable implements Parcelable {
 
     public int getFoodImage() {
         return foodImage;
+    }
+    public String getFoodType() {
+        return type;
     }
 
     public static final Creator<FoodItemParcelable> CREATOR = new Creator<FoodItemParcelable>() {

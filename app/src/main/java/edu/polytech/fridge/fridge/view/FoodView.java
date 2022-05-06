@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.polytech.fridge.databinding.ItemFridgeItemviewBinding;
-import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
+import edu.polytech.fridge.factory.Ingredient;
 
 /**
  * Content of a food item
@@ -34,7 +34,7 @@ public class FoodView extends RecyclerView.ViewHolder {
         donate_Btn = binding.donate;
     }
 
-    public void bindData(final FoodViewModel viewModel) {
+    public void bindData(final Ingredient viewModel) {
         foodName_TV.setText(viewModel.getFoodName());
         foodImage_IMG.setImageResource(viewModel.getFoodImage());
         expirationDate_TV.setText(viewModel.getExpirationDate());

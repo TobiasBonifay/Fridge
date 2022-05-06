@@ -1,13 +1,15 @@
 package edu.polytech.fridge.factory;
 
-public class Ingredient {
-    private final String foodName;
-    private final int type;
-    private final int foodImage;
-    private final String expirationDate;
-    private final int currentQuantity;
+import androidx.annotation.NonNull;
 
-    public Ingredient(int type, String foodName, int foodImage, String expirationDate, int currentQuantity) {
+public class Ingredient {
+    private String foodName;
+    private  String type;
+    private  int foodImage;
+    private String expirationDate;
+    private  int currentQuantity;
+
+    public Ingredient(String type, String foodName, int foodImage, String expirationDate, int currentQuantity) {
         this.foodName = foodName;
         this.foodImage = foodImage;
         this.expirationDate = expirationDate;
@@ -31,7 +33,25 @@ public class Ingredient {
         return this.currentQuantity;
     }
 
-    public int getType() {
+    public String getType() {
         return this.type;
+    }
+
+    public void setFoodImage(int foodImage) {
+        this.foodImage = foodImage;
+    }
+
+
+    public void setFoodName(@NonNull final String foodName) {
+        this.foodName = foodName;
+    }
+
+
+    public void setExpirationDate(@NonNull final String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setCurrentQuantity(int currentQuantity) {
+        this.currentQuantity = currentQuantity;
     }
 }

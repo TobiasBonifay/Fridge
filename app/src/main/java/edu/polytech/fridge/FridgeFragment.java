@@ -23,9 +23,9 @@ import java.util.Comparator;
 
 
 import edu.polytech.fridge.databinding.FragmentFridgeBinding;
+import edu.polytech.fridge.factory.Ingredient;
 import edu.polytech.fridge.fridge.data.Fridge;
 import edu.polytech.fridge.fridge.adapters.FoodAdapter;
-import edu.polytech.fridge.fridge.viewmodel.FoodViewModel;
 
 /**
  * Display a recyclerView of food items own by the user
@@ -95,18 +95,18 @@ public class FridgeFragment extends Fragment {
     }
 
     private void filterListAlphabeticOrder() {
-        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getFoodName));
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(Ingredient::getFoodName));
         recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
     }
 
     private void filterListQuantity() {
-        Fridge.getInstance().getFoodList().sort(Comparator.comparing(FoodViewModel::getCurrentQuantity).reversed());
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing(Ingredient::getCurrentQuantity).reversed());
         recyclerViewToDisplayFridgeFood.setAdapter(new FoodAdapter(Fridge.getInstance().getFoodList()));
     }
 
     private void filterListExpirationDate() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Fridge.getInstance().getFoodList().sort(Comparator.comparing((FoodViewModel foodViewModel) -> {
+        Fridge.getInstance().getFoodList().sort(Comparator.comparing((Ingredient foodViewModel) -> {
             try {
                 return format.parse(foodViewModel.getExpirationDate());
             } catch (ParseException e) {

@@ -6,25 +6,28 @@ import edu.polytech.fridge.factory.ingredients.type.CannedFood;
 import edu.polytech.fridge.factory.ingredients.type.Dairy;
 import edu.polytech.fridge.factory.ingredients.type.Fruit;
 import edu.polytech.fridge.factory.ingredients.type.Liquid;
+import edu.polytech.fridge.factory.ingredients.type.Meal;
 import edu.polytech.fridge.factory.ingredients.type.Meat;
 import edu.polytech.fridge.factory.ingredients.type.Vegetable;
 
 public class IngredientManager extends IngredientFactory {
     @Override
-    public Ingredient put(int type, String foodName, int foodImage, String expirationDate, int currentQuantity) throws Throwable {
+    public Ingredient put(String type, String foodName, int foodImage, String expirationDate, int currentQuantity) throws Throwable {
         switch (type) {
-            case 0:
+            case "fruit":
                 return new Fruit(foodName, foodImage, expirationDate, currentQuantity);
-            case 1:
+            case "vegetable":
                 return new Vegetable(foodName, foodImage, expirationDate, currentQuantity);
-            case 2:
+            case "dairy":
                 return new Dairy(foodName, foodImage, expirationDate, currentQuantity);
-            case 3:
+            case "liquid":
                 return new Liquid(foodName, foodImage, expirationDate, currentQuantity);
-            case 4:
+            case "cannedfood":
                 return new CannedFood(foodName, foodImage, expirationDate, currentQuantity);
-            case 5:
+            case "meat":
                 return new Meat(foodName, foodImage, expirationDate, currentQuantity);
+            case "meal":
+                return new Meal(foodName, foodImage, expirationDate, currentQuantity);
             default:
                 throw new Throwable("err");
         }

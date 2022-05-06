@@ -81,11 +81,11 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
     private static List<FindFoodViewModel> foodItemsFakeDatabase() {
         List<FindFoodViewModel> items = new ArrayList<>();
         // fetch data from FireBase
-        FindFoodViewModel aliment = new FindFoodViewModel("Carrot", R.drawable.ic_carrot);
-        FindFoodViewModel aliment2 = new FindFoodViewModel("Pear", R.drawable.ic_pear);
-        FindFoodViewModel aliment3 = new FindFoodViewModel("Pasta", R.drawable.ic_spaghetti);
-        FindFoodViewModel aliment4 = new FindFoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti);
-        FindFoodViewModel aliment5 = new FindFoodViewModel("Database item", R.drawable.ic_spaghetti);
+        FindFoodViewModel aliment = new FindFoodViewModel("Carrot", R.drawable.ic_carrot,"vegetable");
+        FindFoodViewModel aliment2 = new FindFoodViewModel("Pear", R.drawable.ic_pear,"fruit");
+        FindFoodViewModel aliment3 = new FindFoodViewModel("Pasta", R.drawable.ic_spaghetti,"meal");
+        FindFoodViewModel aliment4 = new FindFoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti,"meal");
+        FindFoodViewModel aliment5 = new FindFoodViewModel("Database item", R.drawable.ic_spaghetti,"meal");
 
         items.add(aliment);
         items.add(aliment2);
@@ -107,7 +107,7 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
 
     public void addFoodOnFridge(FindFoodViewModel foodToAdd) {
         Intent addFoodIntent = new Intent(this, AddFoodItemActivity.class);
-        addFoodIntent.putExtra("food", new FoodItemParcelable(foodToAdd.getFoodName(), foodToAdd.getFoodImage()));
+        addFoodIntent.putExtra("food", new FoodItemParcelable(foodToAdd.getFoodName(), foodToAdd.getFoodImage(),foodToAdd.getFoodType()));
         startActivity(addFoodIntent);
     }
 
