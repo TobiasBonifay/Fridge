@@ -1,8 +1,10 @@
 package edu.polytech.fridge;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import edu.polytech.fridge.fridge.data.Fridge;
 
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;
+    private Button cancel, add;
 
     public AddFoodItemActivity() {
     }
@@ -24,6 +27,14 @@ public class AddFoodItemActivity extends AppCompatActivity {
         binding = ActivityAddFoodItemBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        cancel = view.findViewById(R.id.Cancel);
+        add = view.findViewById(R.id.addIngredient);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
 
         Ingredient foodToAddCompleted = getFoodItemToAdd();
