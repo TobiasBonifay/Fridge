@@ -145,7 +145,7 @@ public class RecipeFragment extends Fragment {
         ImageView imageView = (ImageView) layout.findViewById(R.id.recipeIcon);
         //static image
         //recipe.setImageUrl("https://image.shutterstock.com/image-photo/crepe-banana-chocolate-260nw-359513414.jpg");
-        Picasso.with(context.getApplicationContext()).load(recipeModel.getImageUrl()).into(imageView);
+        Picasso.get().load(recipeModel.getImageUrl()).into(imageView);
 
         ((TextView) layout.findViewById(R.id.recipeTitle)).setText(recipeModel.getNom());
         ((TextView) layout.findViewById(R.id.ingredients)).setText("Ingrédients: " + recipeModel.getIngredients());

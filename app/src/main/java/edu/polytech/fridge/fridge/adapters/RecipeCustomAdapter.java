@@ -74,7 +74,7 @@ public class RecipeCustomAdapter extends BaseAdapter {
         //Chargement de l'image
         //recipe.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
         if (recipeModel.getImageUrl() != null) {
-            Picasso.with(context.getApplicationContext()).load(recipeModel.getImageUrl()).into(holder.imageView);
+            Picasso.get().load(recipeModel.getImageUrl()).into(holder.imageView);
         } else {
             recipeModel.setImageUrl("https://cdn2.iconfinder.com/data/icons/bakery-related-line/64/bakery_pastry_cooking-06-512.png");
         }
