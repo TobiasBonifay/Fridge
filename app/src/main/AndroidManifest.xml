@@ -52,6 +52,7 @@
         </activity>
         <activity android:name=".FindFoodsActivity" />
         <activity android:name=".AddFoodItemActivity" />
+        <activity android:name=".NotificationsFragment"/>
     </application>
 
 </manifest>

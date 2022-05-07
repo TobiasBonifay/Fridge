@@ -22,6 +22,7 @@
         android:name="edu.polytech.fridge.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/navigation_donations"
         android:name="edu.polytech.fridge.DonationsFragment"
