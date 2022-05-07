@@ -40,7 +40,7 @@ public class NotificationsController {
         NotificationsModel notificationsModel = NotificationsModel.getInstance();
         Observable e = new Observable();
         e.notifyObservers();
-        notificationsModel.setNotificationText("Fridge");
+        notificationsModel.setNotificationText("Leek is about to expire, what about cooking a leek soup?");
         notificationsModel.setNotificationImage("https://www.onceuponachef.com/images/2011/11/potato-leek-soup-14.jpg");
         notificationsView.update(e, notificationsModel);
 
