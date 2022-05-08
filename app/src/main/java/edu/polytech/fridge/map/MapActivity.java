@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,6 +64,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     private boolean sumbitText = false;
     Button association;
     private double lat, lng;
+    public static String name;
 
 
     @SuppressLint("WrongThread")
@@ -145,6 +152,11 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         this.ggMap = mGoogleMap;
         ggMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         ggMap.setMyLocationEnabled(true);
+        ggMap.addMarker(new MarkerOptions().position(new LatLng(43.61705334494936, 7.080146423829886)).icon(bitmapDesciptorFromVector(getApplicationContext(),R.drawable.ic_donate_donation_svgrepo_com)));
+        ggMap.addMarker(new MarkerOptions().position(new LatLng(43.61273253728841, 7.080371161290283)).icon(bitmapDesciptorFromVector(getApplicationContext(),R.drawable.ic_donate_donation_svgrepo_com)));
+        ggMap.addMarker(new MarkerOptions().position(new LatLng(43.623323892830854, 7.075558231733037)).icon(bitmapDesciptorFromVector(getApplicationContext(),R.drawable.ic_donate_donation_svgrepo_com)));
+        ggMap.addMarker(new MarkerOptions().position(new LatLng(43.617164927719976, 7.047458647488262)).icon(bitmapDesciptorFromVector(getApplicationContext(),R.drawable.ic_donate_donation_svgrepo_com)));
+
     }
 
     @Override
@@ -193,6 +205,10 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        DatabaseReference base =  FirebaseDatabase.getInstance().getReference("uploads");
+
+        Bitmap bitmap=null;
+
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         if (ggMap != null) {
@@ -200,7 +216,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             ggMap.setOnMarkerClickListener(this);
             if (sumbitText == false && aBoolean == true) {
                 ggMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ggPosition, 15));
-                //ggMap.addMarker(new MarkerOptions().position(ggPosition).title("donation"));
+                Marker marker = ggMap.addMarker(new MarkerOptions().position(ggPosition).title(name));
+                marker.showInfoWindow();
             }
             aBoolean = false;
 

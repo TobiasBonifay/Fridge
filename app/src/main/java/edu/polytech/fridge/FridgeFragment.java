@@ -40,7 +40,7 @@ public class FridgeFragment extends Fragment {
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Fridge.generateFridgeTemplateWithFakeFoods();
+
 
         setUpFridgeContent();
         setUpSpinner();

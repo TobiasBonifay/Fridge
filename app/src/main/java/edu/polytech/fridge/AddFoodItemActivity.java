@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +19,11 @@ import edu.polytech.fridge.fridge.data.Fridge;
 public class AddFoodItemActivity extends AppCompatActivity {
     private ActivityAddFoodItemBinding binding;
     private Button cancel, add;
+    private ImageView foodImage;
+    private TextView foodName;
 
     public AddFoodItemActivity() {
+
     }
 
     @Override
@@ -27,15 +32,19 @@ public class AddFoodItemActivity extends AppCompatActivity {
         binding = ActivityAddFoodItemBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        Ingredient foodToAddCompleted = getFoodItemToAdd();
         cancel = view.findViewById(R.id.Cancel);
         add = view.findViewById(R.id.addIngredient);
+        foodImage = view.findViewById(R.id.food_image_add);
+        foodName = view.findViewById(R.id.food_name_add);
+        foodImage.setImageResource(foodToAddCompleted.getFoodImage());
+        foodName.setText(foodToAddCompleted.getFoodName());
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        Ingredient foodToAddCompleted = getFoodItemToAdd();
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +61,7 @@ public class AddFoodItemActivity extends AppCompatActivity {
     private Ingredient getFoodItemToAdd() {
         FoodItemParcelable foodItemParcelableToAdd = getIntent().getParcelableExtra("food");
         String expirationDate = "27/04/2022";
-        int quantity = 2;
+        int quantity = 1;
         return new Ingredient(
                 foodItemParcelableToAdd.getFoodType(),
                 foodItemParcelableToAdd.getFoodName(),
