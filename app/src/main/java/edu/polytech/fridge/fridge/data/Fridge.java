@@ -34,10 +34,10 @@ public class Fridge {
         List<Ingredient> foodList = new ArrayList<>();
 
         // fetch data from FireBase
-        Ingredient aliment = new Vegetable("Carrot", R.drawable.ic_carrot, "27/04/2022", 4);
-        Ingredient aliment2 = new Fruit("Pear", R.drawable.ic_pear, "24/04/2022", 2);
-        Ingredient aliment3 = new Meal("Pasta", R.drawable.ic_spaghetti, "29/04/2022", 1);
-        Ingredient aliment4 = new Meal("Toxic Pasta", R.drawable.ic_spaghetti, "09/04/2017", 1);
+        Ingredient aliment = new Vegetable("Carrot", R.drawable.ic_carrot, "27/05/2022", 4);
+        Ingredient aliment2 = new Fruit("Pear", R.drawable.ic_pear, "24/05/2022", 2);
+        Ingredient aliment3 = new Meal("Pasta", R.drawable.ic_spaghetti, "29/05/2022", 1);
+        Ingredient aliment4 = new Meal("Leek", R.drawable.ic_leek_svgrepo_com, "09/05/2021", 6);
 
         foodList.add(aliment);
         foodList.add(aliment2);
