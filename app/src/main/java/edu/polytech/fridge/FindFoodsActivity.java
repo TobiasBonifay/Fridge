@@ -28,6 +28,7 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
     private ActivityFindFoodBinding binding;
     private RecyclerView recyclerViewToDisplayAvailableItems;
     private List<FindFoodViewModel> foodItemsAvailable;
+    private List<FindFoodViewModel> filteredList = new ArrayList<>();
     Button btn4;
 
     @Override
@@ -96,8 +97,7 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
     }
 
     private void filterList(String text) {
-        List<FindFoodViewModel> filteredList = new ArrayList<>();
-
+        filteredList.clear();
         for (FindFoodViewModel food : foodItemsAvailable) {
             if (food.getFoodName().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)))
                 filteredList.add(food);
@@ -111,9 +111,8 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
         startActivity(addFoodIntent);
     }
 
-
     @Override
     public void OnItemClick(int position) {
-        addFoodOnFridge(foodItemsAvailable.get(position));
+        addFoodOnFridge(filteredList.get(position));
     }
 }
