@@ -87,12 +87,23 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
         FindFoodViewModel aliment3 = new FindFoodViewModel("Pasta", R.drawable.ic_spaghetti,"meal");
         FindFoodViewModel aliment4 = new FindFoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti,"meal");
         FindFoodViewModel aliment5 = new FindFoodViewModel("Database item", R.drawable.ic_spaghetti,"meal");
+        FindFoodViewModel aliment6 = new FindFoodViewModel("Meat", R.drawable.meat_outline_filled,"meal");
+        FindFoodViewModel aliment7 = new FindFoodViewModel("Canned", R.drawable.canned,"meal");
+        FindFoodViewModel aliment8 = new FindFoodViewModel("drink", R.drawable.drink_martini_outline_filled_var,"drink");
+
+
+
+
 
         items.add(aliment);
         items.add(aliment2);
         items.add(aliment3);
         items.add(aliment4);
         items.add(aliment5);
+        items.add(aliment6);
+        items.add(aliment7);
+        items.add(aliment8);
+
         return items;
     }
 
