@@ -88,7 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/incrementQuantity"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -109,7 +109,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/decrementQuantity"
                     android:layout_width="60dp"
                     android:layout_height="60dp"

@@ -79,14 +79,14 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/incrementQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:contentDescription="@string/minus"
                 android:src="@drawable/ic_plus" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/decrementQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"

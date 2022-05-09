@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
@@ -26,6 +28,7 @@ import edu.polytech.fridge.databinding.FragmentFridgeBinding;
 import edu.polytech.fridge.factory.Ingredient;
 import edu.polytech.fridge.fridge.data.Fridge;
 import edu.polytech.fridge.fridge.adapters.FoodAdapter;
+import edu.polytech.fridge.fridge.data.FridgeFindFoodsRecyclerViewInterface;
 
 /**
  * Display a recyclerView of food items own by the user
