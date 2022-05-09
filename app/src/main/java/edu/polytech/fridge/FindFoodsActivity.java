@@ -85,24 +85,23 @@ public class FindFoodsActivity extends AppCompatActivity implements FridgeFindFo
         FindFoodViewModel aliment = new FindFoodViewModel("Carrot", R.drawable.ic_carrot,"vegetable");
         FindFoodViewModel aliment2 = new FindFoodViewModel("Pear", R.drawable.ic_pear,"fruit");
         FindFoodViewModel aliment3 = new FindFoodViewModel("Pasta", R.drawable.ic_spaghetti,"meal");
-        FindFoodViewModel aliment4 = new FindFoodViewModel("Toxic Pasta", R.drawable.ic_spaghetti,"meal");
-        FindFoodViewModel aliment5 = new FindFoodViewModel("Database item", R.drawable.ic_spaghetti,"meal");
         FindFoodViewModel aliment6 = new FindFoodViewModel("Meat", R.drawable.meat_outline_filled,"meal");
         FindFoodViewModel aliment7 = new FindFoodViewModel("Canned", R.drawable.canned,"meal");
         FindFoodViewModel aliment8 = new FindFoodViewModel("drink", R.drawable.drink_martini_outline_filled_var,"drink");
-
-
-
+        FindFoodViewModel aliment9 = new FindFoodViewModel("Milk", R.drawable._593736_farm_fresh_milk_product_icon,"dairy");
+        FindFoodViewModel aliment10 = new FindFoodViewModel("Juice", R.drawable._07358_orange_juice_icon,"liquid");
+        FindFoodViewModel aliment11 = new FindFoodViewModel("Tomato", R.drawable._6019_vegetable_tomato_icon,"vegetable");
 
 
         items.add(aliment);
         items.add(aliment2);
         items.add(aliment3);
-        items.add(aliment4);
-        items.add(aliment5);
         items.add(aliment6);
         items.add(aliment7);
         items.add(aliment8);
+        items.add(aliment9);
+        items.add(aliment10);
+        items.add(aliment11);
 
         return items;
     }

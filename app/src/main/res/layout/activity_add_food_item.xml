@@ -104,7 +104,7 @@
             android:id="@+id/weight_add"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Weight"
+            android:text="Weight(in grams)"
             android:textSize="60px" />
 
         <EditText
