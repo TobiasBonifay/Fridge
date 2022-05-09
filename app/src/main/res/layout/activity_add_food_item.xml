@@ -39,7 +39,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="344dp"
-        android:layout_height="336dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
@@ -57,10 +57,11 @@
 
         <EditText
             android:id="@+id/Quantity_Input"
-            android:layout_width="57dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="number"
+            android:minHeight="48dp" />
 
         <TextView
             android:id="@+id/purchaseDate_add"
@@ -70,11 +71,15 @@
             android:textSize="60px" />
 
         <EditText
-            android:id="@+id/purchase_Date_Input"
-            android:layout_width="173dp"
+            android:id="@+id/purchase_date_Input"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:minHeight="48dp"
+            android:focusable="false"
+            android:hint="DD/MM/YYYY"
+            android:inputType="none"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/expirationDate_add"
@@ -83,12 +88,17 @@
             android:text="Expiration date"
             android:textSize="60px" />
 
+
         <EditText
             android:id="@+id/expiration_date_input"
-            android:layout_width="171dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:minHeight="48dp"
+            android:hint="DD/MM/YYYY"
+            android:focusable="false"
+            android:inputType="none"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/weight_add"
@@ -99,10 +109,11 @@
 
         <EditText
             android:id="@+id/weight_input"
-            android:layout_width="57dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:minHeight="48dp"
+            android:inputType="number" />
 
     </LinearLayout>
 
