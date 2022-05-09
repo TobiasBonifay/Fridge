@@ -83,6 +83,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 .findFragmentById(R.id.map);
         checkPermission();
         mapFragment.getMapAsync(this);
+        /*
         association= view.findViewById(R.id.donation);
         association.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +104,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
             }
         });
+
+         */
         View locationButton = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
@@ -216,7 +219,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             ggMap.setOnMarkerClickListener(this);
             if (sumbitText == false && aBoolean == true) {
                 ggMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ggPosition, 15));
-                Marker marker = ggMap.addMarker(new MarkerOptions().position(ggPosition).title(name));
+                Marker marker = ggMap.addMarker(new MarkerOptions().position(ggPosition).title("Donated food"));
                 marker.showInfoWindow();
             }
             aBoolean = false;

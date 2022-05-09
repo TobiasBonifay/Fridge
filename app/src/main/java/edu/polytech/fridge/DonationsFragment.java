@@ -101,21 +101,15 @@ public class DonationsFragment extends Fragment {
         btn=view.findViewById(R.id.button2);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        /*donation.setOnClickListener(new View.OnClickListener() {
+        donation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Ingredient> list = Fridge.getInstance().getFoodList();
-                for (Ingredient e : list) {
-                    if (e.getFoodName().equals(name.getText().toString())) {
-                        int q = e.getCurrentQuantity() - Integer.parseInt(quantity.getText().toString());
-                        e.setCurrentQuantity(q);
-                    }
-                }
+
                 startActivity(new Intent(getActivity(), MapActivity.class));
             }
         });
 
-         */
+
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.CAMERA}, 101);

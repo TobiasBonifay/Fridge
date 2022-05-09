@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,12 @@ public class AddFoodItemActivity extends AppCompatActivity {
     private Button cancel, add;
     private ImageView foodImage;
     private TextView foodName;
+    private EditText quantity;
+    private EditText purchase;
+    private EditText expiration;
+    private EditText weight;
+
+
 
     public AddFoodItemActivity() {
 
