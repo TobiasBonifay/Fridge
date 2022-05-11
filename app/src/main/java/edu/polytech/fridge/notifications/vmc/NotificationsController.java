@@ -26,12 +26,12 @@ public class NotificationsController {
     // private final NotificationsCenterActivity activity;
     private final ConstraintLayout layout;
     private final Activity activity;
-    private final NotificationsView notificationsView;
+    private final NotificationsView view;
     private boolean sortModelNaturalOrder = true;
     private boolean controllerActOnModel = false;
 
     public NotificationsController(NotificationsView view, Activity activity) {
-        this.notificationsView = view;
+        this.view = view;
         this.activity = activity;
         this.layout = activity.findViewById(R.id.notification_center);
         adapBaseNotif = new ViewAdapterNotification(view, NotificationsModel.getInstance().getNotificationList());
