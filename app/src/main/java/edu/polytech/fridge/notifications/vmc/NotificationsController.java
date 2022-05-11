@@ -20,7 +20,7 @@ import edu.polytech.fridge.notifications.OnSwipeTouchListener;
 import edu.polytech.fridge.notifications.ViewAdapterNotification;
 
 public class NotificationsController {
-    public static final String TAG = "NotificationController";
+    public static final String TAG = "notifController";
     private final ViewAdapterNotification adapBaseNotif;
     private final ViewAdapterNotification adapPinNotif;
     // private final NotificationsCenterActivity activity;
@@ -36,7 +36,6 @@ public class NotificationsController {
         this.layout = activity.findViewById(R.id.notification_center);
         adapBaseNotif = new ViewAdapterNotification(view, NotificationsModel.getInstance().getNotificationList());
         adapPinNotif = new ViewAdapterNotification(view, NotificationsModel.getInstance().getPinnedNotificationList());
-
         view.setAdapterBaseNotification(adapBaseNotif);
         view.setAdapterPinnedNotification(adapPinNotif);
     }
@@ -87,7 +86,7 @@ public class NotificationsController {
                 @Override
                 public void onSwipeLeft() {
                     super.onSwipeLeft();
-                    changeNotificationToUnPinned(i);
+                    unpinNotification(i);
                     createToast("Unpinned");
                 }
             };
@@ -112,7 +111,7 @@ public class NotificationsController {
                 @Override
                 public void onSwipeRight() {
                     super.onSwipeRight();
-                    changeNotificationToPinned(i);
+                    pinNotification(i);
                     createToast("Pinned");
                 }
             };
@@ -121,11 +120,11 @@ public class NotificationsController {
 
     }
 
-    public void changeNotificationToPinned(int index) {
+    public void pinNotification(int index) {
         NotificationsModel.getInstance().transferNotificationToPinned(index);
     }
 
-    public void changeNotificationToUnPinned(int index) {
+    public void unpinNotification(int index) {
         NotificationsModel.getInstance().transferNotificationToUnpinned(index);
     }
 
@@ -135,16 +134,10 @@ public class NotificationsController {
 
     public void update() {
         Log.d(TAG, "Data model changed" );
-
         if (!controllerActOnModel) {
-            if (sortModelNaturalOrder) {
-                sortAcc();
-            } else {
-                sortDec();
-            }
-        } else {
-            controllerActOnModel = false;
-        }
+            if (sortModelNaturalOrder) sortAcc();
+            else sortDec();
+        } else controllerActOnModel = false;
     }
 
     private void createToast(String text) {
