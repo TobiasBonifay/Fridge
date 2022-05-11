@@ -1,7 +1,6 @@
 package edu.polytech.fridge.notifications.vmc;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -49,6 +48,6 @@ public class NotificationsView implements Observer {
     }
 
     public void setGestureAdapters(ViewAdapterNotification adapter, ConstraintLayout layout, int i) {
-        controller.setGesturesAdapters(adapter, layout, i);
+        controller.setGestAdaptGit(adapter, layout, i);
     }
 }

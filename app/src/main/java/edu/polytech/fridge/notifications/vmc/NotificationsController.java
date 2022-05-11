@@ -2,7 +2,6 @@ package edu.polytech.fridge.notifications.vmc;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -17,30 +16,29 @@ import java.net.URL;
 import java.util.Observable;
 
 import edu.polytech.fridge.R;
-import edu.polytech.fridge.NotificationsFragment;
 import edu.polytech.fridge.notifications.OnSwipeTouchListener;
 import edu.polytech.fridge.notifications.ViewAdapterNotification;
 
 public class NotificationsController {
     public static final String TAG = "NotificationController";
-    private final ViewAdapterNotification adapterBaseNotification;
-    private final ViewAdapterNotification adapterPinnedNotification;
+    private final ViewAdapterNotification adapBaseNotif;
+    private final ViewAdapterNotification adapPinNotif;
     // private final NotificationsCenterActivity activity;
     private final ConstraintLayout layout;
     private final Activity activity;
+    private final NotificationsView notificationsView;
     private boolean sortModelNaturalOrder = true;
     private boolean controllerActOnModel = false;
-    private final NotificationsView notificationsView;
 
     public NotificationsController(NotificationsView view, Activity activity) {
         this.notificationsView = view;
-        adapterBaseNotification = new ViewAdapterNotification(view, NotificationsModel.getInstance().getNotificationList());
-        adapterPinnedNotification = new ViewAdapterNotification(view, NotificationsModel.getInstance().getPinnedNotificationList());
         this.activity = activity;
         this.layout = activity.findViewById(R.id.notification_center);
+        adapBaseNotif = new ViewAdapterNotification(view, NotificationsModel.getInstance().getNotificationList());
+        adapPinNotif = new ViewAdapterNotification(view, NotificationsModel.getInstance().getPinnedNotificationList());
 
-        view.setAdapterBaseNotification(adapterBaseNotification);
-        view.setAdapterPinnedNotification(adapterPinnedNotification);
+        view.setAdapterBaseNotification(adapBaseNotif);
+        view.setAdapterPinnedNotification(adapPinNotif);
     }
 
 
@@ -69,22 +67,22 @@ public class NotificationsController {
         // notificationsView.update(e, notificationsModel);
     }
 
-    private void sortNotificationInIncreasingTime() {
+    private void sortAcc() {
         controllerActOnModel = true;
         NotificationsModel.getInstance().sortTimeIncrease();
         sortModelNaturalOrder = true;
     }
 
-    private void sortNotificationInDecreasingTime() {
+    private void sortDec() {
         controllerActOnModel = true;
         NotificationsModel.getInstance().sortTimeDecrease();
         sortModelNaturalOrder = false;
     }
 
-    public void setGesturesAdapters(ViewAdapterNotification adapter, ConstraintLayout layout, int i) {
+    public void setGestAdaptGit(ViewAdapterNotification adp, ConstraintLayout layout, int i) {
         OnSwipeTouchListener swipeTouchListener;
 
-        if (adapter == adapterPinnedNotification) {
+        if (adp == adapPinNotif) {
             swipeTouchListener = new OnSwipeTouchListener(layout.getContext()) {
                 @Override
                 public void onSwipeLeft() {
@@ -94,7 +92,7 @@ public class NotificationsController {
                 }
             };
             layout.setOnTouchListener(swipeTouchListener);
-        } else if (adapter == adapterBaseNotification) {
+        } else if (adp == adapBaseNotif) {
             swipeTouchListener = new OnSwipeTouchListener(layout.getContext()) {
                 @Override
                 public void onSwipeLeft() {
@@ -140,9 +138,9 @@ public class NotificationsController {
 
         if (!controllerActOnModel) {
             if (sortModelNaturalOrder) {
-                sortNotificationInIncreasingTime();
+                sortAcc();
             } else {
-                sortNotificationInDecreasingTime();
+                sortDec();
             }
         } else {
             controllerActOnModel = false;
@@ -155,11 +153,11 @@ public class NotificationsController {
 
     public void setListenersView() {
         LinearLayout layoutListView =  layout.findViewById(R.id.layout_list_view);
-        ((ListView) layoutListView.findViewById(R.id.list_notifications)).setAdapter(adapterBaseNotification);
-        ((ListView) layoutListView.findViewById(R.id.list_notifications_pinned)).setAdapter(adapterPinnedNotification);
+        ((ListView) layoutListView.findViewById(R.id.list_notifications)).setAdapter(adapBaseNotif);
+        ((ListView) layoutListView.findViewById(R.id.list_notifications_pinned)).setAdapter(adapPinNotif);
 
         LinearLayout layout_buttons = layout.findViewById(R.id.buttons_sort);
-        layout_buttons.findViewById(R.id.increase_time_button).setOnClickListener(view -> sortNotificationInIncreasingTime());
-        layout_buttons.findViewById(R.id.decrease_time_button).setOnClickListener(view -> sortNotificationInDecreasingTime());
+        layout_buttons.findViewById(R.id.increase_time_button).setOnClickListener(view -> sortAcc());
+        layout_buttons.findViewById(R.id.decrease_time_button).setOnClickListener(view -> sortDec());
     }
 }
