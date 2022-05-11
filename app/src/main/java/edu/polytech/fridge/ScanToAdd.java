@@ -2,9 +2,15 @@ package edu.polytech.fridge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.widget.TextView;
 import android.Manifest;
+import android.widget.Toast;
+
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -47,7 +53,24 @@ public class ScanToAdd extends AppCompatActivity implements ZXingScannerView.Res
 
     @Override
     public void handleResult(Result rawResult) {
-        ScanToAdd.scantext.setText(rawResult.getText());
+        Vibrator vibrator =(Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(400L);
+        //ScanToAdd.scantext.setText(rawResult.getText());
+        //Toast.makeText(this,rawResult.getText(),Toast.LENGTH_LONG).show();
+        if (rawResult.getBarcodeFormat() != BarcodeFormat.EAN_13 || rawResult.getBarcodeFormat() == BarcodeFormat.EAN_13 ) {
+
+            Toast.makeText(this, rawResult.getText() + " is added succesfully to the fridge" , Toast.LENGTH_LONG).show();
+
+
+        } else {
+
+            Intent intent = new Intent(this, FindFoodsActivity.class);
+            intent.putExtra("PRODUCT", rawResult.getText());
+            startActivity(intent);
+        }
+
+
+
 
         onBackPressed();
     }
