@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Observable;
 
 public final class NotificationsModel extends Observable {
-    public static final String NOTIFICFATION_LIST = "notifcationList";
-    public static final String PINNED_NOTIFICFATION_LIST = "pinnedNotifcationList";
+    public static final String NOTIFICFATION_LIST = "listNotif";
+    public static final String PINNED_NOTIFICFATION_LIST = "pinNotif";
 
     private static NotificationsModel instance;
     private final List<Notification> notificationList = new ArrayList<>();

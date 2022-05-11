@@ -88,7 +88,7 @@ public class NotificationsController {
                 public void onSwipeLeft() {
                     super.onSwipeLeft();
                     changeNotificationToUnPinned(i);
-                    createToast("La notification a été désépinglée");
+                    createToast("Unpinned");
                 }
             };
             layout.setOnTouchListener(swipeTouchListener);
@@ -98,13 +98,13 @@ public class NotificationsController {
                 public void onSwipeLeft() {
                     super.onSwipeLeft();
                     new AlertDialog.Builder(activity)
-                            .setTitle("Confirmation")
-                            .setMessage("Êtes-vous sûr de vouloir supprimer cette notification ?")
-                            .setPositiveButton("Valider", (dialog, which) -> {
+                            .setTitle("Title")
+                            .setMessage("Sure?")
+                            .setPositiveButton("Ok", (dialog, which) -> {
                                 removeNotification(i);
-                                createToast("La notification a bien été supprimée");
+                                createToast("Deleted");
                             })
-                            .setNegativeButton("Annuler", null)
+                            .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 }
@@ -113,7 +113,7 @@ public class NotificationsController {
                 public void onSwipeRight() {
                     super.onSwipeRight();
                     changeNotificationToPinned(i);
-                    createToast("La notification a été épinglée");
+                    createToast("Pinned");
                 }
             };
             layout.setOnTouchListener(swipeTouchListener);
@@ -134,7 +134,7 @@ public class NotificationsController {
     }
 
     public void update() {
-        Log.d(TAG, "Les données du modèle ont changé" );
+        Log.d(TAG, "Data model changed" );
 
         if (!controllerActOnModel) {
             if (sortModelNaturalOrder) {
