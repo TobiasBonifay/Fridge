@@ -10,7 +10,7 @@ import java.util.Observer;
 import edu.polytech.fridge.notifications.ViewAdapterNotification;
 
 public class NotificationsView implements Observer {
-    public static final String TAG = "NotificationView";
+    public static final String TAG = "notifView";
 
     private ViewAdapterNotification adapterBaseNotification;
     private ViewAdapterNotification adapterPinnedNotification;
