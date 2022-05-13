@@ -219,8 +219,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             ggMap.setOnMarkerClickListener(this);
             if (sumbitText == false && aBoolean == true) {
                 ggMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ggPosition, 15));
-                Marker marker = ggMap.addMarker(new MarkerOptions().position(ggPosition).title("Donated food"));
-                marker.showInfoWindow();
+                ggMap.addMarker(new MarkerOptions().position(ggPosition).title("Donated food")).showInfoWindow();
+                ;
             }
             aBoolean = false;
 

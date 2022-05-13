@@ -242,7 +242,7 @@ public class DonationsFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),"stuff happening",Toast.LENGTH_SHORT).show();                        }
+                            Toast.makeText(getActivity(),"Upload succsess ",Toast.LENGTH_SHORT).show();                        }
                     },500);
                     Toast.makeText(getActivity(),"Upload succsess",Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
